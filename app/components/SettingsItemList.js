@@ -4,7 +4,7 @@ import { View, StyleSheet, Text, FlatList } from "react-native";
 import SettingsItem from "../components/SettingsItem";
 import { selectedTheme } from "../config/themes";
 
-function SettingsItemList({ dataRow }) {
+function SettingsItemList({ dataRow, onPress }) {
 	return (
 		<View style={styles.container}>
 			<FlatList
@@ -19,7 +19,7 @@ function SettingsItemList({ dataRow }) {
 						noIcon={item.noIcon}
 						titleColor={item.titleColor}
 						noChevron={item.noChevron}
-						onPress={() => console.log("Message selected", item)}
+						onPress={onPress}
 					/>
 				)}
 				ItemSeparatorComponent={() => {

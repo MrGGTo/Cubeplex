@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, FlatList } from "react-native";
+import { View, StyleSheet, Text, FlatList, Button } from "react-native";
 
 import Screen from "../components/Screen";
 import SettingsItemList from "../components/SettingsItemList";
@@ -84,13 +84,16 @@ const deleteRow = [
 	},
 ];
 
-function SettingScreen(props) {
+function SettingScreen({ navigation }) {
 	return (
 		<Screen styl={styles.container}>
 			<ScrollView>
 				<AppText style={styles.title}>Settings</AppText>
 				<SettingsItemList dataRow={recordRow} />
-				<SettingsItemList dataRow={settingsRow} />
+				<SettingsItemList
+					dataRow={settingsRow}
+					onPress={() => navigation.navigate("Theme")}
+				/>
 				<SettingsItemList dataRow={appDetailsRow} />
 				<SettingsItemList dataRow={deleteRow} />
 			</ScrollView>
