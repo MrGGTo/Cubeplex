@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	View,
 	StyleSheet,
@@ -7,6 +7,8 @@ import {
 	Image,
 	FlatList,
 	ScrollView,
+	TouchableOpacity,
+	Modal,
 } from "react-native";
 
 import Screen from "../components/Screen";
@@ -24,11 +26,54 @@ import ZShape from "../data/oll/ZShape";
 
 import AlgorithmItem from "../components/AlgorithmItem";
 import AppText from "../components/AppText";
+import { themesData, selectedTheme } from "../config/themes";
+import DialogModal from "../components/DialogModal";
+import IconButton from "../components/IconButton";
 
 function OllAlgorithmScreen(props) {
+	const [infoVisible, setInfoVisible] = useState("false");
 	return (
 		<Screen>
 			<ScrollView>
+				<View style={styles.header}>
+					<AppText style={styles.title}>OLL Algorithms</AppText>
+					<TouchableOpacity onPress={() => setInfoVisible(true)}>
+						<AppText style={styles.info}>Info</AppText>
+					</TouchableOpacity>
+				</View>
+				<Modal
+					animationType="fade"
+					transparent={true}
+					visible={infoVisible}
+				>
+					<View style={{ backgroundColor: "#000000aa", flex: 1 }}>
+						<Modal
+							animationType="slide"
+							transparent={true}
+							visible={infoVisible}
+						>
+							<View
+								style={{
+									backgroundColor:
+										selectedTheme.backgroundSecondary,
+									flex: 1,
+									marginVertical: 75,
+									marginHorizontal: 50,
+									borderRadius: 15,
+								}}
+							>
+								<View style={{ flexDirection: "row-reverse" }}>
+									<IconButton
+										name="close"
+										size={35}
+										onPress={() => setInfoVisible(false)}
+										style={{ padding: 15 }}
+									/>
+								</View>
+							</View>
+						</Modal>
+					</View>
+				</Modal>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Dot Case</AppText>
 					<FlatList
@@ -245,6 +290,21 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		margin: 10,
 		borderRadius: 15,
+	},
+	title: {
+		fontSize: 35,
+		fontWeight: "700",
+		flex: 1,
+	},
+	header: {
+		flexDirection: "row",
+		marginTop: 15,
+		marginHorizontal: 15,
+		alignItems: "center",
+	},
+	info: {
+		color: selectedTheme.color,
+		fontSize: 18,
 	},
 	detailContainer: {
 		flexDirection: "column",
