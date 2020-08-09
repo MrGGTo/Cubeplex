@@ -28,11 +28,11 @@ const SettingsNavigator = () => (
 			component={ThemeScreen}
 			options={{
 				headerStyle: {
-					backgroundColor: selectedTheme.backgroundPrimary,
+					backgroundColor: selectedTheme.backgroundSecondary,
 				},
 				headerTintColor: selectedTheme.fontPrimary,
 				headerTitleStyle: {
-					fontSize: 28,
+					fontSize: 20,
 					// fontWeight: "bold",
 				},
 				headerRight: () => (

@@ -9,18 +9,17 @@ import {
 	Modal,
 	TouchableOpacity,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Screen from "../components/Screen";
 
 import plls from "../data/plls";
 import IconButton from "../components/IconButton";
-import AlgorithmStarAction from "../components/AlgorithmStarAction";
 import AlgorithmItem from "../components/AlgorithmItem";
 import AppText from "../components/AppText";
 import { selectedTheme } from "../config/themes";
+import router from "../navigation/router";
 
-function PllAlgorithmScreen(props) {
+function PllAlgorithmScreen({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState("false");
 	return (
 		<Screen>
@@ -71,7 +70,9 @@ function PllAlgorithmScreen(props) {
 						name={item.name}
 						algorithm={item.algorithm}
 						image={item.image}
-						onPress={() => console.log("Message selected", item)}
+						onPress={() =>
+							navigation.navigate(router.ALGORITHM_DETAILS, item)
+						}
 					/>
 				)}
 			/>

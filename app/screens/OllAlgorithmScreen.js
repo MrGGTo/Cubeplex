@@ -29,8 +29,9 @@ import AppText from "../components/AppText";
 import { themesData, selectedTheme } from "../config/themes";
 import DialogModal from "../components/DialogModal";
 import IconButton from "../components/IconButton";
+import router from "../navigation/router";
 
-function OllAlgorithmScreen(props) {
+function OllAlgorithmScreen({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState("false");
 	return (
 		<Screen>
@@ -70,6 +71,41 @@ function OllAlgorithmScreen(props) {
 										style={{ padding: 15 }}
 									/>
 								</View>
+								<ScrollView style={{ margin: 15 }}>
+									<AppText
+										style={{
+											fontSize: 32,
+											fontWeight: "bold",
+											marginBottom: 10,
+										}}
+									>
+										What is OLL?
+									</AppText>
+									<AppText>
+										OLL stands for Orient last layer, the
+										3rd step of advanced Fridrich (CFOP)
+										method. After solving F2L, the frist two
+										layer, we need to orient the last layer
+										(OLL). OLL can be done by the provided
+										algorithms.
+									</AppText>
+									<AppText
+										style={{
+											fontSize: 32,
+											fontWeight: "bold",
+											marginTop: 30,
+											marginBottom: 10,
+										}}
+									>
+										Face Rotations
+									</AppText>
+									<AppText>
+										We use letters to describe a rotation on
+										the cube. Learn to read the Rubik's Cube
+										Notation and you'll be able to perform
+										all algorithms you see.
+									</AppText>
+								</ScrollView>
 							</View>
 						</Modal>
 					</View>
@@ -86,7 +122,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -104,7 +143,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -122,7 +164,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -142,7 +187,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -162,7 +210,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -180,7 +231,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -198,7 +252,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -216,7 +273,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -234,7 +294,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -252,7 +315,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}
@@ -270,7 +336,10 @@ function OllAlgorithmScreen(props) {
 								algorithm={item.algorithmId}
 								image={item.image}
 								onPress={() =>
-									console.log("Message selected", item)
+									navigation.navigate(
+										router.ALGORITHM_DETAILS,
+										item
+									)
 								}
 							/>
 						)}

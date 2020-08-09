@@ -67,17 +67,18 @@ const Aa = [
 	},
 ];
 
-function AlogorithmDetailsScreen(props) {
+function AlgorithmDetailsScreen({ route }) {
+	const algorithmData = route.params;
+
 	return (
 		<Screen>
 			<View style={styles.container}>
 				<View style={styles.detailContainer}>
-					<Image
-						style={styles.image}
-						source={require("../assets/pll/Aa.png")}
-					/>
+					<Image style={styles.image} source={algorithmData.image} />
 					<View>
-						<AppText style={styles.name}>Aa perm</AppText>
+						<AppText style={styles.name}>
+							{algorithmData.name}
+						</AppText>
 						<AppText style={styles.recordText}>Best : 2.1s</AppText>
 						<AppText style={styles.recordText}>Avg. : 2.1s</AppText>
 						<AppText style={styles.recordText}>AO5 : 2.1s</AppText>
@@ -109,8 +110,8 @@ function AlogorithmDetailsScreen(props) {
 				<View style={styles.algorithmContainer}>
 					<AppText>Algorithms</AppText>
 					<FlatList
-						data={Aa}
-						keyExtractor={(a) => a.id.toString()}
+						data={algorithmData.algs}
+						keyExtractor={(alg) => alg.id.toString()}
 						renderItem={({ item }) => (
 							<AlgorithmDetailsList
 								id={item.id}
@@ -143,8 +144,9 @@ const styles = StyleSheet.create({
 	image: {
 		marginVertical: 25,
 		marginRight: 25,
-		width: 150,
-		height: 150,
+		width: 125,
+		height: 125,
+		resizeMode: "contain",
 	},
 	detailContainer: {
 		flexDirection: "row",
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
 		borderRadius: 30,
 	},
 	name: {
-		fontSize: 40,
+		fontSize: 28,
 		fontWeight: "600",
 		// margin: 25,
 	},
@@ -206,4 +208,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default AlogorithmDetailsScreen;
+export default AlgorithmDetailsScreen;

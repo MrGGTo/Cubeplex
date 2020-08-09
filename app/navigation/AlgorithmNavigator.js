@@ -7,6 +7,8 @@ import router from "./router";
 import OllAlgorithmScreen from "../screens/OllAlgorithmScreen";
 import PllAlgorithmScreen from "../screens/PllAlgorithmScreen";
 import { selectedTheme } from "../config/themes";
+import PllAlgorithmDetailsNavigator from "./PllAlgorithmDetailsNavigator";
+import OllAlgorithmDetailsNavigator from "./OllAlgorithmDetailsNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +24,7 @@ const AlgorithmNavigator = () => {
 		>
 			<Tab.Screen
 				name={router.OLL_ALGORITHMS}
-				component={OllAlgorithmScreen}
+				component={OllAlgorithmDetailsNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Image
@@ -35,7 +37,7 @@ const AlgorithmNavigator = () => {
 			/>
 			<Tab.Screen
 				name={router.PLL_ALGORITHMS}
-				component={PllAlgorithmScreen}
+				component={PllAlgorithmDetailsNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<Image

@@ -7,19 +7,19 @@ export default [
 		algs: [
 			{
 				id: 1,
-				algorithm: "y' f R U R' U' f' U' F R U R' U' F'",
+				algorithm: "f R U R' U' R U R' U' f'",
 			},
 			{
 				id: 2,
-				algorithm: "r' R2 U R' U r U2 r' U M'",
+				algorithm: "y2 F U R U' R' U R U' R' F'",
 			},
 			{
 				id: 3,
-				algorithm: "r' R U R' F2 R U L' U L M'",
+				algorithm: "y' R' U' R' F R F' R U' R' U2 R",
 			},
 			{
 				id: 4,
-				algorithm: "y F U R U' R' F' U F R U R' U' F'",
+				algorithm: "y2 f' L' U' L U L' U' L U f",
 			},
 		],
 	},

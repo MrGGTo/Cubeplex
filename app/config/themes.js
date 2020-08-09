@@ -159,6 +159,6 @@ export const themesData = [
 	},
 ];
 
-const themeid = 2;
+const themeid = 3;
 
 export const selectedTheme = themesData.find((theme) => theme.id === themeid);
