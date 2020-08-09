@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, FlatList } from "react-native";
 
 import SettingsItem from "../components/SettingsItem";
 import { selectedTheme } from "../config/themes";
+import ThemeScreen from "../screens/ThemeScreen";
 
 function SettingsItemList({ dataRow, onPress }) {
 	return (

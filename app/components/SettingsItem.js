@@ -14,9 +14,13 @@ function SettingsItem({
 	onPress,
 	noIcon = false,
 	noChevron = false,
+	separate,
 }) {
 	return (
-		<TouchableOpacity onPress={onPress}>
+		<TouchableOpacity
+			onPress={onPress}
+			style={{ marginBottom: separate ? 30 : 0 }}
+		>
 			<View style={styles.container}>
 				{!noIcon && (
 					<View

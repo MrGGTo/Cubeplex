@@ -1,23 +1,15 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
-import { themesData } from "../config/themes";
+import { themesData, lightThemes } from "../config/themes";
 import Screen from "../components/Screen";
 import ThemeItemList from "../components/ThemeItemList";
 import AppText from "../components/AppText";
 import ThemeItem from "../components/ThemeItem";
 
-function ThemeScreen(props) {
+function DarkThemeScreen(props) {
 	return (
 		<Screen>
-			{/* <FlatList
-				data={themesData}
-				keyExtractor={(data) => data.id.toString()}
-				renderItem={({ item }) => (
-					<ThemeItemList name={item.name} themes={item.themes} />
-				)}
-			/> */}
-			{/* <AppText style={{ margin: 25, fontSize: 36 }}>Themes</AppText> */}
 			<FlatList
 				columnWrapperStyle={{
 					justifyContent: "space-evenly",
@@ -26,7 +18,7 @@ function ThemeScreen(props) {
 				}}
 				numColumns={2}
 				// scrollEnabled={false}
-				data={themesData}
+				data={lightThemes}
 				keyExtractor={(data) => data.id.toString()}
 				renderItem={({ item }) => (
 					<ThemeItem
@@ -40,4 +32,4 @@ function ThemeScreen(props) {
 	);
 }
 
-export default ThemeScreen;
+export default DarkThemeScreen;

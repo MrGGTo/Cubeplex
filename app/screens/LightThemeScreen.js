@@ -1,24 +1,18 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
-import { themesData } from "../config/themes";
+import { themesData, lightThemes } from "../config/themes";
 import Screen from "../components/Screen";
 import ThemeItemList from "../components/ThemeItemList";
 import AppText from "../components/AppText";
 import ThemeItem from "../components/ThemeItem";
+import ThemeScreen from "../screens/ThemeScreen";
 
-function ThemeScreen(props) {
+function LightThemeScreen(props) {
 	return (
 		<Screen>
+			<AppText>hiolas</AppText>
 			{/* <FlatList
-				data={themesData}
-				keyExtractor={(data) => data.id.toString()}
-				renderItem={({ item }) => (
-					<ThemeItemList name={item.name} themes={item.themes} />
-				)}
-			/> */}
-			{/* <AppText style={{ margin: 25, fontSize: 36 }}>Themes</AppText> */}
-			<FlatList
 				columnWrapperStyle={{
 					justifyContent: "space-evenly",
 					marginVertical: 15,
@@ -26,7 +20,7 @@ function ThemeScreen(props) {
 				}}
 				numColumns={2}
 				// scrollEnabled={false}
-				data={themesData}
+				data={lightThemes}
 				keyExtractor={(data) => data.id.toString()}
 				renderItem={({ item }) => (
 					<ThemeItem
@@ -35,9 +29,9 @@ function ThemeScreen(props) {
 						themeBackgroundColor={item.backgroundSecondary}
 					/>
 				)}
-			/>
+			/> */}
 		</Screen>
 	);
 }
 
-export default ThemeScreen;
+export default LightThemeScreen;

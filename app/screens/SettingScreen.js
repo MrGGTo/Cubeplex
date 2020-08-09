@@ -5,98 +5,125 @@ import Screen from "../components/Screen";
 import SettingsItemList from "../components/SettingsItemList";
 import { ScrollView } from "react-native-gesture-handler";
 import AppText from "../components/AppText";
+import SettingsItem from "../components/SettingsItem";
+import { selectedTheme } from "../config/themes";
+import router from "../navigation/router";
 
-const recordRow = [
+const settingsData = [
 	{
 		id: 1,
 		title: "Saved Records",
 		iconName: "star",
 		backgroundColor: "#FFE60A",
+		navigate: router.THEME,
 	},
 	{
 		id: 2,
 		title: "Pinned Algorithms",
 		iconName: "pin",
 		backgroundColor: "#299B50",
-	},
-];
-
-const settingsRow = [
-	{
-		id: 1,
-		title: "Theme",
-		iconName: "format-paint",
-		backgroundColor: "pink",
-	},
-	{
-		id: 2,
-		title: "Timer Settings",
-		iconName: "settings",
-		backgroundColor: "#6f6f6f",
-	},
-];
-
-const appDetailsRow = [
-	{
-		id: 1,
-		title: "Tell Friends About Cubeplex",
-		iconName: "thumb-up",
-		backgroundColor: "dodgerblue",
-	},
-	{
-		id: 2,
-		title: "Send Feedback",
-		iconName: "message-text",
-		backgroundColor: "orange",
+		navigate: router.THEME,
+		separate: true,
 	},
 	{
 		id: 3,
+		title: "Theme",
+		iconName: "format-paint",
+		backgroundColor: "pink",
+		navigate: router.THEME,
+	},
+	{
+		id: 4,
+		title: "Timer Settings",
+		iconName: "settings",
+		backgroundColor: "#6f6f6f",
+		navigate: router.THEME,
+		separate: true,
+	},
+	{
+		id: 5,
+		title: "Tell Friends About Cubeplex",
+		iconName: "thumb-up",
+		backgroundColor: "dodgerblue",
+		navigate: router.THEME,
+	},
+	{
+		id: 6,
+		title: "Send Feedback",
+		iconName: "message-text",
+		backgroundColor: "orange",
+		navigate: router.THEME,
+	},
+	{
+		id: 7,
 		title: "Support Us",
 		iconName: "heart",
 		backgroundColor: "#FF5B83",
+		navigate: router.THEME,
+		separate: true,
 	},
-];
-
-const deleteRow = [
 	{
-		id: 1,
+		id: 8,
 		title: "Delete Timer Records",
 		backgroundColor: "red",
 		iconName: "timer",
 		noChevron: true,
 		titleColor: "red",
+		navigate: router.THEME,
 	},
 	{
-		id: 2,
+		id: 9,
 		title: "Delete Algorithm Training Records",
 		backgroundColor: "red",
 		iconName: "timer-sand",
 		noChevron: true,
 		titleColor: "red",
+		navigate: router.THEME,
 	},
 	{
-		id: 3,
+		id: 10,
 		title: "Delete All Records",
 		backgroundColor: "red",
 		iconName: "trash-can",
 		noChevron: true,
 		titleColor: "red",
+		navigate: router.THEME,
 	},
 ];
 
 function SettingScreen({ navigation }) {
 	return (
 		<Screen styl={styles.container}>
-			<ScrollView>
-				<AppText style={styles.title}>Settings</AppText>
-				<SettingsItemList dataRow={recordRow} />
-				<SettingsItemList
-					dataRow={settingsRow}
-					onPress={() => navigation.navigate("Theme")}
-				/>
-				<SettingsItemList dataRow={appDetailsRow} />
-				<SettingsItemList dataRow={deleteRow} />
-			</ScrollView>
+			<AppText style={styles.title}>Settings</AppText>
+			<FlatList
+				data={settingsData}
+				keyExtractor={(data) => data.id.toString()}
+				renderItem={({ item }) => (
+					<SettingsItem
+						title={item.title}
+						iconName={item.iconName}
+						backgroundColor={item.backgroundColor}
+						noIcon={item.noIcon}
+						titleColor={item.titleColor}
+						noChevron={item.noChevron}
+						onPress={() => navigation.navigate(item.navigate)}
+						separate={item.separate}
+					/>
+				)}
+				ItemSeparatorComponent={() => {
+					return (
+						<View
+							style={{
+								height: 1,
+								width: "75%",
+								backgroundColor:
+									selectedTheme.backgroundPrimary,
+								marginLeft: "15%",
+							}}
+						/>
+					);
+				}}
+			/>
 		</Screen>
 	);
 }
