@@ -1,5 +1,13 @@
-import React from "react";
-import { View, StyleSheet, FlatList, Button, StatusBar } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+	View,
+	StyleSheet,
+	FlatList,
+	Button,
+	StatusBar,
+	Alert,
+	AsyncStorage,
+} from "react-native";
 
 import {
 	themesData,
@@ -8,7 +16,6 @@ import {
 	getSelectedTheme,
 } from "../config/themes";
 import Screen from "../components/Screen";
-import ThemeItemList from "../components/ThemeItemList";
 import AppText from "../components/AppText";
 import ThemeItem from "../components/ThemeItem";
 
@@ -20,20 +27,35 @@ function ThemeScreen(props) {
 	const dispatch = useDispatch();
 	const theme = getSelectedTheme();
 
+	const [themeID, setThemeID] = useState(1);
+
+	const saveTheme = async () => {
+		try {
+			await AsyncStorage.setItem("ThemeID", theme.id);
+		} catch (error) {
+			Alert(error);
+		}
+	};
+
+	const loadTheme = async () => {
+		try {
+			const id = await AsyncStorage.getItem("ThemeID");
+			return id != null ? parseInt(id) : null;
+		} catch (error) {
+			console.log("Bad");
+			alert(error);
+		}
+	};
+
+	useEffect(() => {
+		// saveTheme();
+		const idx = loadTheme();
+		dispatch(switchTheme(themesData.find((theme) => theme.id === idx)));
+	}, []);
+
 	return (
 		<Screen>
 			<StatusBar barStyle={selectedTheme.statusBarStyle} />
-			{/* {selectedTheme.name === "Dodger Blue" ? (
-				<Button
-					title="Change to Purple"
-					onPress={() => dispatch(switchTheme(selectedThemeAlter))}
-				/>
-			) : (
-				<Button
-					title="Change to Green"
-					onPress={() => dispatch(switchTheme(selectedTheme))}
-				/>
-			)} */}
 			<FlatList
 				columnWrapperStyle={{
 					justifyContent: "space-evenly",
@@ -53,14 +75,17 @@ function ThemeScreen(props) {
 							dispatch(
 								switchTheme(
 									themesData.find(
-										(theme) => theme.id === item.id
+										(theme) => theme.id === themeID
 									)
 								)
 							);
+							saveTheme();
+							loadTheme();
 						}}
 					/>
 				)}
 			/>
+			<AppText>{themeID}</AppText>
 		</Screen>
 	);
 }

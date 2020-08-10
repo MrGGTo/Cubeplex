@@ -18,6 +18,7 @@ const AppNavigator = () => {
 	// const dispatch = useDispatch();
 
 	const theme = getSelectedTheme();
+
 	return (
 		<Tab.Navigator
 			tabBarOptions={{

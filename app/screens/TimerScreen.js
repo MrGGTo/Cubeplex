@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Modal, Switch } from "react-native";
+import { View, StyleSheet, Modal, Switch, Image } from "react-native";
 
 import Screen from "../components/Screen";
 import Scramble from "../components/Scramble";
@@ -19,6 +19,17 @@ function TimerScreen(props) {
 	return (
 		<Screen style={styles.container}>
 			<AppText style={styles.appName}>Cubeplex</AppText>
+			{/* <Image
+				source={require("../assets/TestIcon.png")}
+				style={[
+					{
+						transform: [{ scaleX: 0.2 }, { scaleY: 0.2 }],
+						// borderWidth: 5,
+						position: "absolute",
+						top: -150,
+					},
+				]}
+			/> */}
 			<IconButton
 				style={styles.settingsContainer}
 				onPress={() => setSettingsVisible(true)}

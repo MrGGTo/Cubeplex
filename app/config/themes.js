@@ -1,3 +1,8 @@
+// import React from "react";
+import { AsyncStorage } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { switchTheme } from "../redux/themeActions";
+
 export const lightThemes = [
 	{
 		globalId: 1,
@@ -177,15 +182,25 @@ export const themesData = [
 	},
 ];
 
-import { useSelector, useDispatch } from "react-redux";
-import { switchTheme } from "../redux/themeActions";
-
 export function getSelectedTheme() {
 	const theme = useSelector((state) => state.themeReducer.theme);
 	return theme;
 }
 
-const themeid = 1;
+const loadTheme = async () => {
+	try {
+		let id = await AsyncStorage.getItem("ThemeID");
+		if (id !== null) {
+			console.log("Good");
+			return parseInt(id);
+		}
+	} catch (error) {
+		console.log("Bad");
+		alert(error);
+	}
+};
+
+const themeid = loadTheme();
 
 export const selectedTheme = themesData.find((theme) => theme.id === themeid);
 export const selectedThemeAlter = themesData.find((theme) => theme.id === 8);
