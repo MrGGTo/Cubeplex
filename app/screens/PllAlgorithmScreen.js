@@ -16,17 +16,25 @@ import plls from "../data/plls";
 import IconButton from "../components/IconButton";
 import AlgorithmItem from "../components/AlgorithmItem";
 import AppText from "../components/AppText";
-import { selectedTheme } from "../config/themes";
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 import router from "../navigation/router";
 
 function PllAlgorithmScreen({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState("false");
+	const theme = getSelectedTheme();
 	return (
 		<Screen>
 			<View style={styles.header}>
 				<AppText style={styles.title}>PLL Algorithms</AppText>
 				<TouchableOpacity onPress={() => setInfoVisible(true)}>
-					<AppText style={styles.info}>Info</AppText>
+					<AppText
+						style={{
+							color: theme.color,
+							fontSize: 18,
+						}}
+					>
+						Info
+					</AppText>
 				</TouchableOpacity>
 			</View>
 			<Modal
@@ -42,8 +50,7 @@ function PllAlgorithmScreen({ navigation }) {
 					>
 						<View
 							style={{
-								backgroundColor:
-									selectedTheme.backgroundSecondary,
+								backgroundColor: theme.backgroundSecondary,
 								flex: 1,
 								marginVertical: 75,
 								marginHorizontal: 50,
@@ -112,7 +119,8 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	info: {
-		color: selectedTheme.color,
+		// color: selectedTheme.color,
+		fontSize: 18,
 	},
 });
 

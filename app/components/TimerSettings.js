@@ -33,9 +33,4 @@ function TimerSettings(props) {
 		</Modal>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {},
-});
-
 export default TimerSettings;

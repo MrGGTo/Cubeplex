@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { selectedTheme } from "../config/themes";
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 import AppText from "./AppText";
 
 function SettingsItem({
@@ -16,12 +16,20 @@ function SettingsItem({
 	noChevron = false,
 	separate,
 }) {
+	const theme = getSelectedTheme();
 	return (
 		<TouchableOpacity
 			onPress={onPress}
 			style={{ marginBottom: separate ? 30 : 0 }}
 		>
-			<View style={styles.container}>
+			<View
+				style={[
+					styles.container,
+					{
+						backgroundColor: theme.backgroundSecondary,
+					},
+				]}
+			>
 				{!noIcon && (
 					<View
 						style={[
@@ -41,7 +49,7 @@ function SettingsItem({
 					<MaterialCommunityIcons
 						name="chevron-right"
 						size={24}
-						color={selectedTheme.fontPrimary}
+						color={theme.fontPrimary}
 					/>
 				)}
 			</View>
@@ -56,7 +64,6 @@ const styles = StyleSheet.create({
 		// marginHorizontal: 15,
 		paddingHorizontal: 15,
 		paddingVertical: 10,
-		backgroundColor: selectedTheme.backgroundSecondary,
 	},
 	iconContainer: {
 		backgroundColor: "orange",

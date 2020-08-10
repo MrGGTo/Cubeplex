@@ -11,16 +11,23 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AlgorithmStarAction from "./AlgorithmStarAction";
 import AppText from "./AppText";
 
-import { selectedTheme } from "../config/themes";
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 
 function AlgorithmItem({ name, algorithm, image, onPress }) {
+	const theme = getSelectedTheme();
 	return (
 		<Swipeable renderLeftActions={AlgorithmStarAction}>
 			<TouchableWithoutFeedback onPress={onPress}>
-				<View
-					style={{ backgroundColor: selectedTheme.backgroundPrimary }}
-				>
-					<View style={styles.container}>
+				<View style={{ backgroundColor: theme.backgroundPrimary }}>
+					<View
+						style={[
+							styles.container,
+							{
+								backgroundColor: theme.backgroundPrimary,
+								borderColor: theme.fontPrimary,
+							},
+						]}
+					>
 						<Image
 							// resizeMethod="resize"
 							style={styles.image}
@@ -33,7 +40,7 @@ function AlgorithmItem({ name, algorithm, image, onPress }) {
 							</AppText>
 						</View>
 						<MaterialCommunityIcons
-							color={selectedTheme.fontPrimary}
+							color={theme.fontPrimary}
 							name="chevron-right"
 							size={25}
 						/>
@@ -49,9 +56,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		flexDirection: "row",
 		padding: 10,
-		backgroundColor: selectedTheme.backgroundPrimary,
 		borderWidth: 1,
-		borderColor: selectedTheme.fontPrimary,
 		margin: 10,
 		borderRadius: 15,
 	},

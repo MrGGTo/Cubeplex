@@ -9,6 +9,7 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	Modal,
+	StatusBar,
 } from "react-native";
 
 import Screen from "../components/Screen";
@@ -26,20 +27,27 @@ import ZShape from "../data/oll/ZShape";
 
 import AlgorithmItem from "../components/AlgorithmItem";
 import AppText from "../components/AppText";
-import { themesData, selectedTheme } from "../config/themes";
-import DialogModal from "../components/DialogModal";
+import { getSelectedTheme, selectedTheme } from "../config/themes";
 import IconButton from "../components/IconButton";
 import router from "../navigation/router";
 
 function OllAlgorithmScreen({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState("false");
+	const theme = getSelectedTheme();
 	return (
 		<Screen>
 			<ScrollView>
 				<View style={styles.header}>
 					<AppText style={styles.title}>OLL Algorithms</AppText>
 					<TouchableOpacity onPress={() => setInfoVisible(true)}>
-						<AppText style={styles.info}>Info</AppText>
+						<AppText
+							style={{
+								color: theme.color,
+								fontSize: 18,
+							}}
+						>
+							Info
+						</AppText>
 					</TouchableOpacity>
 				</View>
 				<Modal
@@ -55,8 +63,7 @@ function OllAlgorithmScreen({ navigation }) {
 						>
 							<View
 								style={{
-									backgroundColor:
-										selectedTheme.backgroundSecondary,
+									backgroundColor: theme.backgroundSecondary,
 									flex: 1,
 									marginVertical: 75,
 									marginHorizontal: 50,
@@ -372,7 +379,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	info: {
-		color: selectedTheme.color,
+		// color: selectedTheme.color,
 		fontSize: 18,
 	},
 	detailContainer: {

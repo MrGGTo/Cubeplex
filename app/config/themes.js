@@ -93,6 +93,7 @@ export const themesData = [
 		backgroundSecondary: "#f0f0f0",
 		fontPrimary: "#0f0f0f",
 		fontSecondary: "#585858",
+		statusBarStyle: "dark-content",
 	},
 	{
 		id: 2,
@@ -102,6 +103,7 @@ export const themesData = [
 		backgroundSecondary: "#f0f0f0",
 		fontPrimary: "#0f0f0f",
 		fontSecondary: "#585858",
+		statusBarStyle: "dark-content",
 	},
 	{
 		id: 3,
@@ -111,6 +113,7 @@ export const themesData = [
 		backgroundSecondary: "#f0f0f0",
 		fontPrimary: "#0f0f0f",
 		fontSecondary: "#585858",
+		statusBarStyle: "dark-content",
 	},
 	{
 		id: 4,
@@ -120,6 +123,7 @@ export const themesData = [
 		backgroundSecondary: "#f0f0f0",
 		fontPrimary: "#0f0f0f",
 		fontSecondary: "#585858",
+		statusBarStyle: "dark-content",
 	},
 	{
 		id: 5,
@@ -129,6 +133,7 @@ export const themesData = [
 		backgroundSecondary: "#303030",
 		fontPrimary: "#e8e8e8",
 		fontSecondary: "#aaaaaa",
+		statusBarStyle: "light-content",
 	},
 	{
 		id: 6,
@@ -138,6 +143,7 @@ export const themesData = [
 		backgroundSecondary: "#303030",
 		fontPrimary: "#e8e8e8",
 		fontSecondary: "#aaaaaa",
+		statusBarStyle: "light-content",
 	},
 	{
 		id: 7,
@@ -147,6 +153,7 @@ export const themesData = [
 		backgroundSecondary: "#303030",
 		fontPrimary: "#e8e8e8",
 		fontSecondary: "#aaaaaa",
+		statusBarStyle: "light-content",
 	},
 	{
 		id: 8,
@@ -156,9 +163,29 @@ export const themesData = [
 		backgroundSecondary: "#303030",
 		fontPrimary: "#e8e8e8",
 		fontSecondary: "#aaaaaa",
+		statusBarStyle: "light-content",
+	},
+	{
+		id: 9,
+		name: "Wing Wing",
+		color: "#CDA1CE",
+		backgroundPrimary: "#202020",
+		backgroundSecondary: "#303030",
+		fontPrimary: "#e8e8e8",
+		fontSecondary: "#aaaaaa",
+		statusBarStyle: "light-content",
 	},
 ];
 
-const themeid = 3;
+import { useSelector, useDispatch } from "react-redux";
+import { switchTheme } from "../redux/themeActions";
+
+export function getSelectedTheme() {
+	const theme = useSelector((state) => state.themeReducer.theme);
+	return theme;
+}
+
+const themeid = 1;
 
 export const selectedTheme = themesData.find((theme) => theme.id === themeid);
+export const selectedThemeAlter = themesData.find((theme) => theme.id === 8);

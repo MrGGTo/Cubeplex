@@ -1,13 +1,18 @@
 import React from "react";
-import { View, StyleSheet, Text, FlatList } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 
 import SettingsItem from "../components/SettingsItem";
-import { selectedTheme } from "../config/themes";
-import ThemeScreen from "../screens/ThemeScreen";
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 
 function SettingsItemList({ dataRow, onPress }) {
+	const theme = getSelectedTheme();
 	return (
-		<View style={styles.container}>
+		<View
+			style={{
+				marginBottom: 30,
+				backgroundColor: theme.backgroundSecondary,
+			}}
+		>
 			<FlatList
 				scrollEnabled={false}
 				data={dataRow}
@@ -29,8 +34,7 @@ function SettingsItemList({ dataRow, onPress }) {
 							style={{
 								height: 1,
 								width: "75%",
-								backgroundColor:
-									selectedTheme.backgroundPrimary,
+								backgroundColor: theme.backgroundPrimary,
 								marginLeft: "15%",
 							}}
 						/>
@@ -44,8 +48,6 @@ function SettingsItemList({ dataRow, onPress }) {
 const styles = StyleSheet.create({
 	container: {
 		// marginVertical: 25,
-		marginBottom: 30,
-		backgroundColor: selectedTheme.backgroundSecondary,
 	},
 });
 

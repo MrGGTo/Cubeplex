@@ -2,11 +2,18 @@ import React from "react";
 import Constants from "expo-constants";
 import { StyleSheet, SafeAreaView, View } from "react-native";
 
-import { selectedTheme } from "../config/themes";
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 
 function Screen({ children, style }) {
+	const theme = getSelectedTheme();
 	return (
-		<SafeAreaView style={[styles.screen, style]}>
+		<SafeAreaView
+			style={[
+				styles.screen,
+				style,
+				{ backgroundColor: theme.backgroundPrimary },
+			]}
+		>
 			<View style={[styles.view, style]}>{children}</View>
 		</SafeAreaView>
 	);
@@ -16,7 +23,6 @@ const styles = StyleSheet.create({
 	screen: {
 		paddingTop: Constants.statusBarHeight,
 		flex: 1,
-		backgroundColor: selectedTheme.backgroundPrimary,
 	},
 	view: {
 		flex: 1,

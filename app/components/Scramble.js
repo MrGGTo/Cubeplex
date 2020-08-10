@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, StyleSheet } from "react-native";
 import AppText from "./AppText";
 import IconButton from "./IconButton";
 

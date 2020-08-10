@@ -14,61 +14,11 @@ import plls from "../data/plls";
 import Screen from "../components/Screen";
 import AlgorithmDetailsList from "../components/AlgorithmDetailsList";
 import AppText from "../components/AppText";
-import { selectedTheme } from "../config/themes";
-
-const Aa = [
-	{
-		id: 1,
-		algorithm: "(x) R' U R' D2 R U' R' D2 R2 (x')",
-	},
-	{
-		id: 2,
-		algorithm: "l' U R' D2 R U' R' D2 R2 (x')",
-	},
-	{
-		id: 3,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-	{
-		id: 4,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-	{
-		id: 5,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-	{
-		id: 6,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-	{
-		id: 7,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-	{
-		id: 8,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-	{
-		id: 9,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-	{
-		id: 10,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-	{
-		id: 11,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-	{
-		id: 12,
-		algorithm: "(x') R' D R' U2 R D' R' U2 R2 (x)",
-	},
-];
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 
 function AlgorithmDetailsScreen({ route }) {
 	const algorithmData = route.params;
+	const theme = getSelectedTheme();
 
 	return (
 		<Screen>
@@ -98,7 +48,14 @@ function AlgorithmDetailsScreen({ route }) {
 						/>
 						<AppText style={styles.pinText}>Pin</AppText>
 					</TouchableOpacity>
-					<TouchableOpacity style={styles.TrainButton}>
+					<TouchableOpacity
+						style={[
+							styles.TrainButton,
+							{
+								backgroundColor: theme.color,
+							},
+						]}
+					>
 						<MaterialCommunityIcons
 							name="timer-sand"
 							color="white"
@@ -187,7 +144,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: selectedTheme.color,
 		paddingVertical: 8,
 		marginHorizontal: 5,
 		flex: 1,

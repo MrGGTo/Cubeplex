@@ -6,13 +6,15 @@ import Scramble from "../components/Scramble";
 import IconButton from "../components/IconButton";
 import Timer from "../components/Timer";
 import AppText from "../components/AppText";
-import { selectedTheme } from "../config/themes";
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 
 function TimerScreen(props) {
 	const [settingsVisible, setSettingsVisible] = useState(false);
 	const [scrambleLength, setScrambleLength] = useState(20);
 	const [isEnabled, setIsEnabled] = useState(false);
 	const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+	const theme = getSelectedTheme();
 
 	return (
 		<Screen style={styles.container}>
@@ -46,8 +48,7 @@ function TimerScreen(props) {
 					>
 						<View
 							style={{
-								backgroundColor:
-									selectedTheme.backgroundSecondary,
+								backgroundColor: theme.backgroundSecondary,
 								flex: 1,
 								marginVertical: 75,
 								marginHorizontal: 50,
@@ -105,7 +106,7 @@ function TimerScreen(props) {
 									}}
 									trackColor={{
 										false: "#767577",
-										true: selectedTheme.color,
+										true: theme.color,
 									}}
 									onValueChange={toggleSwitch}
 									value={isEnabled}

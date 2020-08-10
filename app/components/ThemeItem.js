@@ -1,19 +1,24 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import AppText from "./AppText";
-import { selectedTheme } from "../config/themes";
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 
 function ThemeItem({
 	backgroundColor,
 	name,
 	themeBackgroundColor = "#FFFFFF",
+	onPress,
 }) {
+	const theme = getSelectedTheme();
 	return (
-		<TouchableOpacity style={styles.container}>
+		<TouchableOpacity style={styles.container} onPress={onPress}>
 			<View
 				style={[
 					styles.preview,
-					{ backgroundColor: themeBackgroundColor },
+					{
+						backgroundColor: themeBackgroundColor,
+						borderColor: theme.fontSecondary,
+					},
 				]}
 			>
 				<View style={styles.previewContainer}>
@@ -28,7 +33,14 @@ function ThemeItem({
 					></View>
 				</View>
 			</View>
-			<AppText style={styles.text}>{name}</AppText>
+			<AppText
+				style={{
+					fontSize: 18,
+					color: theme.fontSecondary,
+				}}
+			>
+				{name}
+			</AppText>
 		</TouchableOpacity>
 	);
 }
@@ -44,7 +56,6 @@ const styles = StyleSheet.create({
 		height: 100,
 		borderRadius: 25,
 		borderWidth: 1,
-		borderColor: selectedTheme.fontSecondary,
 		alignItems: "center",
 		justifyContent: "center",
 	},
@@ -60,10 +71,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "dodgerblue",
 		left: 0,
 	},
-	text: {
-		fontSize: 18,
-		color: selectedTheme.fontSecondary,
-	},
+	text: {},
 });
 
 export default ThemeItem;

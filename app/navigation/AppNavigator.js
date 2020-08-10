@@ -2,23 +2,28 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import { useSelector, useDispatch } from "react-redux";
+import { switchTheme } from "../redux/themeActions";
+
 import router from "./router";
 import TimerScreen from "../screens/TimerScreen";
-import PllAlgorithmScreen from "../screens/PllAlgorithmScreen";
-import SettingScreen from "../screens/SettingScreen";
-import { selectedTheme } from "../config/themes";
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 import SettingsNavigator from "./SettingsNavigator";
 import AlgorithmNavigator from "./AlgorithmNavigator";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+	// const theme = useSelector((state) => state.themeReducer.theme);
+	// const dispatch = useDispatch();
+
+	const theme = getSelectedTheme();
 	return (
 		<Tab.Navigator
 			tabBarOptions={{
-				activeTintColor: selectedTheme.color,
-				activeBackgroundColor: selectedTheme.backgroundSecondary,
-				inactiveBackgroundColor: selectedTheme.backgroundPrimary,
+				activeTintColor: theme.color,
+				activeBackgroundColor: theme.backgroundSecondary,
+				inactiveBackgroundColor: theme.backgroundPrimary,
 				// tabStyle: { backgroundColor: "red" },
 			}}
 			tabStyle={

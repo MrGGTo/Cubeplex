@@ -6,7 +6,7 @@ import SettingsItemList from "../components/SettingsItemList";
 import { ScrollView } from "react-native-gesture-handler";
 import AppText from "../components/AppText";
 import SettingsItem from "../components/SettingsItem";
-import { selectedTheme } from "../config/themes";
+import { selectedTheme, getSelectedTheme } from "../config/themes";
 import router from "../navigation/router";
 
 const settingsData = [
@@ -92,6 +92,7 @@ const settingsData = [
 ];
 
 function SettingScreen({ navigation }) {
+	const theme = getSelectedTheme();
 	return (
 		<Screen styl={styles.container}>
 			<AppText style={styles.title}>Settings</AppText>
@@ -116,8 +117,7 @@ function SettingScreen({ navigation }) {
 							style={{
 								height: 1,
 								width: "75%",
-								backgroundColor:
-									selectedTheme.backgroundPrimary,
+								backgroundColor: theme.backgroundPrimary,
 								marginLeft: "15%",
 							}}
 						/>
