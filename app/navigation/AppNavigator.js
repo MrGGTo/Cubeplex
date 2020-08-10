@@ -25,13 +25,7 @@ const AppNavigator = () => {
 				activeTintColor: theme.color,
 				activeBackgroundColor: theme.backgroundSecondary,
 				inactiveBackgroundColor: theme.backgroundPrimary,
-				// tabStyle: { backgroundColor: "red" },
 			}}
-			tabStyle={
-				{
-					// backgroundColor: "red",
-				}
-			}
 		>
 			<Tab.Screen
 				name={router.TIMER}

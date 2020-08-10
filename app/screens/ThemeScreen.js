@@ -27,35 +27,35 @@ function ThemeScreen(props) {
 	const dispatch = useDispatch();
 	const theme = getSelectedTheme();
 
-	const [themeID, setThemeID] = useState(1);
+	// const [themeID, setThemeID] = useState(1);
 
-	const saveTheme = async () => {
-		try {
-			await AsyncStorage.setItem("ThemeID", theme.id);
-		} catch (error) {
-			Alert(error);
-		}
-	};
+	// const saveTheme = async () => {
+	// 	try {
+	// 		await AsyncStorage.setItem("ThemeID", theme.id);
+	// 	} catch (error) {
+	// 		Alert(error);
+	// 	}
+	// };
 
-	const loadTheme = async () => {
-		try {
-			const id = await AsyncStorage.getItem("ThemeID");
-			return id != null ? parseInt(id) : null;
-		} catch (error) {
-			console.log("Bad");
-			alert(error);
-		}
-	};
+	// const loadTheme = async () => {
+	// 	try {
+	// 		const id = await AsyncStorage.getItem("ThemeID");
+	// 		return id != null ? parseInt(id) : null;
+	// 	} catch (error) {
+	// 		console.log("Bad");
+	// 		alert(error);
+	// 	}
+	// };
 
-	useEffect(() => {
-		// saveTheme();
-		const idx = loadTheme();
-		dispatch(switchTheme(themesData.find((theme) => theme.id === idx)));
-	}, []);
+	// useEffect(() => {
+	// 	// saveTheme();
+	// 	const idx = loadTheme();
+	// 	dispatch(switchTheme(themesData.find((theme) => theme.id === idx)));
+	// }, []);
 
 	return (
 		<Screen>
-			<StatusBar barStyle={selectedTheme.statusBarStyle} />
+			<StatusBar barStyle={theme.statusBarStyle} />
 			<FlatList
 				columnWrapperStyle={{
 					justifyContent: "space-evenly",
@@ -75,17 +75,17 @@ function ThemeScreen(props) {
 							dispatch(
 								switchTheme(
 									themesData.find(
-										(theme) => theme.id === themeID
+										(theme) => theme.id === item.id
 									)
 								)
 							);
-							saveTheme();
-							loadTheme();
+							// saveTheme();
+							// loadTheme();
 						}}
 					/>
 				)}
 			/>
-			<AppText>{themeID}</AppText>
+			{/* <AppText>{themeID}</AppText> */}
 		</Screen>
 	);
 }

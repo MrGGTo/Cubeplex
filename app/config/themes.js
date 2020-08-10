@@ -187,20 +187,20 @@ export function getSelectedTheme() {
 	return theme;
 }
 
-const loadTheme = async () => {
-	try {
-		let id = await AsyncStorage.getItem("ThemeID");
-		if (id !== null) {
-			console.log("Good");
-			return parseInt(id);
-		}
-	} catch (error) {
-		console.log("Bad");
-		alert(error);
-	}
-};
+// const loadTheme = async () => {
+// 	try {
+// 		let id = await AsyncStorage.getItem("ThemeID");
+// 		if (id !== null) {
+// 			console.log("Good");
+// 			return parseInt(id);
+// 		}
+// 	} catch (error) {
+// 		console.log("Bad");
+// 		alert(error);
+// 	}
+// };
 
-const themeid = loadTheme();
+// const themeid = loadTheme();
 
-export const selectedTheme = themesData.find((theme) => theme.id === themeid);
+export const selectedTheme = themesData.find((theme) => theme.id === 1);
 export const selectedThemeAlter = themesData.find((theme) => theme.id === 8);
