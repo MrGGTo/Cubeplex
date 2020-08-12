@@ -10,13 +10,11 @@ import TimerScreen from "../screens/TimerScreen";
 import { selectedTheme, getSelectedTheme } from "../config/themes";
 import SettingsNavigator from "./SettingsNavigator";
 import AlgorithmNavigator from "./AlgorithmNavigator";
+import RecordsScreen from "../screens/RecordsScreen";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-	// const theme = useSelector((state) => state.themeReducer.theme);
-	// const dispatch = useDispatch();
-
 	const theme = getSelectedTheme();
 
 	return (
@@ -33,7 +31,20 @@ const AppNavigator = () => {
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<MaterialCommunityIcons
-							name="timer"
+							name="timer-sand"
+							color={color}
+							size={size}
+						/>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name={router.RECORDS}
+				component={RecordsScreen}
+				options={{
+					tabBarIcon: ({ color, size }) => (
+						<MaterialCommunityIcons
+							name="chart-tree"
 							color={color}
 							size={size}
 						/>
@@ -46,7 +57,7 @@ const AppNavigator = () => {
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<MaterialCommunityIcons
-							name="format-float-left"
+							name="format-float-none"
 							color={color}
 							size={size}
 						/>

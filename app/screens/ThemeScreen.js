@@ -14,6 +14,8 @@ import {
 	selectedTheme,
 	selectedThemeAlter,
 	getSelectedTheme,
+	saveTheme,
+	loadTheme,
 } from "../config/themes";
 import Screen from "../components/Screen";
 import AppText from "../components/AppText";
@@ -26,32 +28,7 @@ function ThemeScreen(props) {
 	// const theme = useSelector((state) => state.themeReducer.theme);
 	const dispatch = useDispatch();
 	const theme = getSelectedTheme();
-
-	// const [themeID, setThemeID] = useState(1);
-
-	// const saveTheme = async () => {
-	// 	try {
-	// 		await AsyncStorage.setItem("ThemeID", theme.id);
-	// 	} catch (error) {
-	// 		Alert(error);
-	// 	}
-	// };
-
-	// const loadTheme = async () => {
-	// 	try {
-	// 		const id = await AsyncStorage.getItem("ThemeID");
-	// 		return id != null ? parseInt(id) : null;
-	// 	} catch (error) {
-	// 		console.log("Bad");
-	// 		alert(error);
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	// saveTheme();
-	// 	const idx = loadTheme();
-	// 	dispatch(switchTheme(themesData.find((theme) => theme.id === idx)));
-	// }, []);
+	const themeIDID = loadTheme();
 
 	return (
 		<Screen>
@@ -72,6 +49,7 @@ function ThemeScreen(props) {
 						backgroundColor={item.color}
 						themeBackgroundColor={item.backgroundSecondary}
 						onPress={() => {
+							saveTheme(item.id);
 							dispatch(
 								switchTheme(
 									themesData.find(
@@ -79,13 +57,11 @@ function ThemeScreen(props) {
 									)
 								)
 							);
-							// saveTheme();
-							// loadTheme();
 						}}
 					/>
 				)}
 			/>
-			{/* <AppText>{themeID}</AppText> */}
+			{/* <AppText>{themeIDID}</AppText> */}
 		</Screen>
 	);
 }

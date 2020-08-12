@@ -1,5 +1,6 @@
 export default {
 	TIMER: "Timer",
+	RECORDS: "Records",
 	ALGORITHM: "Algorithms",
 	PLL_ALGORITHMS: "PLL Algorithms",
 	OLL_ALGORITHMS: "OLL Algorithms",

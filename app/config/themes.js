@@ -173,34 +173,43 @@ export const themesData = [
 	{
 		id: 9,
 		name: "Wing Wing",
-		color: "#CDA1CE",
-		backgroundPrimary: "#202020",
-		backgroundSecondary: "#303030",
+		color: "#7e57c2",
+		backgroundPrimary: "#292d3e",
+		backgroundSecondary: "#292d3e",
 		fontPrimary: "#e8e8e8",
 		fontSecondary: "#aaaaaa",
 		statusBarStyle: "light-content",
 	},
 ];
 
-export function getSelectedTheme() {
+export const getSelectedTheme = () => {
 	const theme = useSelector((state) => state.themeReducer.theme);
+	// theme = themesData.find((theme) => theme.id === loadTheme());
 	return theme;
-}
+};
 
-// const loadTheme = async () => {
-// 	try {
-// 		let id = await AsyncStorage.getItem("ThemeID");
-// 		if (id !== null) {
-// 			console.log("Good");
-// 			return parseInt(id);
-// 		}
-// 	} catch (error) {
-// 		console.log("Bad");
-// 		alert(error);
-// 	}
-// };
+// Save themeID to AsyncStorage
+export const saveTheme = (num) => {
+	let themeID = num.toString();
+	AsyncStorage.setItem("ThemeID", themeID);
+};
 
-// const themeid = loadTheme();
+// Load themeID from AsyncStorage
+export const loadTheme = async () => {
+	try {
+		let themeID = await AsyncStorage.getItem("ThemeID");
+		if (themeID !== null) {
+			const dispatch = useDispatch();
+			dispatch(
+				switchTheme(themesData.find((theme) => theme.id === themeID))
+			);
+		}
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const setTheme = () => {};
 
 export const selectedTheme = themesData.find((theme) => theme.id === 1);
 export const selectedThemeAlter = themesData.find((theme) => theme.id === 8);

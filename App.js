@@ -1,15 +1,16 @@
 // import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import themeReducer from "./app/redux/themeReducer";
+import { themesData, loadTheme } from "./app/config/themes";
 
 const store = createStore(
 	combineReducers({ themeReducer }),

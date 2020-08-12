@@ -1,12 +1,28 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Modal, Switch, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+	View,
+	StyleSheet,
+	Modal,
+	Switch,
+	Image,
+	Button,
+	AsyncStorage,
+} from "react-native";
 
 import Screen from "../components/Screen";
 import Scramble from "../components/Scramble";
 import IconButton from "../components/IconButton";
 import Timer from "../components/Timer";
 import AppText from "../components/AppText";
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import {
+	selectedTheme,
+	getSelectedTheme,
+	loadTheme,
+	saveTheme,
+	themesData,
+} from "../config/themes";
+import { useDispatch } from "react-redux";
+import { switchTheme } from "../redux/themeActions";
 
 function TimerScreen(props) {
 	const [settingsVisible, setSettingsVisible] = useState(false);
@@ -19,17 +35,6 @@ function TimerScreen(props) {
 	return (
 		<Screen style={styles.container}>
 			<AppText style={styles.appName}>Cubeplex</AppText>
-			{/* <Image
-				source={require("../assets/TestIcon.png")}
-				style={[
-					{
-						transform: [{ scaleX: 0.2 }, { scaleY: 0.2 }],
-						// borderWidth: 5,
-						position: "absolute",
-						top: -150,
-					},
-				]}
-			/> */}
 			<IconButton
 				style={styles.settingsContainer}
 				onPress={() => setSettingsVisible(true)}
