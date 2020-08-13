@@ -48,7 +48,13 @@ function TimerScreen(props) {
 				i--;
 			}
 		}
-		return scramble;
+
+		var scrambleString = "";
+		for (var i = 0; i < scrambleLength; i++) {
+			scrambleString += scramble[i] + "";
+		}
+
+		return scrambleString;
 	};
 
 	useEffect(() => {

@@ -19,6 +19,7 @@ const AppNavigator = () => {
 
 	return (
 		<Tab.Navigator
+			lazy={true}
 			tabBarOptions={{
 				activeTintColor: theme.color,
 				activeBackgroundColor: theme.backgroundSecondary,

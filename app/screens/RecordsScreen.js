@@ -7,6 +7,7 @@ import {
 	StyleSheet,
 	TextInput,
 	Alert,
+	FlatList,
 } from "react-native";
 
 import * as SQLite from "expo-sqlite";
@@ -16,6 +17,7 @@ import { getSelectedTheme } from "../config/themes";
 import AppText from "../components/AppText";
 import RecordItem from "../components/RecordItem";
 import RecordDeleteAction from "../components/RecordDeleteAction";
+import Screen from "../components/Screen";
 
 const db = SQLite.openDatabase("db.db");
 
@@ -25,6 +27,7 @@ function RecordScreen() {
 	const [recordData, setRecordData] = useState([]);
 	const [inputTime, setInputTime] = useState();
 	const [inputScramble, setInputScramble] = useState();
+	const [refreshing, setRefreshing] = useState(false);
 
 	// create table
 	useEffect(() => {
@@ -32,9 +35,9 @@ function RecordScreen() {
 			tx.executeSql(
 				"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
 			);
-			console.log("why");
+			console.log("what");
 			tx.executeSql(
-				"SELECT * FROM record",
+				"SELECT * FROM records",
 				null,
 				// success
 				(txObj, { rows: { _array } }) => {
@@ -90,163 +93,89 @@ function RecordScreen() {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>Records Database</Text>
-			<View style={{ flexDirection: "row" }}></View>
-			<View style={{ flexDirection: "row" }}>
-				<TextInput
-					style={styles.input}
-					keyboardType="number-pad"
-					placeholder="Record Time"
-					placeholderTextColor="#666"
-					onChangeText={(text) => setInputTime(text)}
-				/>
-				<TextInput
-					style={styles.input}
-					keyboardType="default"
-					placeholder="Scramble"
-					placeholderTextColor="#555"
-					onChangeText={(text) => setInputScramble(text)}
-				/>
-			</View>
-			<TouchableOpacity
-				style={styles.button}
-				onPress={() => {
-					fetchRecord();
-				}}
-			>
-				<Text
-					style={{
-						fontSize: 20,
-						color: "#fff",
-						fontWeight: "600",
-					}}
-				>
-					Reload Record
-				</Text>
-			</TouchableOpacity>
-			<TouchableOpacity
-				style={styles.button}
-				onPress={() => {
-					addRecord();
-				}}
-			>
-				<Text
-					style={{
-						fontSize: 20,
-						color: "#fff",
-						fontWeight: "600",
-					}}
-				>
-					Add Record
-				</Text>
-			</TouchableOpacity>
-			<TouchableOpacity
-				style={[styles.button, { backgroundColor: "#dd0000" }]}
-				onPress={() => {
-					db.transaction((tx) => {
-						tx.executeSql(
-							"DELETE FROM records WHERE id != -1",
-							null,
-							(txObj, resultSet) => {
-								console.log("deleted");
-								fetchRecord();
-							},
-							(txObj, error) => {
-								console.log("delete failed");
-							}
-						);
-					});
-				}}
-			>
-				<Text
-					style={{
-						fontSize: 20,
-						color: "#fff",
-						fontWeight: "600",
-					}}
-				>
-					Delete All Records
-				</Text>
-			</TouchableOpacity>
-			<ScrollView style={styles.recordlist}>
-				{recordData !== null
-					? recordData.map(({ id, time, scramble, dateTime }) => (
-							<RecordItem
-								key={id}
-								time={time}
-								scramble={scramble}
-								dateTime={dateTime}
-								renderRightActions={() => (
-									<RecordDeleteAction
-										onPress={() => {
-											Alert.alert(
-												"Delete Record",
-												"Do you want to delete this record?\n" +
-													"\nTime: " +
-													moment
-														.duration(time)
-														.seconds() +
-													"." +
-													moment
-														.duration(time)
-														.milliseconds() +
-													"s" +
-													"\nScramble: " +
-													scramble +
-													"\nOn " +
-													dateTime,
-												[
-													{
-														text: "Cancel",
-														onPress: () =>
-															console.log(
-																"Cancel Pressed"
-															),
-														style: "cancel",
-													},
-													{
-														text: "Delete",
-														onPress: () => {
-															db.transaction(
-																(tx) => {
-																	tx.executeSql(
-																		"DELETE FROM records WHERE id = ?",
-																		[id],
-																		(
-																			txObj,
-																			resultSet
-																		) => {
-																			console.log(
-																				"deleted id: " +
-																					id
-																			);
-																			fetchRecord();
-																		},
-																		(
-																			txObj,
-																			error
-																		) => {
-																			console.log(
-																				"delete failed"
-																			);
-																		}
+		<Screen style={styles.container}>
+			{recordData !== null ? (
+				<FlatList
+					data={recordData}
+					keyExtractor={(data) => data.id.toString()}
+					renderItem={({ item }) => (
+						<RecordItem
+							id={item.id}
+							time={item.time}
+							scramble={item.scramble}
+							dateTime={item.dateTime}
+							renderRightActions={() => (
+								<RecordDeleteAction
+									onPress={() => {
+										Alert.alert(
+											"Delete Record",
+											"Do you want to delete this record?\n" +
+												"\nTime: " +
+												moment
+													.duration(item.time)
+													.seconds() +
+												"." +
+												moment
+													.duration(item.time)
+													.milliseconds() +
+												"s" +
+												"\nScramble: " +
+												item.scramble +
+												"\nOn " +
+												item.dateTime,
+											[
+												{
+													text: "Cancel",
+													onPress: () =>
+														console.log(
+															"Cancel Pressed"
+														),
+													style: "cancel",
+												},
+												{
+													text: "Delete",
+													onPress: () => {
+														db.transaction((tx) => {
+															tx.executeSql(
+																"DELETE FROM records WHERE id = ?",
+																[item.id],
+																(
+																	txObj,
+																	resultSet
+																) => {
+																	console.log(
+																		"deleted id: " +
+																			item.id
+																	);
+																	fetchRecord();
+																},
+																(
+																	txObj,
+																	error
+																) => {
+																	console.log(
+																		"delete failed"
 																	);
 																}
 															);
-														},
+														});
 													},
-												],
-												{ cancelable: false }
-											);
-										}}
-									/>
-								)}
-							/>
-					  ))
-					: null}
-			</ScrollView>
-		</View>
+												},
+											],
+											{ cancelable: false }
+										);
+									}}
+								/>
+							)}
+						/>
+					)}
+					refreshing={refreshing}
+					onRefresh={() => {
+						fetchRecord();
+					}}
+				/>
+			) : null}
+		</Screen>
 	);
 }
 export default RecordScreen;
@@ -254,36 +183,91 @@ export default RecordScreen;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		// marginTop: 15,
-		alignItems: "center",
 		backgroundColor: "white",
-	},
-	title: {
-		fontSize: 32,
-		fontWeight: "bold",
-		margin: 15,
-		marginTop: 35,
-		// color: "white",
-	},
-	input: {
-		borderWidth: 1,
-		borderColor: "#aaa",
-		padding: 10,
-		marginHorizontal: 15,
-		borderRadius: 7,
-		fontSize: 20,
-		flex: 1,
-		// color: "white",
 	},
 	button: {
 		backgroundColor: "#7e57c2",
 		padding: 15,
 		margin: 5,
 		borderRadius: 10,
-		width: "75%",
+		// width: "75%",
 		alignItems: "center",
 	},
 	recordlist: {
 		width: "100%",
 	},
 });
+
+// ? recordData.map(({ id, time, scramble, dateTime }) => (
+// 		<RecordItem
+// 			key={id}
+// 			time={time}
+// 			scramble={scramble}
+// 			dateTime={dateTime}
+// 			renderRightActions={() => (
+// 				<RecordDeleteAction
+// 					onPress={() => {
+// 						Alert.alert(
+// 							"Delete Record",
+// 							"Do you want to delete this record?\n" +
+// 								"\nTime: " +
+// 								moment
+// 									.duration(time)
+// 									.seconds() +
+// 								"." +
+// 								moment
+// 									.duration(time)
+// 									.milliseconds() +
+// 								"s" +
+// 								"\nScramble: " +
+// 								scramble +
+// 								"\nOn " +
+// 								dateTime,
+// 							[
+// 								{
+// 									text: "Cancel",
+// 									onPress: () =>
+// 										console.log(
+// 											"Cancel Pressed"
+// 										),
+// 									style: "cancel",
+// 								},
+// 								{
+// 									text: "Delete",
+// 									onPress: () => {
+// 										db.transaction(
+// 											(tx) => {
+// 												tx.executeSql(
+// 													"DELETE FROM records WHERE id = ?",
+// 													[id],
+// 													(
+// 														txObj,
+// 														resultSet
+// 													) => {
+// 														console.log(
+// 															"deleted id: " +
+// 																id
+// 														);
+// 														fetchRecord();
+// 													},
+// 													(
+// 														txObj,
+// 														error
+// 													) => {
+// 														console.log(
+// 															"delete failed"
+// 														);
+// 													}
+// 												);
+// 											}
+// 										);
+// 									},
+// 								},
+// 							],
+// 							{ cancelable: false }
+// 						);
+// 					}}
+// 				/>
+// 			)}
+// 		/>
+//   ))

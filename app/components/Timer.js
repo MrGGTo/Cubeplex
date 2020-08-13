@@ -48,12 +48,12 @@ export default class Timer extends Component {
 				"INSERT INTO records (time, scramble, dateTime) values (?, ?, ?)",
 				[
 					inputTime === null ? 0 : inputTime,
-					this.state.scramble === ""
+					this.props.scramble === ""
 						? "Null Scramble"
-						: this.state.scramble,
+						: this.props.scramble,
 					moment().format("LLLL"),
 				],
-				// successbad boy kit
+				// success
 				(txObj, { rows: { _array } }) => {
 					console.log("add succcess");
 				},
@@ -144,7 +144,6 @@ export default class Timer extends Component {
 						}
 						onPressIn={() => {
 							this.stop();
-							this.props.onPressStop();
 							// console.log(this.props.onPressStop);
 						}}
 						style={{ padding: 250 }}
@@ -156,7 +155,10 @@ export default class Timer extends Component {
 							laps.reduce((total, curr) => total + curr, 0) +
 							timer
 						}
-						onPressOut={this.reset}
+						onPressOut={() => {
+							this.reset();
+							this.props.onPressStop();
+						}}
 					/>
 				)}
 			</View>

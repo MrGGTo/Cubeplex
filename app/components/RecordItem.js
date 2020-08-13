@@ -8,17 +8,15 @@ import AlgorithmStarAction from "./AlgorithmStarAction";
 import RecordStarAction from "./RecordStarAction";
 import RecordDeleteAction from "./RecordDeleteAction";
 
-function RecordItem({ key, time, scramble, dateTime, renderRightActions }) {
+function RecordItem({ id, time, scramble, dateTime, renderRightActions }) {
 	return (
 		<Swipeable
 			renderLeftActions={RecordStarAction}
 			renderRightActions={renderRightActions}
 		>
 			<View style={styles.filler}>
-				<TouchableOpacity key={key} style={styles.container}>
-					<AppText style={styles.recordItemTime}>
-						{dateTime} id: {key}
-					</AppText>
+				<TouchableOpacity style={styles.container}>
+					<AppText style={styles.recordItemTime}>{dateTime}</AppText>
 					<View style={styles.line}></View>
 					<View style={styles.detailedContainer}>
 						<View style={styles.timeContainer}>
@@ -34,6 +32,7 @@ function RecordItem({ key, time, scramble, dateTime, renderRightActions }) {
 								{moment.duration(time).milliseconds()}s
 							</AppText>
 						</View>
+						<View style={styles.line}></View>
 						<AppText>{scramble}</AppText>
 					</View>
 				</TouchableOpacity>
@@ -62,18 +61,22 @@ const styles = StyleSheet.create({
 		height: 1,
 		width: "100%",
 		backgroundColor: "black",
+		marginVertical: 5,
 	},
 	detailedContainer: {
-		flexDirection: "row",
-		paddingTop: 15,
+		// flexDirection: "row",
+		// paddingTop: 15,
 	},
 	timeContainer: {
 		flexDirection: "row",
 		alignItems: "center",
+		marginHorizontal: 5,
+		marginVertical: 10,
 		flex: 1,
 	},
 	time: {
 		fontSize: 20,
+		fontWeight: "500",
 		marginHorizontal: 10,
 		// flex: 1,
 	},
