@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
-import moment, { duration } from "moment";
 
 import TimerDisplay from "./TimerDisplay";
 
@@ -41,7 +40,7 @@ export default class Timer extends Component {
 		});
 		const recordTime = firstLap + now - start;
 		const duration = moment.duration(recordTime);
-		alert("This is the raw time: " + recordTime);
+		alert("This is the raw time: " + moment.duration(recordTime).seconds);
 	};
 
 	stop = () => {

@@ -6,21 +6,16 @@ import {
 	ScrollView,
 	StyleSheet,
 	TextInput,
-	Button,
-	FlatList,
+	Alert,
 } from "react-native";
 
-import {
-	selectedTheme,
-	getSelectedTheme,
-	loadTheme,
-	saveTheme,
-	themesData,
-} from "../config/themes";
-
 import * as SQLite from "expo-sqlite";
+import moment from "moment";
+
+import { getSelectedTheme } from "../config/themes";
 import AppText from "../components/AppText";
 import RecordItem from "../components/RecordItem";
+import RecordDeleteAction from "../components/RecordDeleteAction";
 
 const db = SQLite.openDatabase("db.db");
 
@@ -32,29 +27,32 @@ function RecordScreen() {
 	const [inputScramble, setInputScramble] = useState();
 
 	// create table
-	db.transaction((tx) => {
-		tx.executeSql(
-			"CREATE TABLE IF NOT EXISTS record (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT)"
-		);
-		tx.executeSql(
-			"SELECT * FROM record",
-			null,
-			// success
-			(txObj, { rows: { _array } }) => {
-				setRecordData(_array);
-				console.log("fetch success" + JSON.stringify(_array));
-			},
-			// failed
-			(txObj, error) => {
-				console.log("fetch failed");
-			}
-		);
-	});
+	useEffect(() => {
+		db.transaction((tx) => {
+			tx.executeSql(
+				"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
+			);
+			console.log("why");
+			tx.executeSql(
+				"SELECT * FROM record",
+				null,
+				// success
+				(txObj, { rows: { _array } }) => {
+					setRecordData(_array);
+					console.log("fetch success" + JSON.stringify(_array));
+				},
+				// failed
+				(txObj, error) => {
+					console.log("fetch failed");
+				}
+			);
+		});
+	}, []);
 
 	fetchRecord = () => {
 		db.transaction((tx) => {
 			tx.executeSql(
-				"SELECT * FROM record",
+				"SELECT * FROM records ORDER BY id DESC",
 				null,
 				// success
 				(txObj, { rows: { _array } }) => {
@@ -72,9 +70,13 @@ function RecordScreen() {
 	addRecord = () => {
 		db.transaction((tx) => {
 			tx.executeSql(
-				"INSERT INTO record (time, scramble) values (?, ?)",
-				[inputTime, inputScramble],
-				// success
+				"INSERT INTO records (time, scramble, dateTime) values (?, ?, ?)",
+				[
+					inputTime === null ? 0 : inputTime,
+					inputScramble === "" ? "Null Scramble" : inputScramble,
+					moment().format("LLLL"),
+				],
+				// successbad boy kit
 				(txObj, { rows: { _array } }) => {
 					fetchRecord();
 					console.log("add succcess");
@@ -128,7 +130,7 @@ function RecordScreen() {
 				onPress={() => {
 					db.transaction((tx) => {
 						tx.executeSql(
-							"DELETE FROM record WHERE id != -1",
+							"DELETE FROM records WHERE id != -1",
 							null,
 							(txObj, resultSet) => {
 								console.log("deleted");
@@ -153,11 +155,77 @@ function RecordScreen() {
 			</TouchableOpacity>
 			<ScrollView style={styles.recordlist}>
 				{recordData !== null
-					? recordData.map(({ id, time, scramble }) => (
+					? recordData.map(({ id, time, scramble, dateTime }) => (
 							<RecordItem
-								id={id}
+								key={id}
 								time={time}
 								scramble={scramble}
+								dateTime={dateTime}
+								renderRightActions={() => (
+									<RecordDeleteAction
+										onPress={() => {
+											Alert.alert(
+												"Delete Record",
+												"Do you want to delete this record?" +
+													"\nTime: " +
+													moment
+														.duration(time)
+														.seconds() +
+													"." +
+													moment
+														.duration(time)
+														.milliseconds() +
+													"s" +
+													"\nScramble: " +
+													scramble +
+													"\nOn " +
+													dateTime,
+												[
+													{
+														text: "Cancel",
+														onPress: () =>
+															console.log(
+																"Cancel Pressed"
+															),
+														style: "cancel",
+													},
+													{
+														text: "Delete",
+														onPress: () => {
+															db.transaction(
+																(tx) => {
+																	tx.executeSql(
+																		"DELETE FROM records WHERE id = ?",
+																		[id],
+																		(
+																			txObj,
+																			resultSet
+																		) => {
+																			console.log(
+																				"deleted id: " +
+																					id
+																			);
+																			fetchRecord();
+																		},
+																		(
+																			txObj,
+																			error
+																		) => {
+																			console.log(
+																				"delete failed"
+																			);
+																		}
+																	);
+																}
+															);
+														},
+													},
+												],
+												{ cancelable: false }
+											);
+										}}
+									/>
+								)}
 							/>
 					  ))
 					: null}
@@ -201,11 +269,5 @@ const styles = StyleSheet.create({
 	},
 	recordlist: {
 		width: "100%",
-	},
-	recordItem: {
-		borderColor: "#000",
-		borderWidth: 1,
-		padding: 15,
-		margin: 10,
 	},
 });
