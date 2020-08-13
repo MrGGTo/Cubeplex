@@ -1,7 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
+import * as SQLite from "expo-sqlite";
+import moment from "moment";
 
 import TimerDisplay from "./TimerDisplay";
+
+const db = SQLite.openDatabase("db.db");
 
 export default class Timer extends Component {
 	constructor(props) {
@@ -11,11 +15,55 @@ export default class Timer extends Component {
 			now: 0,
 			laps: [],
 		};
+
+		// create or open database
+		db.transaction((tx) => {
+			tx.executeSql(
+				"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
+			);
+			tx.executeSql(
+				"SELECT * FROM record",
+				null,
+				// success
+				(txObj, { rows: { _array } }) => {
+					console.log(
+						"(Timer) fetch success" + JSON.stringify(_array)
+					);
+				},
+				// failed
+				(txObj, error) => {
+					console.log("(Timer) fetch failed");
+				}
+			);
+		});
 	}
 
 	componentWillUnmount() {
 		clearInterval(this.timer);
 	}
+
+	addRecord = (inputTime) => {
+		db.transaction((tx) => {
+			tx.executeSql(
+				"INSERT INTO records (time, scramble, dateTime) values (?, ?, ?)",
+				[
+					inputTime === null ? 0 : inputTime,
+					this.state.scramble === ""
+						? "Null Scramble"
+						: this.state.scramble,
+					moment().format("LLLL"),
+				],
+				// successbad boy kit
+				(txObj, { rows: { _array } }) => {
+					console.log("add succcess");
+				},
+				// failed
+				(txObj, error) => {
+					console.log("add failed");
+				}
+			);
+		});
+	};
 
 	start = () => {
 		const now = new Date().getTime();
@@ -40,13 +88,24 @@ export default class Timer extends Component {
 		});
 		const recordTime = firstLap + now - start;
 		const duration = moment.duration(recordTime);
-		alert("This is the raw time: " + moment.duration(recordTime).seconds);
+		alert("This is the raw time: " + moment.duration(recordTime).seconds());
 	};
 
 	stop = () => {
 		clearInterval(this.timer);
 		const { laps, now, start } = this.state;
 		const [firstLap, ...other] = laps;
+
+		const timestamp = new Date().getTime();
+		this.setState({
+			laps: [0, firstLap + now - start, ...other],
+			start: timestamp,
+			now: timestamp,
+		});
+		const recordTime = firstLap + now - start;
+		const duration = moment.duration(recordTime);
+		this.addRecord(recordTime);
+
 		this.setState({
 			laps: [firstLap + now - start, ...other],
 			start: 0,
@@ -83,7 +142,11 @@ export default class Timer extends Component {
 							laps.reduce((total, curr) => total + curr, 0) +
 							timer
 						}
-						onPressIn={this.stop}
+						onPressIn={() => {
+							this.stop();
+							this.props.onPressStop();
+							// console.log(this.props.onPressStop);
+						}}
 						style={{ padding: 250 }}
 					/>
 				)}

@@ -112,6 +112,22 @@ function RecordScreen() {
 			<TouchableOpacity
 				style={styles.button}
 				onPress={() => {
+					fetchRecord();
+				}}
+			>
+				<Text
+					style={{
+						fontSize: 20,
+						color: "#fff",
+						fontWeight: "600",
+					}}
+				>
+					Reload Record
+				</Text>
+			</TouchableOpacity>
+			<TouchableOpacity
+				style={styles.button}
+				onPress={() => {
 					addRecord();
 				}}
 			>
@@ -166,7 +182,7 @@ function RecordScreen() {
 										onPress={() => {
 											Alert.alert(
 												"Delete Record",
-												"Do you want to delete this record?" +
+												"Do you want to delete this record?\n" +
 													"\nTime: " +
 													moment
 														.duration(time)
@@ -262,7 +278,7 @@ const styles = StyleSheet.create({
 	button: {
 		backgroundColor: "#7e57c2",
 		padding: 15,
-		margin: 15,
+		margin: 5,
 		borderRadius: 10,
 		width: "75%",
 		alignItems: "center",

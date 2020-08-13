@@ -9,6 +9,7 @@ import {
 	AsyncStorage,
 } from "react-native";
 
+import scrambleRotations from "../data/scrambleRotations";
 import Screen from "../components/Screen";
 import Scramble from "../components/Scramble";
 import IconButton from "../components/IconButton";
@@ -27,10 +28,37 @@ import { switchTheme } from "../redux/themeActions";
 function TimerScreen(props) {
 	const [settingsVisible, setSettingsVisible] = useState(false);
 	const [scrambleLength, setScrambleLength] = useState(20);
+	const [scramble, setScramble] = useState(createScramble);
 	const [isEnabled, setIsEnabled] = useState(false);
 	const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
 	const theme = getSelectedTheme();
+
+	const createScramble = () => {
+		var scramble = [scrambleLength];
+		for (var i = 0; i < scrambleLength; i++) {
+			scramble[i] =
+				scrambleRotations[
+					Math.floor(Math.random() * scrambleRotations.length)
+				] + " ";
+			if (
+				(i > 0 && scramble[i].charAt(0) == scramble[i - 1].charAt(0)) ||
+				(i > 1 && scramble[i].charAt(0) == scramble[i - 2].charAt(0))
+			) {
+				i--;
+			}
+		}
+		return scramble;
+	};
+
+	useEffect(() => {
+		setScramble(createScramble);
+	}, []);
+
+	onPressStop = () => {
+		console.log("good");
+		setScramble(createScramble);
+	};
 
 	return (
 		<Screen style={styles.container}>
@@ -42,13 +70,24 @@ function TimerScreen(props) {
 				size={27}
 				color="black"
 			/>
-			<Scramble
+			{/* <Scramble
 				style={styles.scramble}
 				fontSize={20}
 				scrambleLength={scrambleLength}
-			/>
+			/> */}
+			<View style={styles.scramble}>
+				<AppText style={{ fontSize: 20 }}>{scramble}</AppText>
+				<IconButton
+					name="reload"
+					size={24}
+					style={{ paddingHorizontal: 5 }}
+					onPress={() => {
+						setScramble(createScramble);
+					}}
+				/>
+			</View>
 			<View style={styles.timerContainer}>
-				<Timer />
+				<Timer onPressStop={onPressStop} scramble={scramble} />
 			</View>
 
 			<Modal
@@ -154,6 +193,7 @@ const styles = StyleSheet.create({
 	},
 	scramble: {
 		position: "absolute",
+		flexDirection: "row",
 		top: 75,
 		padding: 50,
 	},

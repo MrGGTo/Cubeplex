@@ -24,6 +24,12 @@ function RecordItem({ key, time, scramble, dateTime, renderRightActions }) {
 						<View style={styles.timeContainer}>
 							<MaterialCommunityIcons name="timer" size={20} />
 							<AppText style={styles.time}>
+								{moment.duration(time).minutes() !== 0
+									? moment
+											.duration(time)
+											.minutes()
+											.toString() + ":"
+									: null}
 								{moment.duration(time).seconds()}.
 								{moment.duration(time).milliseconds()}s
 							</AppText>
