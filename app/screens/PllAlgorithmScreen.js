@@ -16,12 +16,11 @@ import plls from "../data/plls";
 import IconButton from "../components/IconButton";
 import AlgorithmItem from "../components/AlgorithmItem";
 import AppText from "../components/AppText";
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 import router from "../navigation/router";
 
 function PllAlgorithmScreen({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState("false");
-	const theme = getSelectedTheme();
 	return (
 		<Screen>
 			<View style={styles.header}>

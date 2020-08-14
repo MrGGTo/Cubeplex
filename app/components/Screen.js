@@ -2,10 +2,9 @@ import React from "react";
 import Constants from "expo-constants";
 import { StyleSheet, SafeAreaView, View } from "react-native";
 
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 
 function Screen({ children, style }) {
-	const theme = getSelectedTheme();
 	return (
 		<SafeAreaView
 			style={[

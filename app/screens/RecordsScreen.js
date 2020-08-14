@@ -13,7 +13,7 @@ import {
 import * as SQLite from "expo-sqlite";
 import moment from "moment";
 
-import { getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 import AppText from "../components/AppText";
 import RecordItem from "../components/RecordItem";
 import RecordDeleteAction from "../components/RecordDeleteAction";
@@ -22,8 +22,6 @@ import Screen from "../components/Screen";
 const db = SQLite.openDatabase("db.db");
 
 function RecordScreen() {
-	const theme = getSelectedTheme();
-
 	const [recordData, setRecordData] = useState([]);
 	const [inputTime, setInputTime] = useState();
 	const [inputScramble, setInputScramble] = useState();
@@ -79,10 +77,10 @@ function RecordScreen() {
 					inputScramble === "" ? "Null Scramble" : inputScramble,
 					moment().format("LLLL"),
 				],
-				// successbad boy kit
+				// success bad boy kit
 				(txObj, { rows: { _array } }) => {
 					fetchRecord();
-					console.log("add succcess");
+					console.log("add success");
 				},
 				// failed
 				(txObj, error) => {
@@ -183,19 +181,16 @@ export default RecordScreen;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "white",
+		// backgroundColor: "white",
 	},
-	button: {
-		backgroundColor: "#7e57c2",
-		padding: 15,
-		margin: 5,
-		borderRadius: 10,
-		// width: "75%",
-		alignItems: "center",
-	},
-	recordlist: {
-		width: "100%",
-	},
+	// button: {
+	// 	backgroundColor: "#7e57c2",
+	// 	padding: 15,
+	// 	margin: 5,
+	// 	borderRadius: 10,
+	// 	// width: "75%",
+	// 	alignItems: "center",
+	// },
 });
 
 // ? recordData.map(({ id, time, scramble, dateTime }) => (

@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 import router from "./router";
 import PllAlgorithmScreen from "../screens/PllAlgorithmScreen";
 import AlgorithmDetailsScreen from "../screens/AlgorithmDetailsScreen";
@@ -9,7 +9,6 @@ import AlgorithmDetailsScreen from "../screens/AlgorithmDetailsScreen";
 const Stack = createStackNavigator();
 
 const PllAlgorithmDetailsNavigator = () => {
-	const theme = getSelectedTheme();
 	return (
 		<Stack.Navigator>
 			<Stack.Screen

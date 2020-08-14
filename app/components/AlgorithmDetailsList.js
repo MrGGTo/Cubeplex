@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		width: "100%",
 		paddingVertical: 15,
-		// backgroundColor: "dodgerblue",
 	},
 	containerItem: {
 		marginRight: 15,

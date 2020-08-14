@@ -1,10 +1,9 @@
 import React from "react";
 import { Text } from "react-native";
 
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 
 function AppText({ children, style, secondary }) {
-	const theme = getSelectedTheme();
 	return (
 		<Text
 			style={[

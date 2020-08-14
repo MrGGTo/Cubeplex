@@ -27,13 +27,12 @@ import ZShape from "../data/oll/ZShape";
 
 import AlgorithmItem from "../components/AlgorithmItem";
 import AppText from "../components/AppText";
-import { getSelectedTheme, selectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 import IconButton from "../components/IconButton";
 import router from "../navigation/router";
 
 function OllAlgorithmScreen({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState("false");
-	const theme = getSelectedTheme();
 	return (
 		<Screen>
 			<ScrollView>

@@ -7,6 +7,7 @@ import {
 	Image,
 	Button,
 	AsyncStorage,
+	StatusBar,
 } from "react-native";
 
 import scrambleRotations from "../data/scrambleRotations";
@@ -15,15 +16,10 @@ import Scramble from "../components/Scramble";
 import IconButton from "../components/IconButton";
 import Timer from "../components/Timer";
 import AppText from "../components/AppText";
-import {
-	selectedTheme,
-	getSelectedTheme,
-	loadTheme,
-	saveTheme,
-	themesData,
-} from "../config/themes";
+import { theme } from "../config/themes";
 import { useDispatch } from "react-redux";
 import { switchTheme } from "../redux/themeActions";
+// import {  } from "expo-status-bar";
 
 function TimerScreen(props) {
 	const [settingsVisible, setSettingsVisible] = useState(false);
@@ -32,7 +28,10 @@ function TimerScreen(props) {
 	const [isEnabled, setIsEnabled] = useState(false);
 	const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-	const theme = getSelectedTheme();
+	const dispatch = useDispatch();
+	const [themeID, setThemeID] = useState(1);
+	const toggleThemeSwitch = () =>
+		setThemeID((previousState) => (previousState === 1 ? 0 : 1));
 
 	const createScramble = () => {
 		var scramble = [scrambleLength];
@@ -68,11 +67,13 @@ function TimerScreen(props) {
 
 	return (
 		<Screen style={styles.container}>
+			<StatusBar barStyle={theme.statusBarStyle} />
+
 			<AppText style={styles.appName}>Cubeplex</AppText>
 			<IconButton
 				style={styles.settingsContainer}
 				onPress={() => setSettingsVisible(true)}
-				name="settings-outline"
+				name="settings"
 				size={27}
 				color="black"
 			/>

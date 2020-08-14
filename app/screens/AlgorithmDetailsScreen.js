@@ -14,11 +14,10 @@ import plls from "../data/plls";
 import Screen from "../components/Screen";
 import AlgorithmDetailsList from "../components/AlgorithmDetailsList";
 import AppText from "../components/AppText";
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 
 function AlgorithmDetailsScreen({ route }) {
 	const algorithmData = route.params;
-	const theme = getSelectedTheme();
 
 	return (
 		<Screen>

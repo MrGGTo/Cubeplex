@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import AppText from "./AppText";
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 
 function ThemeItem({
 	backgroundColor,
@@ -9,7 +9,6 @@ function ThemeItem({
 	themeBackgroundColor = "#FFFFFF",
 	onPress,
 }) {
-	const theme = getSelectedTheme();
 	return (
 		<TouchableOpacity style={styles.container} onPress={onPress}>
 			<View

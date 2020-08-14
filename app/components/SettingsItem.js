@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 import AppText from "./AppText";
 
 function SettingsItem({
@@ -16,7 +16,6 @@ function SettingsItem({
 	noChevron = false,
 	separate,
 }) {
-	const theme = getSelectedTheme();
 	return (
 		<TouchableOpacity
 			onPress={onPress}

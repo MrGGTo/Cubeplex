@@ -11,10 +11,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AlgorithmStarAction from "./AlgorithmStarAction";
 import AppText from "./AppText";
 
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 
 function AlgorithmItem({ name, algorithm, image, onPress }) {
-	const theme = getSelectedTheme();
 	return (
 		<Swipeable renderLeftActions={AlgorithmStarAction}>
 			<TouchableWithoutFeedback onPress={onPress}>

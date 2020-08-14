@@ -7,7 +7,7 @@ import { switchTheme } from "../redux/themeActions";
 
 import router from "./router";
 import TimerScreen from "../screens/TimerScreen";
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 import SettingsNavigator from "./SettingsNavigator";
 import AlgorithmNavigator from "./AlgorithmNavigator";
 import RecordsScreen from "../screens/RecordsScreen";
@@ -15,8 +15,6 @@ import RecordsScreen from "../screens/RecordsScreen";
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-	const theme = getSelectedTheme();
-
 	return (
 		<Tab.Navigator
 			lazy={true}

@@ -1,77 +1,15 @@
-import React from "react";
-import { View, StyleSheet, Text, FlatList, Button } from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet, FlatList } from "react-native";
+import * as SQLite from "expo-sqlite";
 
 import Screen from "../components/Screen";
-import SettingsItemList from "../components/SettingsItemList";
-import { ScrollView } from "react-native-gesture-handler";
 import AppText from "../components/AppText";
 import SettingsItem from "../components/SettingsItem";
 import { theme } from "../config/themes";
-import router from "../navigation/router";
 
 const settingsData = [
 	{
 		id: 1,
-		title: "Saved Records",
-		iconName: "star",
-		backgroundColor: "#FFE60A",
-		navigate: router.THEME,
-	},
-	{
-		id: 2,
-		title: "Pinned Algorithms",
-		iconName: "pin",
-		backgroundColor: "#299B50",
-		navigate: router.THEME,
-		separate: true,
-	},
-	{
-		id: 3,
-		title: "Theme",
-		iconName: "format-paint",
-		backgroundColor: "pink",
-		navigate: router.THEME,
-	},
-	{
-		id: 4,
-		title: "Timer Settings",
-		iconName: "settings",
-		backgroundColor: "#6f6f6f",
-		navigate: router.THEME,
-		separate: true,
-	},
-	{
-		id: 5,
-		title: "Tell Friends About Cubeplex",
-		iconName: "thumb-up",
-		backgroundColor: "dodgerblue",
-		navigate: router.THEME,
-	},
-	{
-		id: 6,
-		title: "Send Feedback",
-		iconName: "message-text",
-		backgroundColor: "orange",
-		navigate: router.THEME,
-	},
-	{
-		id: 7,
-		title: "Support Us",
-		iconName: "heart",
-		backgroundColor: "#FF5B83",
-		navigate: router.THEME,
-		separate: true,
-	},
-	{
-		id: 8,
-		title: "Manage Records",
-		backgroundColor: "teal",
-		iconName: "pencil",
-		titleColor: "red",
-		navigate: router.MANAGE_RECORDS,
-	},
-	{
-		id: 9,
 		title: "Delete Timer Records",
 		backgroundColor: "red",
 		iconName: "timer",
@@ -81,7 +19,7 @@ const settingsData = [
 		delete: "timer",
 	},
 	{
-		id: 10,
+		id: 2,
 		title: "Delete Algorithm Training Records",
 		backgroundColor: "red",
 		iconName: "timer-sand",
@@ -89,9 +27,10 @@ const settingsData = [
 		titleColor: "red",
 		navigate: null,
 		delete: "training",
+		separate: true,
 	},
 	{
-		id: 11,
+		id: 3,
 		title: "Delete All Records",
 		backgroundColor: "red",
 		iconName: "trash-can",
@@ -102,10 +41,38 @@ const settingsData = [
 	},
 ];
 
-function SettingScreen({ navigation }) {
+const db = SQLite.openDatabase("db.db");
+
+function ManageRecordsScreen(props) {
+	// create table
+	useEffect(() => {
+		db.transaction((tx) => {
+			tx.executeSql(
+				"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
+			);
+		});
+	}, []);
+
+	deleteTimerRecord = () => {
+		db.transaction((tx) => {
+			tx.executeSql(
+				"DELETE FROM records WHERE id != -1",
+				null,
+				// success
+				(txObj, { rows: { _array } }) => {
+					alert("Deleted Timer Records");
+					console.log("Deleted Timer Records");
+				},
+				// failed
+				(txObj, error) => {
+					console.log("Delete Timer failed");
+				}
+			);
+		});
+	};
+
 	return (
 		<Screen style={styles.container}>
-			<AppText style={styles.title}>Settings</AppText>
 			<FlatList
 				data={settingsData}
 				keyExtractor={(data) => data.id.toString()}
@@ -123,7 +90,8 @@ function SettingScreen({ navigation }) {
 							} else {
 								switch (item.delete) {
 									case "timer":
-										alert("timer");
+										// alert("timer");
+										deleteTimerRecord();
 										break;
 
 									case "training":
@@ -165,7 +133,9 @@ const styles = StyleSheet.create({
 		margin: 20,
 		fontWeight: "700",
 	},
-	container: {},
+	container: {
+		marginVertical: 25,
+	},
 	settingsContainer: {
 		// marginVertical: 25,
 		marginBottom: 30,
@@ -173,4 +143,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default SettingScreen;
+export default ManageRecordsScreen;

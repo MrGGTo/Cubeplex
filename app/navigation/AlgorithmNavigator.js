@@ -6,14 +6,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import router from "./router";
 import OllAlgorithmScreen from "../screens/OllAlgorithmScreen";
 import PllAlgorithmScreen from "../screens/PllAlgorithmScreen";
-import { getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 import PllAlgorithmDetailsNavigator from "./PllAlgorithmDetailsNavigator";
 import OllAlgorithmDetailsNavigator from "./OllAlgorithmDetailsNavigator";
 
 const Tab = createBottomTabNavigator();
 
 const AlgorithmNavigator = () => {
-	const theme = getSelectedTheme();
 	return (
 		<Tab.Navigator
 			tabBarOptions={{

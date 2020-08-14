@@ -9,26 +9,18 @@ import {
 	AsyncStorage,
 } from "react-native";
 
-import {
-	themesData,
-	selectedTheme,
-	selectedThemeAlter,
-	getSelectedTheme,
-	saveTheme,
-	loadTheme,
-} from "../config/themes";
+import { theme, themesData } from "../config/themes";
 import Screen from "../components/Screen";
 import AppText from "../components/AppText";
 import ThemeItem from "../components/ThemeItem";
 
-import { useSelector, useDispatch } from "react-redux";
-import { switchTheme } from "../redux/themeActions";
+// import { useSelector, useDispatch } from "react-redux";
+// import { switchTheme } from "../redux/themeActions";
 
 function ThemeScreen(props) {
 	// const theme = useSelector((state) => state.themeReducer.theme);
-	const dispatch = useDispatch();
-	const theme = getSelectedTheme();
-	const themeIDID = loadTheme();
+	// const dispatch = useDispatch();
+	// const themeIDID = loadTheme();
 
 	return (
 		<Screen>
@@ -48,20 +40,19 @@ function ThemeScreen(props) {
 						name={item.name}
 						backgroundColor={item.color}
 						themeBackgroundColor={item.backgroundSecondary}
-						onPress={() => {
-							saveTheme(item.id);
-							dispatch(
-								switchTheme(
-									themesData.find(
-										(theme) => theme.id === item.id
-									)
-								)
-							);
-						}}
+						// onPress={() => {
+						// 	saveTheme(item.id);
+						// 	dispatch(
+						// 		switchTheme(
+						// 			themesData.find(
+						// 				(theme) => theme.id === item.id
+						// 			)
+						// 		)
+						// 	);
+						// }}
 					/>
 				)}
 			/>
-			{/* <AppText>{themeIDID}</AppText> */}
 		</Screen>
 	);
 }

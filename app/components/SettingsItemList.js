@@ -2,10 +2,9 @@ import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
 import SettingsItem from "../components/SettingsItem";
-import { selectedTheme, getSelectedTheme } from "../config/themes";
+import { theme } from "../config/themes";
 
 function SettingsItemList({ dataRow, onPress }) {
-	const theme = getSelectedTheme();
 	return (
 		<View
 			style={{
