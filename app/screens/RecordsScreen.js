@@ -1,14 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	ScrollView,
-	StyleSheet,
-	TextInput,
-	Alert,
-	FlatList,
-} from "react-native";
+import { StyleSheet, Alert, FlatList, Button } from "react-native";
 
 import * as SQLite from "expo-sqlite";
 import moment from "moment";
@@ -18,22 +9,22 @@ import AppText from "../components/AppText";
 import RecordItem from "../components/RecordItem";
 import RecordDeleteAction from "../components/RecordDeleteAction";
 import Screen from "../components/Screen";
+import { openOrCreateDatabase } from "../database/RecordDatabase";
 
 const db = SQLite.openDatabase("db.db");
 
 function RecordScreen() {
 	const [recordData, setRecordData] = useState([]);
-	const [inputTime, setInputTime] = useState();
-	const [inputScramble, setInputScramble] = useState();
 	const [refreshing, setRefreshing] = useState(false);
 
 	// create table
 	useEffect(() => {
+		openOrCreateDatabase();
 		db.transaction((tx) => {
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
-			);
-			console.log("what");
+			// tx.executeSql(
+			// 	"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
+			// );
+			// console.log("what");
 			tx.executeSql(
 				"SELECT * FROM records",
 				null,
@@ -92,6 +83,7 @@ function RecordScreen() {
 
 	return (
 		<Screen style={styles.container}>
+			<Button title="Star Records" />
 			{recordData !== null ? (
 				<FlatList
 					data={recordData}

@@ -156,7 +156,7 @@ export default class Timer extends Component {
 							timer
 						}
 						onPressOut={() => {
-							this.reset();
+							this.start();
 							this.props.onPressStop();
 						}}
 					/>

@@ -6,6 +6,10 @@ import Screen from "../components/Screen";
 import AppText from "../components/AppText";
 import SettingsItem from "../components/SettingsItem";
 import { theme } from "../config/themes";
+import {
+	openOrCreateDatabase,
+	deleteRecords,
+} from "../database/RecordDatabase";
 
 const settingsData = [
 	{
@@ -46,30 +50,26 @@ const db = SQLite.openDatabase("db.db");
 function ManageRecordsScreen(props) {
 	// create table
 	useEffect(() => {
-		db.transaction((tx) => {
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
-			);
-		});
+		openOrCreateDatabase();
 	}, []);
 
-	deleteTimerRecord = () => {
-		db.transaction((tx) => {
-			tx.executeSql(
-				"DELETE FROM records WHERE id != -1",
-				null,
-				// success
-				(txObj, { rows: { _array } }) => {
-					alert("Deleted Timer Records");
-					console.log("Deleted Timer Records");
-				},
-				// failed
-				(txObj, error) => {
-					console.log("Delete Timer failed");
-				}
-			);
-		});
-	};
+	// deleteTimerRecord = () => {
+	// 	db.transaction((tx) => {
+	// 		tx.executeSql(
+	// 			"DELETE FROM records WHERE id != -1",
+	// 			null,
+	// 			// success
+	// 			(txObj, { rows: { _array } }) => {
+	// 				alert("Deleted Timer Records");
+	// 				console.log("Deleted Timer Records");
+	// 			},
+	// 			// failed
+	// 			(txObj, error) => {
+	// 				console.log("Delete Timer failed");
+	// 			}
+	// 		);
+	// 	});
+	// };
 
 	return (
 		<Screen style={styles.container}>
@@ -90,8 +90,7 @@ function ManageRecordsScreen(props) {
 							} else {
 								switch (item.delete) {
 									case "timer":
-										// alert("timer");
-										deleteTimerRecord();
+										deleteRecords();
 										break;
 
 									case "training":
