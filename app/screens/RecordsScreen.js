@@ -4,12 +4,11 @@ import { StyleSheet, Alert, FlatList, Button } from "react-native";
 import * as SQLite from "expo-sqlite";
 import moment from "moment";
 
-import { theme } from "../config/themes";
-import AppText from "../components/AppText";
 import RecordItem from "../components/RecordItem";
 import RecordDeleteAction from "../components/RecordDeleteAction";
 import Screen from "../components/Screen";
 import { openOrCreateDatabase } from "../database/RecordDatabase";
+import RecordStarAction from "../components/RecordStarAction";
 
 const db = SQLite.openDatabase("db.db");
 
@@ -26,7 +25,7 @@ function RecordScreen() {
 			// );
 			// console.log("what");
 			tx.executeSql(
-				"SELECT * FROM records",
+				"SELECT * FROM recordsData ORDER BY id DESC",
 				null,
 				// success
 				(txObj, { rows: { _array } }) => {
@@ -44,7 +43,7 @@ function RecordScreen() {
 	fetchRecord = () => {
 		db.transaction((tx) => {
 			tx.executeSql(
-				"SELECT * FROM records ORDER BY id DESC",
+				"SELECT * FROM recordsData ORDER BY id DESC",
 				null,
 				// success
 				(txObj, { rows: { _array } }) => {
@@ -62,11 +61,12 @@ function RecordScreen() {
 	addRecord = () => {
 		db.transaction((tx) => {
 			tx.executeSql(
-				"INSERT INTO records (time, scramble, dateTime) values (?, ?, ?)",
+				"INSERT INTO recordsData (time, scramble, dateTime, star) values (?, ?, ?, ?)",
 				[
 					inputTime === null ? 0 : inputTime,
 					inputScramble === "" ? "Null Scramble" : inputScramble,
 					moment().format("LLLL"),
+					0, // Why Zero? star = 0 ? false : true
 				],
 				// success bad boy kit
 				(txObj, { rows: { _array } }) => {
@@ -83,7 +83,6 @@ function RecordScreen() {
 
 	return (
 		<Screen style={styles.container}>
-			<Button title="Star Records" />
 			{recordData !== null ? (
 				<FlatList
 					data={recordData}
@@ -94,6 +93,57 @@ function RecordScreen() {
 							time={item.time}
 							scramble={item.scramble}
 							dateTime={item.dateTime}
+							renderLeftActions={() => (
+								<RecordStarAction
+									star={item.star}
+									backgroundColor={
+										item.star === 0 ? "orange" : "grey"
+									}
+									onPress={() => {
+										if (item.star == 0) {
+											db.transaction((tx) => {
+												tx.executeSql(
+													"UPDATE recordsData SET star = 1 WHERE id = ?",
+													[item.id],
+													(txObj, resultSet) => {
+														console.log(
+															"updated id: " +
+																item.id
+														);
+														fetchRecord();
+													},
+													(txObj, error) => {
+														console.log(
+															"update failed " +
+																item.id
+														);
+													}
+												);
+											});
+										} else {
+											db.transaction((tx) => {
+												tx.executeSql(
+													"UPDATE recordsData SET star = 0 WHERE id = ?",
+													[item.id],
+													(txObj, resultSet) => {
+														console.log(
+															"updated id: " +
+																item.id
+														);
+														fetchRecord();
+													},
+													(txObj, error) => {
+														console.log(
+															"update failed " +
+																item.id
+														);
+													}
+												);
+											});
+										}
+									}}
+								/>
+							)}
 							renderRightActions={() => (
 								<RecordDeleteAction
 									onPress={() => {

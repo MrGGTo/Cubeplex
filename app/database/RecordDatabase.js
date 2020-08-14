@@ -7,7 +7,7 @@ const db = SQLite.openDatabase("db.db");
 export const openOrCreateDatabase = () => {
 	db.transaction((tx) => {
 		tx.executeSql(
-			"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
+			"CREATE TABLE IF NOT EXISTS recordsData (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT, star INT)"
 		);
 	});
 };
@@ -27,7 +27,7 @@ export const deleteRecords = () => {
 				onPress: () => {
 					db.transaction((tx) => {
 						tx.executeSql(
-							"DELETE FROM records WHERE id != -1",
+							"DELETE FROM recordsData WHERE id != -1",
 							null,
 							// success
 							(txObj, { rows: { _array } }) => {

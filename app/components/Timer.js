@@ -6,6 +6,7 @@ import moment from "moment";
 import TimerDisplay from "./TimerDisplay";
 
 const db = SQLite.openDatabase("db.db");
+import { openOrCreateDatabase } from "../database/RecordDatabase";
 
 export default class Timer extends Component {
 	constructor(props) {
@@ -16,26 +17,27 @@ export default class Timer extends Component {
 			laps: [],
 		};
 
+		openOrCreateDatabase();
 		// create or open database
-		db.transaction((tx) => {
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
-			);
-			tx.executeSql(
-				"SELECT * FROM record",
-				null,
-				// success
-				(txObj, { rows: { _array } }) => {
-					console.log(
-						"(Timer) fetch success" + JSON.stringify(_array)
-					);
-				},
-				// failed
-				(txObj, error) => {
-					console.log("(Timer) fetch failed");
-				}
-			);
-		});
+		// db.transaction((tx) => {
+		// 	tx.executeSql(
+		// 		"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
+		// 	);
+		// 	tx.executeSql(
+		// 		"SELECT * FROM record",
+		// 		null,
+		// 		// success
+		// 		(txObj, { rows: { _array } }) => {
+		// 			console.log(
+		// 				"(Timer) fetch success" + JSON.stringify(_array)
+		// 			);
+		// 		},
+		// 		// failed
+		// 		(txObj, error) => {
+		// 			console.log("(Timer) fetch failed");
+		// 		}
+		// 	);
+		// });
 	}
 
 	componentWillUnmount() {
@@ -45,17 +47,18 @@ export default class Timer extends Component {
 	addRecord = (inputTime) => {
 		db.transaction((tx) => {
 			tx.executeSql(
-				"INSERT INTO records (time, scramble, dateTime) values (?, ?, ?)",
+				"INSERT INTO recordsData (time, scramble, dateTime, star) values (?, ?, ?, ?)",
 				[
 					inputTime === null ? 0 : inputTime,
 					this.props.scramble === ""
 						? "Null Scramble"
 						: this.props.scramble,
 					moment().format("LLLL"),
+					0,
 				],
 				// success
 				(txObj, { rows: { _array } }) => {
-					console.log("add succcess");
+					console.log("add success");
 				},
 				// failed
 				(txObj, error) => {

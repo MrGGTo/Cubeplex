@@ -1,6 +1,7 @@
 export default {
 	TIMER: "Timer",
 	RECORDS: "Records",
+	STARRED_RECORDS: "Starred Records",
 	ALGORITHM: "Algorithms",
 	PLL_ALGORITHMS: "PLL Algorithms",
 	OLL_ALGORITHMS: "OLL Algorithms",

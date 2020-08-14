@@ -10,10 +10,18 @@ import AlgorithmStarAction from "./AlgorithmStarAction";
 import RecordStarAction from "./RecordStarAction";
 import RecordDeleteAction from "./RecordDeleteAction";
 
-function RecordItem({ id, time, scramble, dateTime, renderRightActions }) {
+function RecordItem({
+	id,
+	time,
+	scramble,
+	dateTime,
+	star,
+	renderLeftActions,
+	renderRightActions,
+}) {
 	return (
 		<Swipeable
-			renderLeftActions={RecordStarAction}
+			renderLeftActions={renderLeftActions}
 			renderRightActions={renderRightActions}
 		>
 			<View style={styles.filler}>

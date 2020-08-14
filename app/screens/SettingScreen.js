@@ -12,10 +12,10 @@ import router from "../navigation/router";
 const settingsData = [
 	{
 		id: 1,
-		title: "Saved Records",
+		title: "Starred Records",
 		iconName: "star",
 		backgroundColor: "#FFE60A",
-		navigate: router.THEME,
+		navigate: router.STARRED_RECORDS,
 	},
 	{
 		id: 2,

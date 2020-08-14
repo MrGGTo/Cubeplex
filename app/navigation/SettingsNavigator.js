@@ -7,6 +7,7 @@ import { theme } from "../config/themes";
 import { Button } from "react-native";
 import router from "./router";
 import ManageRecordsScreen from "../screens/ManageRecordsScreen";
+import StarredRecordScreen from "../screens/StarredRecordScreen";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,27 @@ const SettingsNavigator = () => {
 						backgroundColor: theme.backgroundPrimary,
 					},
 					headerTintColor: theme.fontPrimary,
+				}}
+			/>
+			<Stack.Screen
+				name={router.STARRED_RECORDS}
+				component={StarredRecordScreen}
+				options={{
+					headerStyle: {
+						backgroundColor: theme.backgroundSecondary,
+					},
+					headerTintColor: theme.fontPrimary,
+					headerTitleStyle: {
+						fontSize: 20,
+						// fontWeight: "bold",
+					},
+					headerRight: () => (
+						<Button
+							onPress={() => alert("This is a button!")}
+							title="Info"
+							color={theme.color}
+						/>
+					),
 				}}
 			/>
 			<Stack.Screen
