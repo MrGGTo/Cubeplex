@@ -9,10 +9,11 @@ import RecordDeleteAction from "../components/RecordDeleteAction";
 import Screen from "../components/Screen";
 import { openOrCreateDatabase } from "../database/RecordDatabase";
 import RecordStarAction from "../components/RecordStarAction";
+import router from "../navigation/router";
 
 const db = SQLite.openDatabase("db.db");
 
-function RecordScreen() {
+function RecordScreen({ navigation }) {
 	const [recordData, setRecordData] = useState([]);
 	const [refreshing, setRefreshing] = useState(false);
 
@@ -93,6 +94,12 @@ function RecordScreen() {
 							time={item.time}
 							scramble={item.scramble}
 							dateTime={item.dateTime}
+							onPress={() => {
+								navigation.navigate(
+									router.RECORD_DETAILS,
+									item
+								);
+							}}
 							renderLeftActions={() => (
 								<RecordStarAction
 									star={item.star}

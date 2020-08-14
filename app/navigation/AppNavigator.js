@@ -11,6 +11,7 @@ import { theme } from "../config/themes";
 import SettingsNavigator from "./SettingsNavigator";
 import AlgorithmNavigator from "./AlgorithmNavigator";
 import RecordsScreen from "../screens/RecordsScreen";
+import RecordNavigator from "./RecordNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +40,7 @@ const AppNavigator = () => {
 			/>
 			<Tab.Screen
 				name={router.RECORDS}
-				component={RecordsScreen}
+				component={RecordNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<MaterialCommunityIcons

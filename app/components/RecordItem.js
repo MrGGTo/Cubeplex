@@ -18,6 +18,7 @@ function RecordItem({
 	star,
 	renderLeftActions,
 	renderRightActions,
+	onPress,
 }) {
 	return (
 		<Swipeable
@@ -25,7 +26,7 @@ function RecordItem({
 			renderRightActions={renderRightActions}
 		>
 			<View style={styles.filler}>
-				<TouchableOpacity style={styles.container}>
+				<TouchableOpacity style={styles.container} onPress={onPress}>
 					<AppText style={styles.recordItemTime}>{dateTime}</AppText>
 					<View style={styles.line}></View>
 					<View style={styles.detailedContainer}>
@@ -45,6 +46,11 @@ function RecordItem({
 								{moment.duration(time).seconds()}.
 								{moment.duration(time).milliseconds()}s
 							</AppText>
+							<MaterialCommunityIcons
+								name="chevron-right"
+								size={20}
+								color={theme.fontPrimary}
+							/>
 						</View>
 						<View style={styles.line}></View>
 						<AppText>{scramble}</AppText>
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: "500",
 		marginHorizontal: 10,
-		// flex: 1,
+		flex: 1,
 	},
 });
 
