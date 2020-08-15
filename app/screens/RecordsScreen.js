@@ -21,10 +21,6 @@ function RecordScreen({ navigation }) {
 	useEffect(() => {
 		openOrCreateDatabase();
 		db.transaction((tx) => {
-			// tx.executeSql(
-			// 	"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
-			// );
-			// console.log("what");
 			tx.executeSql(
 				"SELECT * FROM recordsData ORDER BY id DESC",
 				null,
@@ -80,6 +76,25 @@ function RecordScreen({ navigation }) {
 				}
 			);
 		});
+	};
+
+	const pad2 = (n, minutes) => {
+		// (n < 10 ? "0" + n : n)
+		if (n < 10 && minutes > 0) {
+			return "0" + n;
+		} else {
+			return n;
+		}
+	};
+
+	const pad3 = (n) => {
+		if (n < 10) {
+			return "00" + n;
+		} else if (n < 99) {
+			return "0" + n;
+		} else {
+			return n;
+		}
 	};
 
 	return (
@@ -158,13 +173,28 @@ function RecordScreen({ navigation }) {
 											"Delete Record",
 											"Do you want to delete this record?\n" +
 												"\nTime: " +
-												moment
+												(moment
 													.duration(item.time)
-													.seconds() +
+													.minutes() > 0
+													? moment
+															.duration(item.time)
+															.minutes()
+															.toString() + ":"
+													: "") +
+												pad2(
+													moment
+														.duration(item.time)
+														.seconds(),
+													moment
+														.duration(item.time)
+														.minutes()
+												) +
 												"." +
-												moment
-													.duration(item.time)
-													.milliseconds() +
+												pad3(
+													moment
+														.duration(item.time)
+														.milliseconds()
+												) +
 												"s" +
 												"\nScramble: " +
 												item.scramble +

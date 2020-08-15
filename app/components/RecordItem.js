@@ -20,6 +20,25 @@ function RecordItem({
 	renderRightActions,
 	onPress,
 }) {
+	const pad2 = (n, minutes) => {
+		// (n < 10 ? "0" + n : n)
+		if (n < 10 && minutes > 0) {
+			return "0" + n;
+		} else {
+			return n;
+		}
+	};
+
+	const pad3 = (n) => {
+		if (n < 10) {
+			return "00" + n;
+		} else if (n < 99) {
+			return "0" + n;
+		} else {
+			return n;
+		}
+	};
+
 	return (
 		<Swipeable
 			renderLeftActions={renderLeftActions}
@@ -43,8 +62,11 @@ function RecordItem({
 											.minutes()
 											.toString() + ":"
 									: null}
-								{moment.duration(time).seconds()}.
-								{moment.duration(time).milliseconds()}s
+								{pad2(
+									moment.duration(time).seconds(),
+									moment.duration(time).minutes()
+								)}
+								.{pad3(moment.duration(time).milliseconds())}s
 							</AppText>
 							<MaterialCommunityIcons
 								name="chevron-right"

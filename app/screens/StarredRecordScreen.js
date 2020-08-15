@@ -40,6 +40,25 @@ function StarredRecordScreen(props) {
 		});
 	}, []);
 
+	const pad2 = (n, minutes) => {
+		// (n < 10 ? "0" + n : n)
+		if (n < 10 && minutes > 0) {
+			return "0" + n;
+		} else {
+			return n;
+		}
+	};
+
+	const pad3 = (n) => {
+		if (n < 10) {
+			return "00" + n;
+		} else if (n < 99) {
+			return "0" + n;
+		} else {
+			return n;
+		}
+	};
+
 	const fetchStarredRecord = () => {
 		db.transaction((tx) => {
 			tx.executeSql(
@@ -79,14 +98,30 @@ function StarredRecordScreen(props) {
 										Alert.alert(
 											"Un-star Record",
 											"Do you want to un-star this record?\n" +
+												"This record will be removed from the starred record list automatically.\n" +
 												"\nTime: " +
-												moment
+												(moment
 													.duration(item.time)
-													.seconds() +
+													.minutes() > 0
+													? moment
+															.duration(item.time)
+															.minutes()
+															.toString() + ":"
+													: "") +
+												pad2(
+													moment
+														.duration(item.time)
+														.seconds(),
+													moment
+														.duration(item.time)
+														.minutes()
+												) +
 												"." +
-												moment
-													.duration(item.time)
-													.milliseconds() +
+												pad3(
+													moment
+														.duration(item.time)
+														.milliseconds()
+												) +
 												"s" +
 												"\nScramble: " +
 												item.scramble +
