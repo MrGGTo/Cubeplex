@@ -15,8 +15,7 @@ const RecordNavigator = () => {
 	const onShare = async () => {
 		try {
 			const result = await Share.share({
-				message:
-					"I got 6.17s with this scramble on Cubeplex. I Love Wing Wing",
+				message: "I got 6.17s with this scramble on Cubeplex.",
 			});
 			if (result.action === Share.sharedAction) {
 				if (result.activityType) {
@@ -31,6 +30,7 @@ const RecordNavigator = () => {
 			alert(error.message);
 		}
 	};
+
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
@@ -51,19 +51,19 @@ const RecordNavigator = () => {
 						// fontWeight: "bold",
 					},
 
-					headerRight: () => (
-						<TouchableOpacity
-							onPress={() => {
-								onShare();
-							}}
-						>
-							<EvilIcons
-								name="share-apple"
-								size={35}
-								color={theme.fontPrimary}
-							/>
-						</TouchableOpacity>
-					),
+					// headerRight: () => (
+					// 	<TouchableOpacity
+					// 		onPress={() => {
+					// 			onShare();
+					// 		}}
+					// 	>
+					// 		<EvilIcons
+					// 			name="share-apple"
+					// 			size={35}
+					// 			color={theme.fontPrimary}
+					// 		/>
+					// 	</TouchableOpacity>
+					// ),
 				}}
 			/>
 		</Stack.Navigator>
