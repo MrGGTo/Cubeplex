@@ -1,6 +1,7 @@
 export default {
 	TIMER: "Timer",
 	RECORDS: "Records",
+	STATISTICS: "Statistics",
 	RECORD_DETAILS: "Record Details",
 	STARRED_RECORDS: "Starred Records",
 	ALGORITHM: "Algorithms",

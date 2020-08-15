@@ -78,6 +78,10 @@ function RecordScreen({ navigation }) {
 		});
 	};
 
+	const handleLoadMore = () => {
+		alert("Load More");
+	};
+
 	const pad2 = (n, minutes) => {
 		// (n < 10 ? "0" + n : n)
 		if (n < 10 && minutes > 0) {
@@ -214,7 +218,7 @@ function RecordScreen({ navigation }) {
 													onPress: () => {
 														db.transaction((tx) => {
 															tx.executeSql(
-																"DELETE FROM records WHERE id = ?",
+																"DELETE FROM recordsData WHERE id = ?",
 																[item.id],
 																(
 																	txObj,
@@ -250,6 +254,10 @@ function RecordScreen({ navigation }) {
 					onRefresh={() => {
 						fetchRecord();
 					}}
+					onEndReached={() => {
+						handleLoadMore();
+					}}
+					onEndReachedThreshold={0}
 				/>
 			) : null}
 		</Screen>

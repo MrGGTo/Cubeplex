@@ -8,6 +8,7 @@ import RecordScreen from "../screens/RecordsScreen";
 import RecordDetailsScreen from "../screens/RecordDetailsScreen";
 import IconButton from "../components/IconButton";
 import { TouchableOpacity, Share } from "react-native";
+import StatisticsScreen from "../screens/StatisticsScreen";
 
 const Stack = createStackNavigator();
 
@@ -34,9 +35,23 @@ const RecordNavigator = () => {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
+				name={router.STATISTICS}
+				component={StatisticsScreen}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
 				name={router.RECORDS}
 				component={RecordScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerStyle: {
+						backgroundColor: theme.backgroundSecondary,
+					},
+					headerTintColor: theme.fontPrimary,
+					headerTitleStyle: {
+						fontSize: 20,
+						// fontWeight: "bold",
+					},
+				}}
 			/>
 			<Stack.Screen
 				name={router.RECORD_DETAILS}
@@ -50,20 +65,6 @@ const RecordNavigator = () => {
 						fontSize: 20,
 						// fontWeight: "bold",
 					},
-
-					// headerRight: () => (
-					// 	<TouchableOpacity
-					// 		onPress={() => {
-					// 			onShare();
-					// 		}}
-					// 	>
-					// 		<EvilIcons
-					// 			name="share-apple"
-					// 			size={35}
-					// 			color={theme.fontPrimary}
-					// 		/>
-					// 	</TouchableOpacity>
-					// ),
 				}}
 			/>
 		</Stack.Navigator>
