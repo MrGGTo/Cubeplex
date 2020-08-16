@@ -1,7 +1,8 @@
 import React, { Component, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as SQLite from "expo-sqlite";
 import moment from "moment";
+import { AsyncStorage } from "react-native";
 
 import TimerDisplay from "./TimerDisplay";
 
@@ -18,26 +19,6 @@ export default class Timer extends Component {
 		};
 
 		openOrCreateDatabase();
-		// create or open database
-		// db.transaction((tx) => {
-		// 	tx.executeSql(
-		// 		"CREATE TABLE IF NOT EXISTS records (id INTEGER PRIMARY KEY AUTOINCREMENT, time INT, scramble TEXT, dateTime TEXT)"
-		// 	);
-		// 	tx.executeSql(
-		// 		"SELECT * FROM record",
-		// 		null,
-		// 		// success
-		// 		(txObj, { rows: { _array } }) => {
-		// 			console.log(
-		// 				"(Timer) fetch success" + JSON.stringify(_array)
-		// 			);
-		// 		},
-		// 		// failed
-		// 		(txObj, error) => {
-		// 			console.log("(Timer) fetch failed");
-		// 		}
-		// 	);
-		// });
 	}
 
 	componentWillUnmount() {

@@ -1,12 +1,87 @@
-import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+	View,
+	StyleSheet,
+	TouchableOpacity,
+	ScrollView,
+	RefreshControl,
+} from "react-native";
+import * as SQLite from "expo-sqlite";
+
 import Screen from "../components/Screen";
 import AppText from "../components/AppText";
 import { theme } from "../config/themes";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import router from "../navigation/router";
+import { openOrCreateDatabase } from "../database/RecordDatabase";
+import { formatTime } from "../components/TimerDisplay";
+
+const db = SQLite.openDatabase("db.db");
 
 function StatisticsScreen({ navigation }) {
+	const [refreshing, setRefreshing] = React.useState(false);
+
+	const [numberOfSolves, setNumberOfSolves] = useState(0);
+	const [bestTime, setBestTime] = useState(0);
+	const [worstTime, setWorstTime] = useState(0);
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		fetchStatistics();
+		setRefreshing(false);
+	}, []);
+
+	useEffect(() => {
+		openOrCreateDatabase();
+		fetchStatistics();
+	}, []);
+
+	const fetchStatistics = () => {
+		db.transaction((tx) => {
+			// number of solves
+			tx.executeSql(
+				"SELECT COUNT(*) FROM recordsData",
+				null,
+				// success
+				(txObj, { rows: { _array } }) => {
+					setNumberOfSolves(_array[0]["COUNT(*)"]);
+				},
+				// failed
+				(txObj, error) => {
+					console.log(error);
+				}
+			);
+
+			// best time
+			tx.executeSql(
+				"SELECT MIN(time) FROM recordsData",
+				null,
+				// success
+				(txObj, { rows: { _array } }) => {
+					setBestTime(formatTime(_array[0]["MIN(time)"]));
+				},
+				// failed
+				(txObj, error) => {
+					console.log(error);
+				}
+			);
+
+			// Worst time
+			tx.executeSql(
+				"SELECT MAX(time) FROM recordsData",
+				null,
+				// success
+				(txObj, { rows: { _array } }) => {
+					setWorstTime(formatTime(_array[0]["MAX(time)"]));
+				},
+				// failed
+				(txObj, error) => {
+					console.log(error);
+				}
+			);
+		});
+	};
+
 	return (
 		<Screen style={styles.container}>
 			<View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -37,74 +112,84 @@ function StatisticsScreen({ navigation }) {
 					</View>
 				</TouchableOpacity>
 			</View>
+			<ScrollView
+				refreshControl={
+					<RefreshControl
+						refreshing={refreshing}
+						onRefresh={onRefresh}
+					/>
+				}
+			>
+				<View style={styles.statsContainer}>
+					{/* Number of Solves */}
+					<View style={styles.statisticsItem}>
+						<AppText style={styles.name}>Number of Solves:</AppText>
+						<AppText style={styles.result}>
+							{numberOfSolves}
+						</AppText>
+					</View>
+					<View style={styles.line}></View>
+					{/* Best Time */}
+					<TouchableOpacity style={styles.statisticsItem}>
+						<AppText style={styles.name}>Best Time:</AppText>
+						<AppText style={styles.result}>{bestTime}</AppText>
+						<MaterialCommunityIcons
+							name="chevron-right"
+							size={24}
+							color={theme.fontSecondary}
+						/>
+					</TouchableOpacity>
+					<View style={styles.line}></View>
 
-			<View style={styles.statsContainer}>
-				{/* Number of Solves */}
-				<View style={styles.statisticsItem}>
-					<AppText style={styles.name}>Number of Solves:</AppText>
-					<AppText style={styles.result}>456</AppText>
+					{/* Worst Time */}
+					<TouchableOpacity style={styles.statisticsItem}>
+						<AppText style={styles.name}>Worst Time:</AppText>
+						<AppText style={styles.result}>{worstTime}</AppText>
+						<MaterialCommunityIcons
+							name="chevron-right"
+							size={24}
+							color={theme.fontSecondary}
+						/>
+					</TouchableOpacity>
+					<View style={styles.line}></View>
+
+					{/* Average Time */}
+					<TouchableOpacity style={styles.statisticsItem}>
+						<AppText style={styles.name}>Average Time:</AppText>
+						<AppText style={styles.result}>4.37s</AppText>
+						<MaterialCommunityIcons
+							name="chevron-right"
+							size={24}
+							color={theme.fontSecondary}
+						/>
+					</TouchableOpacity>
+					<View style={styles.line}></View>
+
+					{/* Average of 5 */}
+					<TouchableOpacity style={styles.statisticsItem}>
+						<AppText style={styles.name}>Average of 5</AppText>
+						<AppText style={styles.result}>4.37s</AppText>
+						<MaterialCommunityIcons
+							name="chevron-right"
+							size={24}
+							color={theme.fontSecondary}
+						/>
+					</TouchableOpacity>
+					<View style={styles.line}></View>
+
+					{/* Average of 12 */}
+					<TouchableOpacity style={styles.statisticsItem}>
+						<AppText style={styles.name}>Average of 12</AppText>
+						<AppText style={styles.result}>4.37s</AppText>
+						<MaterialCommunityIcons
+							name="chevron-right"
+							size={24}
+							color={theme.fontSecondary}
+						/>
+					</TouchableOpacity>
+					<View style={styles.line}></View>
 				</View>
-				<View style={styles.line}></View>
-				{/* Best Time */}
-				<TouchableOpacity style={styles.statisticsItem}>
-					<AppText style={styles.name}>Best Time:</AppText>
-					<AppText style={styles.result}>4.37s</AppText>
-					<MaterialCommunityIcons
-						name="chevron-right"
-						size={24}
-						color={theme.fontSecondary}
-					/>
-				</TouchableOpacity>
-				<View style={styles.line}></View>
-
-				{/* Worst Time */}
-				<TouchableOpacity style={styles.statisticsItem}>
-					<AppText style={styles.name}>Worst Time:</AppText>
-					<AppText style={styles.result}>4.37s</AppText>
-					<MaterialCommunityIcons
-						name="chevron-right"
-						size={24}
-						color={theme.fontSecondary}
-					/>
-				</TouchableOpacity>
-				<View style={styles.line}></View>
-
-				{/* Average Time */}
-				<TouchableOpacity style={styles.statisticsItem}>
-					<AppText style={styles.name}>Average Time:</AppText>
-					<AppText style={styles.result}>4.37s</AppText>
-					<MaterialCommunityIcons
-						name="chevron-right"
-						size={24}
-						color={theme.fontSecondary}
-					/>
-				</TouchableOpacity>
-				<View style={styles.line}></View>
-
-				{/* Average of 5 */}
-				<TouchableOpacity style={styles.statisticsItem}>
-					<AppText style={styles.name}>Average of 5</AppText>
-					<AppText style={styles.result}>4.37s</AppText>
-					<MaterialCommunityIcons
-						name="chevron-right"
-						size={24}
-						color={theme.fontSecondary}
-					/>
-				</TouchableOpacity>
-				<View style={styles.line}></View>
-
-				{/* Average of 12 */}
-				<TouchableOpacity style={styles.statisticsItem}>
-					<AppText style={styles.name}>Average of 12</AppText>
-					<AppText style={styles.result}>4.37s</AppText>
-					<MaterialCommunityIcons
-						name="chevron-right"
-						size={24}
-						color={theme.fontSecondary}
-					/>
-				</TouchableOpacity>
-				<View style={styles.line}></View>
-			</View>
+			</ScrollView>
 
 			{/* <TouchableOpacity
 				style={[styles.statisticsItem, styles.viewRecords]}

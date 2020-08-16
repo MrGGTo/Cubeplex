@@ -8,6 +8,7 @@ import { theme } from "../config/themes";
 import AppText from "./AppText";
 import AlgorithmStarAction from "./AlgorithmStarAction";
 import RecordStarAction from "./RecordStarAction";
+import { formatTime } from "../components/TimerDisplay";
 import RecordDeleteAction from "./RecordDeleteAction";
 
 function RecordItem({
@@ -20,25 +21,6 @@ function RecordItem({
 	renderRightActions,
 	onPress,
 }) {
-	const pad2 = (n, minutes) => {
-		// (n < 10 ? "0" + n : n)
-		if (n < 10 && minutes > 0) {
-			return "0" + n;
-		} else {
-			return n;
-		}
-	};
-
-	const pad3 = (n) => {
-		if (n < 10) {
-			return "00" + n;
-		} else if (n < 99) {
-			return "0" + n;
-		} else {
-			return n;
-		}
-	};
-
 	return (
 		<Swipeable
 			renderLeftActions={renderLeftActions}
@@ -56,17 +38,7 @@ function RecordItem({
 								color={theme.fontPrimary}
 							/>
 							<AppText style={styles.time}>
-								{moment.duration(time).minutes() !== 0
-									? moment
-											.duration(time)
-											.minutes()
-											.toString() + ":"
-									: null}
-								{pad2(
-									moment.duration(time).seconds(),
-									moment.duration(time).minutes()
-								)}
-								.{pad3(moment.duration(time).milliseconds())}s
+								{formatTime(time)}
 							</AppText>
 							<MaterialCommunityIcons
 								name="chevron-right"

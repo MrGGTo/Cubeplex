@@ -9,6 +9,7 @@ import RecordDeleteAction from "../components/RecordDeleteAction";
 import Screen from "../components/Screen";
 import { openOrCreateDatabase } from "../database/RecordDatabase";
 import RecordStarAction from "../components/RecordStarAction";
+import { formatTime } from "../components/TimerDisplay";
 import router from "../navigation/router";
 
 const db = SQLite.openDatabase("db.db");
@@ -80,25 +81,6 @@ function RecordScreen({ navigation }) {
 
 	const handleLoadMore = () => {
 		alert("Load More");
-	};
-
-	const pad2 = (n, minutes) => {
-		// (n < 10 ? "0" + n : n)
-		if (n < 10 && minutes > 0) {
-			return "0" + n;
-		} else {
-			return n;
-		}
-	};
-
-	const pad3 = (n) => {
-		if (n < 10) {
-			return "00" + n;
-		} else if (n < 99) {
-			return "0" + n;
-		} else {
-			return n;
-		}
 	};
 
 	return (
@@ -177,29 +159,7 @@ function RecordScreen({ navigation }) {
 											"Delete Record",
 											"Do you want to delete this record?\n" +
 												"\nTime: " +
-												(moment
-													.duration(item.time)
-													.minutes() > 0
-													? moment
-															.duration(item.time)
-															.minutes()
-															.toString() + ":"
-													: "") +
-												pad2(
-													moment
-														.duration(item.time)
-														.seconds(),
-													moment
-														.duration(item.time)
-														.minutes()
-												) +
-												"." +
-												pad3(
-													moment
-														.duration(item.time)
-														.milliseconds()
-												) +
-												"s" +
+												formatTime(item.time) +
 												"\nScramble: " +
 												item.scramble +
 												"\nOn " +
@@ -268,88 +228,5 @@ export default RecordScreen;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		// backgroundColor: "white",
 	},
-	// button: {
-	// 	backgroundColor: "#7e57c2",
-	// 	padding: 15,
-	// 	margin: 5,
-	// 	borderRadius: 10,
-	// 	// width: "75%",
-	// 	alignItems: "center",
-	// },
 });
-
-// ? recordData.map(({ id, time, scramble, dateTime }) => (
-// 		<RecordItem
-// 			key={id}
-// 			time={time}
-// 			scramble={scramble}
-// 			dateTime={dateTime}
-// 			renderRightActions={() => (
-// 				<RecordDeleteAction
-// 					onPress={() => {
-// 						Alert.alert(
-// 							"Delete Record",
-// 							"Do you want to delete this record?\n" +
-// 								"\nTime: " +
-// 								moment
-// 									.duration(time)
-// 									.seconds() +
-// 								"." +
-// 								moment
-// 									.duration(time)
-// 									.milliseconds() +
-// 								"s" +
-// 								"\nScramble: " +
-// 								scramble +
-// 								"\nOn " +
-// 								dateTime,
-// 							[
-// 								{
-// 									text: "Cancel",
-// 									onPress: () =>
-// 										console.log(
-// 											"Cancel Pressed"
-// 										),
-// 									style: "cancel",
-// 								},
-// 								{
-// 									text: "Delete",
-// 									onPress: () => {
-// 										db.transaction(
-// 											(tx) => {
-// 												tx.executeSql(
-// 													"DELETE FROM records WHERE id = ?",
-// 													[id],
-// 													(
-// 														txObj,
-// 														resultSet
-// 													) => {
-// 														console.log(
-// 															"deleted id: " +
-// 																id
-// 														);
-// 														fetchRecord();
-// 													},
-// 													(
-// 														txObj,
-// 														error
-// 													) => {
-// 														console.log(
-// 															"delete failed"
-// 														);
-// 													}
-// 												);
-// 											}
-// 										);
-// 									},
-// 								},
-// 							],
-// 							{ cancelable: false }
-// 						);
-// 					}}
-// 				/>
-// 			)}
-// 		/>
-//   ))

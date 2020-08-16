@@ -109,3 +109,23 @@ const styles = StyleSheet.create({
 });
 
 export default TimerDisplay;
+
+export const formatTime = (time) => {
+	const duration = moment.duration(time);
+	const minutes = duration.minutes();
+	const seconds = duration.seconds();
+	const milliseconds = duration.milliseconds();
+
+	const formattedTime =
+		(minutes > 0 ? minutes + ":" : "") +
+		(seconds < 10 && minutes > 0 ? "0" + seconds : seconds) +
+		"." +
+		(milliseconds < 10
+			? "00" + milliseconds
+			: milliseconds < 99
+			? "0" + milliseconds
+			: milliseconds) +
+		"s";
+
+	return formattedTime;
+};
