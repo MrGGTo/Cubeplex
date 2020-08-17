@@ -118,7 +118,21 @@ function OllAlgorithmScreen({ navigation }) {
 				</Modal>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Dot Case</AppText>
-					<FlatList
+					{DotCase.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={DotCase}
 						scrollEnabled={false}
 						keyExtractor={(dotCase) => dotCase.id.toString()}
@@ -135,11 +149,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Line Case</AppText>
-					<FlatList
+					{LineCase.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={LineCase}
 						scrollEnabled={false}
 						keyExtractor={(lineCase) => lineCase.id.toString()}
@@ -156,11 +184,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Cross Case</AppText>
-					<FlatList
+					{CrossCase.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={CrossCase}
 						scrollEnabled={false}
 						keyExtractor={(crossCase) => crossCase.id.toString()}
@@ -177,11 +219,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>4 Corners Case</AppText>
-					<FlatList
+					{FourCorners.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={FourCorners}
 						scrollEnabled={false}
 						keyExtractor={(fourCorners) =>
@@ -200,11 +256,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Short L Shape</AppText>
-					<FlatList
+					{ShortLShape.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={ShortLShape}
 						scrollEnabled={false}
 						keyExtractor={(shortLShape) =>
@@ -223,11 +293,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Long L Shape</AppText>
-					<FlatList
+					{LongLShape.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={LongLShape}
 						scrollEnabled={false}
 						keyExtractor={(longLShape) => longLShape.id.toString()}
@@ -244,11 +328,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>C Shape</AppText>
-					<FlatList
+					{CShape.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={CShape}
 						scrollEnabled={false}
 						keyExtractor={(cShape) => cShape.id.toString()}
@@ -265,11 +363,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>P Shape</AppText>
-					<FlatList
+					{PShape.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={PShape}
 						scrollEnabled={false}
 						keyExtractor={(pShape) => pShape.id.toString()}
@@ -286,11 +398,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>T Shape</AppText>
-					<FlatList
+					{TShape.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={TShape}
 						scrollEnabled={false}
 						keyExtractor={(tShape) => tShape.id.toString()}
@@ -307,11 +433,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>W Shape</AppText>
-					<FlatList
+					{WShape.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={WShape}
 						scrollEnabled={false}
 						keyExtractor={(wShape) => wShape.id.toString()}
@@ -328,11 +468,25 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Z Shape</AppText>
-					<FlatList
+					{ZShape.map((item) => (
+						<AlgorithmItem
+							key={item.id}
+							name={item.name}
+							algorithm={item.algorithmId}
+							image={item.image}
+							onPress={() =>
+								navigation.navigate(
+									router.ALGORITHM_DETAILS,
+									item
+								)
+							}
+						/>
+					))}
+					{/* <FlatList
 						data={ZShape}
 						scrollEnabled={false}
 						keyExtractor={(zShape) => zShape.id.toString()}
@@ -349,7 +503,7 @@ function OllAlgorithmScreen({ navigation }) {
 								}
 							/>
 						)}
-					/>
+					/> */}
 				</View>
 			</ScrollView>
 		</Screen>

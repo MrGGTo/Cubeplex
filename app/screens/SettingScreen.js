@@ -1,5 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Text, FlatList, Button } from "react-native";
+import { View, StyleSheet, Text, FlatList, Button, Share } from "react-native";
+import email from "react-native-email";
 
 import Screen from "../components/Screen";
 import SettingsItemList from "../components/SettingsItemList";
@@ -27,13 +28,6 @@ const settingsData = [
 	},
 	{
 		id: 3,
-		title: "Theme",
-		iconName: "format-paint",
-		backgroundColor: "pink",
-		navigate: router.THEME,
-	},
-	{
-		id: 4,
 		title: "Timer Settings",
 		iconName: "settings",
 		backgroundColor: "#6f6f6f",
@@ -41,21 +35,23 @@ const settingsData = [
 		separate: true,
 	},
 	{
-		id: 5,
+		id: 4,
 		title: "Tell Friends About Cubeplex",
 		iconName: "thumb-up",
 		backgroundColor: "dodgerblue",
-		navigate: router.THEME,
+		// navigate: router.THEME,
+		elseAction: "Share",
 	},
 	{
-		id: 6,
+		id: 5,
 		title: "Send Feedback",
 		iconName: "message-text",
 		backgroundColor: "orange",
-		navigate: router.THEME,
+		// navigate: router.THEME,
+		elseAction: "Feedback",
 	},
 	{
-		id: 7,
+		id: 6,
 		title: "Support Us",
 		iconName: "heart",
 		backgroundColor: "#FF5B83",
@@ -63,46 +59,38 @@ const settingsData = [
 		separate: true,
 	},
 	{
-		id: 8,
+		id: 7,
 		title: "Manage Records",
 		backgroundColor: "teal",
 		iconName: "pencil",
 		titleColor: "red",
 		navigate: router.MANAGE_RECORDS,
 	},
-	{
-		id: 9,
-		title: "Delete Timer Records",
-		backgroundColor: "red",
-		iconName: "timer",
-		noChevron: true,
-		titleColor: "red",
-		navigate: null,
-		delete: "timer",
-	},
-	{
-		id: 10,
-		title: "Delete Algorithm Training Records",
-		backgroundColor: "red",
-		iconName: "timer-sand",
-		noChevron: true,
-		titleColor: "red",
-		navigate: null,
-		delete: "training",
-	},
-	{
-		id: 11,
-		title: "Delete All Records",
-		backgroundColor: "red",
-		iconName: "trash-can",
-		noChevron: true,
-		titleColor: "red",
-		navigate: null,
-		delete: "all",
-	},
 ];
 
 function SettingScreen({ navigation }) {
+	const onShare = async () => {
+		try {
+			await Share.share({
+				message:
+					"Cubeplex - Professional Speed Cube Timer. https://www.google.com",
+			});
+		} catch (error) {
+			alert(error.message);
+		}
+	};
+
+	const handleEmail = () => {
+		const to = ["tiaan@email.com", "foo@bar.com"]; // string or array of email addresses
+		email(to, {
+			// Optional additional arguments
+			cc: ["bazzy@moo.com", "doooo@daaa.com"], // string or array of email addresses
+			bcc: "mee@mee.com", // string or array of email addresses
+			subject: "Show how to use",
+			body: "Some body right here",
+		}).catch(console.error);
+	};
+
 	return (
 		<Screen style={styles.container}>
 			<AppText style={styles.title}>Settings</AppText>
@@ -121,13 +109,13 @@ function SettingScreen({ navigation }) {
 							if (item.navigate != null) {
 								navigation.navigate(item.navigate);
 							} else {
-								switch (item.delete) {
-									case "timer":
-										alert("timer");
+								switch (item.elseAction) {
+									case "Share":
+										onShare();
 										break;
 
-									case "training":
-										alert("training");
+									case "Feedback":
+										handleEmail();
 										break;
 
 									case "all":

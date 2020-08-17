@@ -8,6 +8,7 @@ import {
 	FlatList,
 	Modal,
 	TouchableOpacity,
+	ScrollView,
 } from "react-native";
 
 import Screen from "../components/Screen";
@@ -23,52 +24,64 @@ function PllAlgorithmScreen({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState("false");
 	return (
 		<Screen>
-			<View style={styles.header}>
-				<AppText style={styles.title}>PLL Algorithms</AppText>
-				<TouchableOpacity onPress={() => setInfoVisible(true)}>
-					<AppText
-						style={{
-							color: theme.color,
-							fontSize: 18,
-						}}
-					>
-						Info
-					</AppText>
-				</TouchableOpacity>
-			</View>
-			<Modal
-				animationType="fade"
-				transparent={true}
-				visible={infoVisible}
-			>
-				<View style={{ backgroundColor: "#000000aa", flex: 1 }}>
-					<Modal
-						animationType="slide"
-						transparent={true}
-						visible={infoVisible}
-					>
-						<View
+			<ScrollView>
+				<View style={styles.header}>
+					<AppText style={styles.title}>PLL Algorithms</AppText>
+					<TouchableOpacity onPress={() => setInfoVisible(true)}>
+						<AppText
 							style={{
-								backgroundColor: theme.backgroundSecondary,
-								flex: 1,
-								marginVertical: 75,
-								marginHorizontal: 50,
-								borderRadius: 15,
+								color: theme.color,
+								fontSize: 18,
 							}}
 						>
-							<View style={{ flexDirection: "row-reverse" }}>
-								<IconButton
-									name="close"
-									size={35}
-									onPress={() => setInfoVisible(false)}
-									style={{ padding: 15 }}
-								/>
-							</View>
-						</View>
-					</Modal>
+							Info
+						</AppText>
+					</TouchableOpacity>
 				</View>
-			</Modal>
-			<FlatList
+				<Modal
+					animationType="fade"
+					transparent={true}
+					visible={infoVisible}
+				>
+					<View style={{ backgroundColor: "#000000aa", flex: 1 }}>
+						<Modal
+							animationType="slide"
+							transparent={true}
+							visible={infoVisible}
+						>
+							<View
+								style={{
+									backgroundColor: theme.backgroundSecondary,
+									flex: 1,
+									marginVertical: 75,
+									marginHorizontal: 50,
+									borderRadius: 15,
+								}}
+							>
+								<View style={{ flexDirection: "row-reverse" }}>
+									<IconButton
+										name="close"
+										size={35}
+										onPress={() => setInfoVisible(false)}
+										style={{ padding: 15 }}
+									/>
+								</View>
+							</View>
+						</Modal>
+					</View>
+				</Modal>
+				{plls.map((item) => (
+					<AlgorithmItem
+						key={item.id}
+						name={item.name}
+						algorithm={item.algorithmId}
+						image={item.image}
+						onPress={() =>
+							navigation.navigate(router.ALGORITHM_DETAILS, item)
+						}
+					/>
+				))}
+				{/* <FlatList
 				data={plls}
 				keyExtractor={(pll) => pll.id.toString()}
 				renderItem={({ item }) => (
@@ -81,7 +94,8 @@ function PllAlgorithmScreen({ navigation }) {
 						}
 					/>
 				)}
-			/>
+			/> */}
+			</ScrollView>
 		</Screen>
 	);
 }
