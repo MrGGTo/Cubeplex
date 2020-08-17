@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, Share } from "react-native";
+import {
+	View,
+	StyleSheet,
+	TouchableOpacity,
+	Share,
+	FlatList,
+} from "react-native";
 import moment, { duration } from "moment";
 import { MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
 
@@ -7,22 +13,19 @@ import Screen from "../components/Screen";
 import AppText from "../components/AppText";
 import { formatTime } from "../components/TimerDisplay";
 import { theme } from "../config/themes";
+import RecordItem from "../components/RecordItem";
+import RecordStarAction from "../components/RecordStarAction";
+import RecordDeleteAction from "../components/RecordDeleteAction";
+import router from "../navigation/router";
 
-function RecordDetailsScreen({
-	route,
-	noScramble = false,
-	noDateTime = false,
-}) {
+function RecordAO5Screen({ route, navigation }) {
 	const record = route.params;
+	console.log("hi: " + JSON.stringify(record.records));
 
 	const onShare = async () => {
 		try {
 			await Share.share({
-				message:
-					"I got " +
-					formatTime(record.time) +
-					" with this scramble on Cubeplex. Scramble: " +
-					record.scramble,
+				message: "I got an Ao5 of " + record.ao5 + " on Cubeplex.",
 			});
 		} catch (error) {
 			alert(error.message);
@@ -33,18 +36,8 @@ function RecordDetailsScreen({
 		<Screen>
 			<View style={styles.detailsContainer}>
 				<AppText style={[styles.text, styles.time]}>
-					{formatTime(record.time)}
+					{record.ao5}
 				</AppText>
-				{!noScramble && (
-					<AppText style={[styles.text, styles.scramble]}>
-						{record.scramble}
-					</AppText>
-				)}
-				{!noDateTime && (
-					<AppText style={[styles.text, styles.dateTime]}>
-						{record.dateTime}
-					</AppText>
-				)}
 			</View>
 			<TouchableOpacity style={styles.button} onPress={onShare}>
 				<EvilIcons
@@ -54,6 +47,23 @@ function RecordDetailsScreen({
 				/>
 				<AppText style={styles.buttonText}>Share</AppText>
 			</TouchableOpacity>
+			{/* <View> */}
+			<FlatList
+				data={record.records}
+				keyExtractor={(data) => data.id.toString()}
+				renderItem={({ item }) => (
+					<RecordItem
+						id={item.id}
+						time={item.time}
+						scramble={item.scramble}
+						dateTime={item.dateTime}
+						onPress={() => {
+							navigation.navigate(router.RECORD_DETAILS, item);
+						}}
+					/>
+				)}
+			/>
+			{/* </View> */}
 		</Screen>
 	);
 }
@@ -92,4 +102,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default RecordDetailsScreen;
+export default RecordAO5Screen;

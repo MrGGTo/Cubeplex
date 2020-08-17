@@ -1,6 +1,9 @@
 export default {
 	TIMER: "Timer",
 	RECORDS: "Records",
+	RECORDS_AVG: "Average",
+	RECORDS_AO5: "Average of 5",
+	RECORDS_AO12: "Average of 12",
 	STATISTICS: "Statistics",
 	RECORD_DETAILS: "Record Details",
 	STARRED_RECORDS: "Starred Records",

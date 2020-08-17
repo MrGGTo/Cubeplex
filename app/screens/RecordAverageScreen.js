@@ -8,21 +8,17 @@ import AppText from "../components/AppText";
 import { formatTime } from "../components/TimerDisplay";
 import { theme } from "../config/themes";
 
-function RecordDetailsScreen({
-	route,
-	noScramble = false,
-	noDateTime = false,
-}) {
+function RecordAverageScreen({ route }) {
 	const record = route.params;
+	console.log(route);
 
 	const onShare = async () => {
 		try {
 			await Share.share({
 				message:
-					"I got " +
-					formatTime(record.time) +
-					" with this scramble on Cubeplex. Scramble: " +
-					record.scramble,
+					"I got an average of " +
+					formatTime(record) +
+					" on Cubeplex.",
 			});
 		} catch (error) {
 			alert(error.message);
@@ -33,18 +29,12 @@ function RecordDetailsScreen({
 		<Screen>
 			<View style={styles.detailsContainer}>
 				<AppText style={[styles.text, styles.time]}>
-					{formatTime(record.time)}
+					{formatTime(record.average)}
 				</AppText>
-				{!noScramble && (
-					<AppText style={[styles.text, styles.scramble]}>
-						{record.scramble}
-					</AppText>
-				)}
-				{!noDateTime && (
-					<AppText style={[styles.text, styles.dateTime]}>
-						{record.dateTime}
-					</AppText>
-				)}
+
+				<AppText style={[styles.text, styles.scramble]}>
+					{"Total of Solves: " + record.total}
+				</AppText>
 			</View>
 			<TouchableOpacity style={styles.button} onPress={onShare}>
 				<EvilIcons
@@ -92,4 +82,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default RecordDetailsScreen;
+export default RecordAverageScreen;

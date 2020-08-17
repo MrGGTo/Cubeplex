@@ -19,7 +19,7 @@ function RecordScreen({ navigation }) {
 	const [refreshing, setRefreshing] = useState(false);
 
 	// create table
-	useFocusEffect(() => {
+	useEffect(() => {
 		openOrCreateDatabase();
 		db.transaction((tx) => {
 			tx.executeSql(
@@ -46,7 +46,7 @@ function RecordScreen({ navigation }) {
 				// success
 				(txObj, { rows: { _array } }) => {
 					setRecordData(_array);
-					console.log("fetch success" + JSON.stringify(_array));
+					console.log("yo fetch success" + JSON.stringify(_array));
 				},
 				// failed
 				(txObj, error) => {

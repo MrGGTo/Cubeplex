@@ -29,6 +29,12 @@ function StatisticsScreen({ navigation }) {
 	const [ao5, setAo5] = useState(0);
 	const [ao12, setAo12] = useState(0);
 
+	const [bestTimeRecord, setBestTimeRecord] = useState([]);
+	const [worstTimeRecord, setWorstTimeRecord] = useState();
+	const [averageRecord, setAverageRecord] = useState();
+	const [ao5Record, setAo5Record] = useState();
+	const [ao12Record, setAo12Record] = useState();
+
 	const onRefresh = React.useCallback(() => {
 		setRefreshing(true);
 		fetchStatistics();
@@ -175,8 +181,34 @@ function StatisticsScreen({ navigation }) {
 						</AppText>
 					</View>
 					<View style={styles.line}></View>
+
 					{/* Best Time */}
-					<TouchableOpacity style={styles.statisticsItem}>
+					<TouchableOpacity
+						style={styles.statisticsItem}
+						onPress={() => {
+							db.transaction((tx) => {
+								tx.executeSql(
+									"SELECT MIN(time), * FROM recordsData",
+									null,
+									// success
+									(txObj, { rows: { _array } }) => {
+										console.log(
+											"Navigated to Details with : " +
+												JSON.stringify(_array[0])
+										);
+										navigation.navigate(
+											router.RECORD_DETAILS,
+											_array[0]
+										);
+									},
+									// failed
+									(txObj, error) => {
+										console.log(error);
+									}
+								);
+							});
+						}}
+					>
 						<AppText style={styles.name}>Best Time:</AppText>
 						<AppText style={styles.result}>{bestTime}</AppText>
 						<MaterialCommunityIcons
@@ -188,7 +220,32 @@ function StatisticsScreen({ navigation }) {
 					<View style={styles.line}></View>
 
 					{/* Worst Time */}
-					<TouchableOpacity style={styles.statisticsItem}>
+					<TouchableOpacity
+						style={styles.statisticsItem}
+						onPress={() => {
+							db.transaction((tx) => {
+								tx.executeSql(
+									"SELECT MAX(time), * FROM recordsData",
+									null,
+									// success
+									(txObj, { rows: { _array } }) => {
+										console.log(
+											"Navigated to Details with : " +
+												JSON.stringify(_array[0])
+										);
+										navigation.navigate(
+											router.RECORD_DETAILS,
+											_array[0]
+										);
+									},
+									// failed
+									(txObj, error) => {
+										console.log(error);
+									}
+								);
+							});
+						}}
+					>
 						<AppText style={styles.name}>Worst Time:</AppText>
 						<AppText style={styles.result}>{worstTime}</AppText>
 						<MaterialCommunityIcons
@@ -200,7 +257,36 @@ function StatisticsScreen({ navigation }) {
 					<View style={styles.line}></View>
 
 					{/* Average Time */}
-					<TouchableOpacity style={styles.statisticsItem}>
+					<TouchableOpacity
+						style={styles.statisticsItem}
+						onPress={() => {
+							db.transaction((tx) => {
+								tx.executeSql(
+									"SELECT AVG(time), COUNT(*) FROM recordsData",
+									null,
+									// success
+									(txObj, { rows: { _array } }) => {
+										console.log(
+											"Navigated to Details with : " +
+												JSON.stringify(_array[0])
+										);
+										console.log(_array[0]["AVG(time)"]);
+										navigation.navigate(
+											router.RECORDS_AVG,
+											{
+												average: _array[0]["AVG(time)"],
+												total: _array[0]["COUNT(*)"],
+											}
+										);
+									},
+									// failed
+									(txObj, error) => {
+										console.log(error);
+									}
+								);
+							});
+						}}
+					>
 						<AppText style={styles.name}>Average Time:</AppText>
 						<AppText style={styles.result}>{average}</AppText>
 						<MaterialCommunityIcons
@@ -212,7 +298,36 @@ function StatisticsScreen({ navigation }) {
 					<View style={styles.line}></View>
 
 					{/* Average of 5 */}
-					<TouchableOpacity style={styles.statisticsItem}>
+					<TouchableOpacity
+						style={styles.statisticsItem}
+						onPress={() => {
+							db.transaction((tx) => {
+								tx.executeSql(
+									"SELECT * FROM (SELECT * FROM recordsData ORDER BY id DESC LIMIT 5)",
+									null,
+									// success
+									(txObj, { rows: { _array } }) => {
+										console.log(
+											"Navigated to Details with : " +
+												JSON.stringify(_array)
+										);
+										// console.log(_array[0]["AVG(time)"]);
+										navigation.navigate(
+											router.RECORDS_AO5,
+											{
+												ao5: ao5,
+												records: _array,
+											}
+										);
+									},
+									// failed
+									(txObj, error) => {
+										console.log(error);
+									}
+								);
+							});
+						}}
+					>
 						<AppText style={styles.name}>Average of 5</AppText>
 						<AppText style={styles.result}>{ao5}</AppText>
 						<MaterialCommunityIcons
@@ -224,7 +339,36 @@ function StatisticsScreen({ navigation }) {
 					<View style={styles.line}></View>
 
 					{/* Average of 12 */}
-					<TouchableOpacity style={styles.statisticsItem}>
+					<TouchableOpacity
+						style={styles.statisticsItem}
+						onPress={() => {
+							db.transaction((tx) => {
+								tx.executeSql(
+									"SELECT * FROM (SELECT * FROM recordsData ORDER BY id DESC LIMIT 12)",
+									null,
+									// success
+									(txObj, { rows: { _array } }) => {
+										console.log(
+											"Navigated to Details with : " +
+												JSON.stringify(_array)
+										);
+										// console.log(_array[0]["AVG(time)"]);
+										navigation.navigate(
+											router.RECORDS_AO12,
+											{
+												ao12: ao12,
+												records: _array,
+											}
+										);
+									},
+									// failed
+									(txObj, error) => {
+										console.log(error);
+									}
+								);
+							});
+						}}
+					>
 						<AppText style={styles.name}>Average of 12</AppText>
 						<AppText style={styles.result}>{ao12}</AppText>
 						<MaterialCommunityIcons
@@ -236,17 +380,6 @@ function StatisticsScreen({ navigation }) {
 					<View style={styles.line}></View>
 				</View>
 			</ScrollView>
-
-			{/* <TouchableOpacity
-				style={[styles.statisticsItem, styles.viewRecords]}
-			>
-				<AppText style={styles.name}>View Records</AppText>
-				<MaterialCommunityIcons
-					name="chevron-right"
-					size={24}
-					color={theme.fontSecondary}
-				/>
-			</TouchableOpacity> */}
 		</Screen>
 	);
 }

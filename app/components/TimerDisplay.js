@@ -76,7 +76,12 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	ready: {
-		fontSize: 65,
+		fontSize: 60,
+		// width: 200,
+		// overflow: "visible",
+		alignContent: "center",
+		justifyContent: "center",
+		// backgroundColor: "red",
 	},
 	textContainer: {
 		width: 90,

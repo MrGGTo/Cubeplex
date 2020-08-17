@@ -9,6 +9,7 @@ function AppText({ children, style, secondary }) {
 			style={[
 				{
 					color: secondary ? theme.fontSecondary : theme.fontPrimary,
+					fontSize: 15,
 				},
 				style,
 			]}

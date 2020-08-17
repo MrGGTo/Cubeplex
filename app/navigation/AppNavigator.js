@@ -39,12 +39,12 @@ const AppNavigator = () => {
 				}}
 			/>
 			<Tab.Screen
-				name={router.RECORDS}
+				name={router.STATISTICS}
 				component={RecordNavigator}
 				options={{
 					tabBarIcon: ({ color, size }) => (
 						<MaterialCommunityIcons
-							name="chart-tree"
+							name="chart-areaspline"
 							color={color}
 							size={size}
 						/>

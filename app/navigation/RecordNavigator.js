@@ -9,29 +9,13 @@ import RecordDetailsScreen from "../screens/RecordDetailsScreen";
 import IconButton from "../components/IconButton";
 import { TouchableOpacity, Share } from "react-native";
 import StatisticsScreen from "../screens/StatisticsScreen";
+import RecordAverageScreen from "../screens/RecordAverageScreen";
+import RecordAO5Screen from "../screens/RecordAO5Screen";
+import RecordAO12Screen from "../screens/RecordAO12Screen";
 
 const Stack = createStackNavigator();
 
 const RecordNavigator = () => {
-	const onShare = async () => {
-		try {
-			const result = await Share.share({
-				message: "I got 6.17s with this scramble on Cubeplex.",
-			});
-			if (result.action === Share.sharedAction) {
-				if (result.activityType) {
-					// shared with activity type of result.activityType
-				} else {
-					// shared
-				}
-			} else if (result.action === Share.dismissedAction) {
-				// dismissed
-			}
-		} catch (error) {
-			alert(error.message);
-		}
-	};
-
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
@@ -56,6 +40,48 @@ const RecordNavigator = () => {
 			<Stack.Screen
 				name={router.RECORD_DETAILS}
 				component={RecordDetailsScreen}
+				options={{
+					headerStyle: {
+						backgroundColor: theme.backgroundSecondary,
+					},
+					headerTintColor: theme.fontPrimary,
+					headerTitleStyle: {
+						fontSize: 20,
+						// fontWeight: "bold",
+					},
+				}}
+			/>
+			<Stack.Screen
+				name={router.RECORDS_AVG}
+				component={RecordAverageScreen}
+				options={{
+					headerStyle: {
+						backgroundColor: theme.backgroundSecondary,
+					},
+					headerTintColor: theme.fontPrimary,
+					headerTitleStyle: {
+						fontSize: 20,
+						// fontWeight: "bold",
+					},
+				}}
+			/>
+			<Stack.Screen
+				name={router.RECORDS_AO5}
+				component={RecordAO5Screen}
+				options={{
+					headerStyle: {
+						backgroundColor: theme.backgroundSecondary,
+					},
+					headerTintColor: theme.fontPrimary,
+					headerTitleStyle: {
+						fontSize: 20,
+						// fontWeight: "bold",
+					},
+				}}
+			/>
+			<Stack.Screen
+				name={router.RECORDS_AO12}
+				component={RecordAO12Screen}
 				options={{
 					headerStyle: {
 						backgroundColor: theme.backgroundSecondary,
