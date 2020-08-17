@@ -7,6 +7,7 @@ import {
 	RefreshControl,
 } from "react-native";
 import * as SQLite from "expo-sqlite";
+import { useFocusEffect } from "@react-navigation/native";
 
 import Screen from "../components/Screen";
 import AppText from "../components/AppText";
@@ -24,6 +25,9 @@ function StatisticsScreen({ navigation }) {
 	const [numberOfSolves, setNumberOfSolves] = useState(0);
 	const [bestTime, setBestTime] = useState(0);
 	const [worstTime, setWorstTime] = useState(0);
+	const [average, setAverage] = useState(0);
+	const [ao5, setAo5] = useState(0);
+	const [ao12, setAo12] = useState(0);
 
 	const onRefresh = React.useCallback(() => {
 		setRefreshing(true);
@@ -31,7 +35,7 @@ function StatisticsScreen({ navigation }) {
 		setRefreshing(false);
 	}, []);
 
-	useEffect(() => {
+	useFocusEffect(() => {
 		openOrCreateDatabase();
 		fetchStatistics();
 	}, []);
@@ -73,6 +77,48 @@ function StatisticsScreen({ navigation }) {
 				// success
 				(txObj, { rows: { _array } }) => {
 					setWorstTime(formatTime(_array[0]["MAX(time)"]));
+				},
+				// failed
+				(txObj, error) => {
+					console.log(error);
+				}
+			);
+
+			// Average time
+			tx.executeSql(
+				"SELECT AVG(time) FROM recordsData",
+				null,
+				// success
+				(txObj, { rows: { _array } }) => {
+					setAverage(formatTime(_array[0]["AVG(time)"]));
+				},
+				// failed
+				(txObj, error) => {
+					console.log(error);
+				}
+			);
+
+			// AO5
+			tx.executeSql(
+				"SELECT AVG(time) FROM (SELECT * FROM recordsData ORDER BY id DESC LIMIT 5)",
+				null,
+				// success
+				(txObj, { rows: { _array } }) => {
+					setAo5(formatTime(_array[0]["AVG(time)"]));
+				},
+				// failed
+				(txObj, error) => {
+					console.log(error);
+				}
+			);
+
+			// AO12
+			tx.executeSql(
+				"SELECT AVG(time) FROM (SELECT * FROM recordsData ORDER BY id DESC LIMIT 12)",
+				null,
+				// success
+				(txObj, { rows: { _array } }) => {
+					setAo12(formatTime(_array[0]["AVG(time)"]));
 				},
 				// failed
 				(txObj, error) => {
@@ -156,7 +202,7 @@ function StatisticsScreen({ navigation }) {
 					{/* Average Time */}
 					<TouchableOpacity style={styles.statisticsItem}>
 						<AppText style={styles.name}>Average Time:</AppText>
-						<AppText style={styles.result}>4.37s</AppText>
+						<AppText style={styles.result}>{average}</AppText>
 						<MaterialCommunityIcons
 							name="chevron-right"
 							size={24}
@@ -168,7 +214,7 @@ function StatisticsScreen({ navigation }) {
 					{/* Average of 5 */}
 					<TouchableOpacity style={styles.statisticsItem}>
 						<AppText style={styles.name}>Average of 5</AppText>
-						<AppText style={styles.result}>4.37s</AppText>
+						<AppText style={styles.result}>{ao5}</AppText>
 						<MaterialCommunityIcons
 							name="chevron-right"
 							size={24}
@@ -180,7 +226,7 @@ function StatisticsScreen({ navigation }) {
 					{/* Average of 12 */}
 					<TouchableOpacity style={styles.statisticsItem}>
 						<AppText style={styles.name}>Average of 12</AppText>
-						<AppText style={styles.result}>4.37s</AppText>
+						<AppText style={styles.result}>{ao12}</AppText>
 						<MaterialCommunityIcons
 							name="chevron-right"
 							size={24}

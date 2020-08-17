@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, Alert, FlatList, Button } from "react-native";
-
+import { useFocusEffect } from "@react-navigation/native";
 import * as SQLite from "expo-sqlite";
 import moment from "moment";
 
@@ -19,7 +19,7 @@ function RecordScreen({ navigation }) {
 	const [refreshing, setRefreshing] = useState(false);
 
 	// create table
-	useEffect(() => {
+	useFocusEffect(() => {
 		openOrCreateDatabase();
 		db.transaction((tx) => {
 			tx.executeSql(

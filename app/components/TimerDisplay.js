@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
 export default TimerDisplay;
 
 export const formatTime = (time) => {
-	const duration = moment.duration(time);
+	const duration = moment.duration(Math.round(time));
 	const minutes = duration.minutes();
 	const seconds = duration.seconds();
 	const milliseconds = duration.milliseconds();
