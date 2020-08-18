@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { theme } from "../config/themes";
 
 function AlgorithmStarAction({ onPress }) {
 	return (
@@ -9,7 +10,11 @@ function AlgorithmStarAction({ onPress }) {
 			style={{ justifyContent: "center", alignItems: "center" }}
 		>
 			<View style={styles.container}>
-				<MaterialCommunityIcons name="pin" size={35} color="white" />
+				<MaterialCommunityIcons
+					name="timer-sand"
+					size={35}
+					color="white"
+				/>
 			</View>
 		</TouchableWithoutFeedback>
 	);
@@ -17,7 +22,8 @@ function AlgorithmStarAction({ onPress }) {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: "orange",
+		// backgroundColor: theme.color,
+		backgroundColor: "dodgerblue",
 		width: 60,
 		justifyContent: "center",
 		alignItems: "center",

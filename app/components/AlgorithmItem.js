@@ -8,14 +8,13 @@ import {
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import AlgorithmStarAction from "./AlgorithmStarAction";
 import AppText from "./AppText";
 
 import { theme } from "../config/themes";
 
-function AlgorithmItem({ name, algorithm, image, onPress }) {
+function AlgorithmItem({ name, algorithm, image, onPress, renderLeftActions }) {
 	return (
-		<Swipeable renderLeftActions={AlgorithmStarAction}>
+		<Swipeable renderLeftActions={renderLeftActions}>
 			<TouchableWithoutFeedback onPress={onPress}>
 				<View style={{ backgroundColor: theme.backgroundPrimary }}>
 					<View

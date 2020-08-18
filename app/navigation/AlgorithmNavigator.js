@@ -47,19 +47,6 @@ const AlgorithmNavigator = () => {
 					),
 				}}
 			/>
-			<Tab.Screen
-				name={"Pinned Algorithms"}
-				component={PllAlgorithmScreen}
-				options={{
-					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons
-							name="pin"
-							color={color}
-							size={size}
-						/>
-					),
-				}}
-			/>
 		</Tab.Navigator>
 	);
 };

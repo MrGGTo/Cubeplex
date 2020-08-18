@@ -29,9 +29,9 @@ function AlgorithmDetailsScreen({ route, navigation }) {
 						<AppText style={styles.name}>
 							{algorithmData.name}
 						</AppText>
-						<AppText style={styles.recordText}>Best : 2.1s</AppText>
+						{/* <AppText style={styles.recordText}>Best : 2.1s</AppText>
 						<AppText style={styles.recordText}>Avg. : 2.1s</AppText>
-						<AppText style={styles.recordText}>AO5 : 2.1s</AppText>
+						<AppText style={styles.recordText}>AO5 : 2.1s</AppText> */}
 					</View>
 				</View>
 				<View
@@ -58,7 +58,7 @@ function AlgorithmDetailsScreen({ route, navigation }) {
 						style={[
 							styles.TrainButton,
 							{
-								backgroundColor: theme.color,
+								backgroundColor: "dodgerblue",
 							},
 						]}
 					>

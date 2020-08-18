@@ -11,6 +11,7 @@ import {
 	ScrollView,
 } from "react-native";
 
+import AlgorithmStarAction from "../components/AlgorithmStarAction";
 import Screen from "../components/Screen";
 
 import plls from "../data/plls";
@@ -66,6 +67,24 @@ function PllAlgorithmScreen({ navigation }) {
 										style={{ padding: 15 }}
 									/>
 								</View>
+								<ScrollView style={{ margin: 15 }}>
+									<AppText
+										style={{
+											fontSize: 32,
+											fontWeight: "bold",
+											marginBottom: 10,
+										}}
+									>
+										What is PLL?
+									</AppText>
+									<AppText>
+										PLL stands for permutate the last layer,
+										the 4th step of advanced Fridrich (CFOP)
+										method. After solving OLL, we need to
+										permutate the last layer (PLL). PLL can
+										be done by the provided algorithms.
+									</AppText>
+								</ScrollView>
 							</View>
 						</Modal>
 					</View>
@@ -80,6 +99,16 @@ function PllAlgorithmScreen({ navigation }) {
 						onPress={() =>
 							navigation.navigate(router.ALGORITHM_DETAILS, item)
 						}
+						renderLeftActions={() => (
+							<AlgorithmStarAction
+								onPress={() => {
+									navigation.navigate(
+										router.TRAIN_TIMER,
+										item
+									);
+								}}
+							/>
+						)}
 					/>
 				))}
 			</ScrollView>
