@@ -128,7 +128,7 @@ export default class Timer extends Component {
 						}
 						onPressIn={() => {
 							this.stop();
-							// console.log(this.props.onPressStop);
+							this.props.onPressStop();
 						}}
 						style={{ padding: 250 }}
 					/>
@@ -141,7 +141,7 @@ export default class Timer extends Component {
 						}
 						onPressOut={() => {
 							this.start();
-							this.props.onPressStop();
+							// this.props.onPressStop();
 						}}
 					/>
 				)}

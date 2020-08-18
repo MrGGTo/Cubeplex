@@ -38,13 +38,6 @@ const SettingsNavigator = () => {
 						fontSize: 20,
 						// fontWeight: "bold",
 					},
-					headerRight: () => (
-						<Button
-							onPress={() => alert("This is a button!")}
-							title="Info"
-							color={theme.color}
-						/>
-					),
 				}}
 			/>
 			<Stack.Screen
@@ -59,13 +52,6 @@ const SettingsNavigator = () => {
 						fontSize: 20,
 						// fontWeight: "bold",
 					},
-					headerRight: () => (
-						<Button
-							onPress={() => alert("This is a button!")}
-							title="Info"
-							color={theme.color}
-						/>
-					),
 				}}
 			/>
 			<Stack.Screen
@@ -80,13 +66,6 @@ const SettingsNavigator = () => {
 						fontSize: 20,
 						// fontWeight: "bold",
 					},
-					headerRight: () => (
-						<Button
-							onPress={() => alert("This is a button!")}
-							title="Info"
-							color={theme.color}
-						/>
-					),
 				}}
 			/>
 			<Stack.Screen
@@ -101,13 +80,6 @@ const SettingsNavigator = () => {
 						fontSize: 20,
 						// fontWeight: "bold",
 					},
-					headerRight: () => (
-						<Button
-							onPress={() => alert("This is a button!")}
-							title="Info"
-							color={theme.color}
-						/>
-					),
 				}}
 			/>
 		</Stack.Navigator>

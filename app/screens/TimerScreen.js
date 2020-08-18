@@ -9,7 +9,6 @@ import {
 	AsyncStorage,
 	StatusBar,
 } from "react-native";
-import Slider from "@react-native-community/slider";
 
 import scrambleRotations from "../data/scrambleRotations";
 import Screen from "../components/Screen";
@@ -22,14 +21,11 @@ import { useDispatch } from "react-redux";
 import { switchTheme } from "../redux/themeActions";
 import TimerSettings from "../components/TimerSettings";
 import { useFocusEffect } from "@react-navigation/native";
-// import {  } from "expo-status-bar";
 
 function TimerScreen(props) {
 	const [settingsVisible, setSettingsVisible] = useState(false);
 	const [scrambleLength, setScrambleLength] = useState(20);
 	const [scramble, setScramble] = useState(createScramble);
-	const [isEnabled, setIsEnabled] = useState(false);
-	const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
 	const dispatch = useDispatch();
 	const [themeID, setThemeID] = useState(1);
@@ -98,6 +94,7 @@ function TimerScreen(props) {
 
 	onPressStop = () => {
 		setScramble(createScramble);
+		// retrieveSettingsData();
 	};
 
 	return (
@@ -112,11 +109,6 @@ function TimerScreen(props) {
 				size={27}
 				color="black"
 			/>
-			{/* <Scramble
-				style={styles.scramble}
-				fontSize={20}
-				scrambleLength={scrambleLength}
-			/> */}
 			<View style={styles.scramble}>
 				<AppText style={{ fontSize: 20 }}>{scramble}</AppText>
 				<IconButton
