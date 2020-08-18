@@ -8,6 +8,7 @@ import { Button } from "react-native";
 import router from "./router";
 import ManageRecordsScreen from "../screens/ManageRecordsScreen";
 import StarredRecordScreen from "../screens/StarredRecordScreen";
+import TimerSettings from "../components/TimerSettings";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,27 @@ const SettingsNavigator = () => {
 			<Stack.Screen
 				name={router.STARRED_RECORDS}
 				component={StarredRecordScreen}
+				options={{
+					headerStyle: {
+						backgroundColor: theme.backgroundSecondary,
+					},
+					headerTintColor: theme.fontPrimary,
+					headerTitleStyle: {
+						fontSize: 20,
+						// fontWeight: "bold",
+					},
+					headerRight: () => (
+						<Button
+							onPress={() => alert("This is a button!")}
+							title="Info"
+							color={theme.color}
+						/>
+					),
+				}}
+			/>
+			<Stack.Screen
+				name={router.TIMER_SETTINGS}
+				component={TimerSettings}
 				options={{
 					headerStyle: {
 						backgroundColor: theme.backgroundSecondary,

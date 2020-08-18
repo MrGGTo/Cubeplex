@@ -17,4 +17,5 @@ export default {
 	DARK_THEME: "Dark Theme",
 	LIGHT_THEME: "Light Theme",
 	TRAIN_TIMER: "Train Timer",
+	TIMER_SETTINGS: "Timer Settings",
 };

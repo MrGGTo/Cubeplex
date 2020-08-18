@@ -9,6 +9,7 @@ import {
 	AsyncStorage,
 	StatusBar,
 } from "react-native";
+import Slider from "@react-native-community/slider";
 
 import scrambleRotations from "../data/scrambleRotations";
 import Screen from "../components/Screen";
@@ -19,6 +20,8 @@ import AppText from "../components/AppText";
 import { theme } from "../config/themes";
 import { useDispatch } from "react-redux";
 import { switchTheme } from "../redux/themeActions";
+import TimerSettings from "../components/TimerSettings";
+import { useFocusEffect } from "@react-navigation/native";
 // import {  } from "expo-status-bar";
 
 function TimerScreen(props) {
@@ -56,12 +59,44 @@ function TimerScreen(props) {
 		return scrambleString;
 	};
 
+	// useFocusEffect;
 	useEffect(() => {
-		setScramble(createScramble);
+		retrieveSettingsData();
 	}, []);
 
+	const storeSettingsData = async () => {
+		try {
+			await AsyncStorage.setItem(
+				"settingsData",
+				JSON.stringify({
+					scrambleLength: scrambleLength,
+					inspection: inspection,
+				})
+			);
+		} catch (error) {
+			// Error saving data
+		}
+	};
+
+	const retrieveSettingsData = async () => {
+		try {
+			const value = await AsyncStorage.getItem("settingsData");
+			if (value !== null) {
+				// We have data!!
+				console.log(value);
+				const valueObj = JSON.parse(value);
+				setScrambleLength(valueObj.scrambleLength);
+				setScramble(createScramble);
+				// setInspection(valueObj.inspection);
+			} else {
+				storeSettingsData();
+			}
+		} catch (error) {
+			// Error retrieving data
+		}
+	};
+
 	onPressStop = () => {
-		console.log("good");
 		setScramble(createScramble);
 	};
 
@@ -89,7 +124,7 @@ function TimerScreen(props) {
 					size={24}
 					style={{ paddingHorizontal: 5 }}
 					onPress={() => {
-						setScramble(createScramble);
+						retrieveSettingsData();
 					}}
 				/>
 			</View>
@@ -112,9 +147,10 @@ function TimerScreen(props) {
 							style={{
 								backgroundColor: theme.backgroundSecondary,
 								flex: 1,
-								marginVertical: 75,
-								marginHorizontal: 50,
+								marginVertical: "45%",
+								marginHorizontal: "15%",
 								borderRadius: 15,
+								overflow: "hidden",
 							}}
 						>
 							<View style={{ flexDirection: "row-reverse" }}>
@@ -125,55 +161,13 @@ function TimerScreen(props) {
 									style={{ padding: 15 }}
 								/>
 							</View>
-							<View
-								style={{
-									flexDirection: "row",
-									justifyContent: "space-evenly",
-									alignItems: "center",
-									marginVertical: 15,
+							<TimerSettings
+								backgroundColor={theme.backgroundSecondary}
+								onPressClose={() => {
+									setSettingsVisible(false);
+									retrieveSettingsData();
 								}}
-							>
-								<AppText>Scramble Length</AppText>
-								<IconButton
-									name="less-than"
-									size={17}
-									onPress={() =>
-										setScrambleLength(scrambleLength - 1)
-									}
-								/>
-								<AppText>{scrambleLength}</AppText>
-								<IconButton
-									name="greater-than"
-									size={17}
-									onPress={() =>
-										setScrambleLength(scrambleLength + 1)
-									}
-								/>
-							</View>
-							<View
-								style={{
-									flexDirection: "row",
-									justifyContent: "space-evenly",
-									alignItems: "center",
-									marginVertical: 15,
-								}}
-							>
-								<AppText>WCA Inspection</AppText>
-								<Switch
-									style={{
-										transform: [
-											{ scaleX: 0.8 },
-											{ scaleY: 0.8 },
-										],
-									}}
-									trackColor={{
-										false: "#767577",
-										true: theme.color,
-									}}
-									onValueChange={toggleSwitch}
-									value={isEnabled}
-								/>
-							</View>
+							/>
 						</View>
 					</Modal>
 				</View>
