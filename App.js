@@ -26,3 +26,8 @@ export default function App() {
 		</Provider>
 	);
 }
+
+// admob
+// iOS Banner: ca-app-pub-6427265675170344/5652257755
+
+// Android Banner: ca-app-pub-6427265675170344/8250500935

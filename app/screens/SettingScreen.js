@@ -2,6 +2,14 @@ import React from "react";
 import { View, StyleSheet, Text, FlatList, Button, Share } from "react-native";
 import email from "react-native-email";
 
+import {
+	AdMobBanner,
+	AdMobInterstitial,
+	PublisherBanner,
+	AdMobRewarded,
+	setTestDeviceIDAsync,
+} from "expo-ads-admob";
+
 import Screen from "../components/Screen";
 import SettingsItemList from "../components/SettingsItemList";
 import { ScrollView } from "react-native-gesture-handler";
@@ -94,6 +102,14 @@ function SettingScreen({ navigation }) {
 	return (
 		<Screen style={styles.container}>
 			<AppText style={styles.title}>Settings</AppText>
+			<AdMobBanner
+				bannerSize="banner"
+				adUnitID="ca-app-pub-6427265675170344/5652257755" // Test ID, Replace with your-admob-unit-id
+				servePersonalizedAds={false} // true or false
+				onDidFailToReceiveAdWithError={(value) => {
+					console.log("failed " + value);
+				}}
+			/>
 			<FlatList
 				data={settingsData}
 				keyExtractor={(data) => data.id.toString()}
