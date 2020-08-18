@@ -6,6 +6,7 @@ import router from "./router";
 import PllAlgorithmScreen from "../screens/PllAlgorithmScreen";
 import AlgorithmDetailsScreen from "../screens/AlgorithmDetailsScreen";
 import OllAlgorithmScreen from "../screens/OllAlgorithmScreen";
+import TrainingTimerScreen from "../screens/TrainingTimerScreen";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,20 @@ const OllAlgorithmDetailsNavigator = () => {
 			<Stack.Screen
 				name={router.ALGORITHM_DETAILS}
 				component={AlgorithmDetailsScreen}
+				options={{
+					headerStyle: {
+						backgroundColor: theme.backgroundSecondary,
+					},
+					headerTintColor: theme.fontPrimary,
+					headerTitleStyle: {
+						fontSize: 20,
+						// fontWeight: "bold",
+					},
+				}}
+			/>
+			<Stack.Screen
+				name={router.TRAIN_TIMER}
+				component={TrainingTimerScreen}
 				options={{
 					headerStyle: {
 						backgroundColor: theme.backgroundSecondary,

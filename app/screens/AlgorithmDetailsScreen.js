@@ -15,8 +15,9 @@ import Screen from "../components/Screen";
 import AlgorithmDetailsList from "../components/AlgorithmDetailsList";
 import AppText from "../components/AppText";
 import { theme } from "../config/themes";
+import router from "../navigation/router";
 
-function AlgorithmDetailsScreen({ route }) {
+function AlgorithmDetailsScreen({ route, navigation }) {
 	const algorithmData = route.params;
 
 	return (
@@ -48,6 +49,12 @@ function AlgorithmDetailsScreen({ route }) {
 						<AppText style={styles.pinText}>Pin</AppText>
 					</TouchableOpacity>
 					<TouchableOpacity
+						onPress={() => {
+							navigation.navigate(
+								router.TRAIN_TIMER,
+								algorithmData
+							);
+						}}
 						style={[
 							styles.TrainButton,
 							{
