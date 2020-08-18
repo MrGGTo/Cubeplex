@@ -31,19 +31,19 @@ export default [
 		algs: [
 			{
 				id: 1,
-				algorithm: "y' f R U R' U' f' U F R U R' U' F'",
+				algorithm: "R U R' U R d' R U' R' F'",
 			},
 			{
 				id: 2,
-				algorithm: "M U' r U2 r' U' R U' R2 r",
+				algorithm: "R' U' R U' R' U F' U F R",
 			},
 			{
 				id: 3,
-				algorithm: "y F U R U' R' F' U' F R U R' U' F'",
+				algorithm: "R U R' U R U' y R U' R' F'",
 			},
 			{
 				id: 4,
-				algorithm: "M U' r U2 r' U' R U' R' M'",
+				algorithm: "R' U' R U' R' d R' U R B",
 			},
 		],
 	},
@@ -55,19 +55,19 @@ export default [
 		algs: [
 			{
 				id: 1,
-				algorithm: "R U R' U R' F R F' U2 R' F R F'",
+				algorithm: "R U2 R2 U' R U' R' U2 F R F'",
 			},
 			{
 				id: 2,
-				algorithm: "y2 F R' F' R2 r' U R U' R' U' M'",
+				algorithm: "y R' F R U R U' R2 F' R2 U' R' U R U R'",
 			},
 			{
 				id: 3,
-				algorithm: "f R U R' U' f' U' R U R' U' R' F R F'",
+				algorithm: "r U2 R2 F R F' U2 r' F R F'",
 			},
 			{
 				id: 4,
-				algorithm: "R' F R U' M' U2 r' U' F' U R",
+				algorithm: "y r U2 R' U' R2 r' U R' U' r U' r'",
 			},
 		],
 	},
@@ -79,19 +79,19 @@ export default [
 		algs: [
 			{
 				id: 1,
-				algorithm: "r U R' U R U2 r2 U' R U' R' U2 r",
+				algorithm: "r U r' U R U' R' U R U' R' r U' r'",
 			},
 			{
 				id: 2,
-				algorithm: "y R U2 R2 F R F' U2 M' U R U' r'",
+				algorithm: "F R U R' U' R F' r U R' U' r'",
 			},
 			{
 				id: 3,
-				algorithm: "y2 F R U R' d R' U2 R' F R F'",
+				algorithm: "r' U' r U' R' U R U' R' U R r' U r",
 			},
 			{
 				id: 4,
-				algorithm: "y2 F R U R' U y' R' U2 R' F R F'",
+				algorithm: "y f R U R' U' f' F R U R' U' R U R' U' F'",
 			},
 		],
 	},

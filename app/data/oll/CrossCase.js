@@ -67,7 +67,7 @@ export default [
 			},
 			{
 				id: 4,
-				algorithm: "y R U R' U' R U' R' U2 R U' R' U2 R U R'",
+				algorithm: "R U R' U R U2 R2 U' R U' R' U2 R",
 			},
 		],
 	},

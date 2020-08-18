@@ -70,31 +70,18 @@ function PllAlgorithmScreen({ navigation }) {
 						</Modal>
 					</View>
 				</Modal>
+
 				{plls.map((item) => (
 					<AlgorithmItem
 						key={item.id}
 						name={item.name}
-						algorithm={item.algorithmId}
+						algorithm={item.algs[0].algorithm}
 						image={item.image}
 						onPress={() =>
 							navigation.navigate(router.ALGORITHM_DETAILS, item)
 						}
 					/>
 				))}
-				{/* <FlatList
-				data={plls}
-				keyExtractor={(pll) => pll.id.toString()}
-				renderItem={({ item }) => (
-					<AlgorithmItem
-						name={item.name}
-						algorithm={item.algorithm}
-						image={item.image}
-						onPress={() =>
-							navigation.navigate(router.ALGORITHM_DETAILS, item)
-						}
-					/>
-				)}
-			/> */}
 			</ScrollView>
 		</Screen>
 	);

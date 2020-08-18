@@ -3,6 +3,7 @@ export default [
 		id: 1,
 		name: "Z Permutation",
 		algorithm: 1,
+		algorithmId: 1,
 		image: require("../assets/pll/Z.png"),
 		algs: [
 			{

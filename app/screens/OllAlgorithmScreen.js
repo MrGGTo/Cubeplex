@@ -122,7 +122,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -132,24 +132,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={DotCase}
-						scrollEnabled={false}
-						keyExtractor={(dotCase) => dotCase.id.toString()}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Line Case</AppText>
@@ -157,7 +139,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -167,24 +149,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={LineCase}
-						scrollEnabled={false}
-						keyExtractor={(lineCase) => lineCase.id.toString()}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Cross Case</AppText>
@@ -192,7 +156,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -202,24 +166,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={CrossCase}
-						scrollEnabled={false}
-						keyExtractor={(crossCase) => crossCase.id.toString()}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>4 Corners Case</AppText>
@@ -227,7 +173,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -237,26 +183,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={FourCorners}
-						scrollEnabled={false}
-						keyExtractor={(fourCorners) =>
-							fourCorners.id.toString()
-						}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Short L Shape</AppText>
@@ -264,7 +190,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -274,26 +200,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={ShortLShape}
-						scrollEnabled={false}
-						keyExtractor={(shortLShape) =>
-							shortLShape.id.toString()
-						}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Long L Shape</AppText>
@@ -301,7 +207,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -311,24 +217,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={LongLShape}
-						scrollEnabled={false}
-						keyExtractor={(longLShape) => longLShape.id.toString()}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>C Shape</AppText>
@@ -336,7 +224,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -346,24 +234,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={CShape}
-						scrollEnabled={false}
-						keyExtractor={(cShape) => cShape.id.toString()}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>P Shape</AppText>
@@ -371,7 +241,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -381,24 +251,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={PShape}
-						scrollEnabled={false}
-						keyExtractor={(pShape) => pShape.id.toString()}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>T Shape</AppText>
@@ -406,7 +258,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -416,24 +268,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={TShape}
-						scrollEnabled={false}
-						keyExtractor={(tShape) => tShape.id.toString()}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>W Shape</AppText>
@@ -441,7 +275,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -451,24 +285,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={WShape}
-						scrollEnabled={false}
-						keyExtractor={(wShape) => wShape.id.toString()}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Z Shape</AppText>
@@ -476,7 +292,7 @@ function OllAlgorithmScreen({ navigation }) {
 						<AlgorithmItem
 							key={item.id}
 							name={item.name}
-							algorithm={item.algorithmId}
+							algorithm={item.algs[0].algorithm}
 							image={item.image}
 							onPress={() =>
 								navigation.navigate(
@@ -486,24 +302,6 @@ function OllAlgorithmScreen({ navigation }) {
 							}
 						/>
 					))}
-					{/* <FlatList
-						data={ZShape}
-						scrollEnabled={false}
-						keyExtractor={(zShape) => zShape.id.toString()}
-						renderItem={({ item }) => (
-							<AlgorithmItem
-								name={item.name}
-								algorithm={item.algorithmId}
-								image={item.image}
-								onPress={() =>
-									navigation.navigate(
-										router.ALGORITHM_DETAILS,
-										item
-									)
-								}
-							/>
-						)}
-					/> */}
 				</View>
 			</ScrollView>
 		</Screen>
