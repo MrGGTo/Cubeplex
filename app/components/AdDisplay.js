@@ -28,11 +28,27 @@ const styles = StyleSheet.create({
 });
 export default AdDisplay;
 
+export const showRewardedAd = async () => {
+	try {
+		await AdMobRewarded.setAdUnitID(
+			Platform.OS === "android"
+				? ""
+				: "ca-app-pub-6427265675170344/5360930942"
+		); // Test ID, Replace with your-admob-unit-id
+		await AdMobRewarded.requestAdAsync();
+		await AdMobRewarded.showAdAsync();
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 export const getBannerUnitID =
 	Platform.OS === "android"
 		? "ca-app-pub-6427265675170344/8250500935"
 		: "ca-app-pub-6427265675170344/5652257755";
 
+export const getRewardedUnitID =
+	Platform.OS === "android" ? "" : "ca-app-pub-6427265675170344/5360930942";
 // admob
 // iOS Banner: ca-app-pub-6427265675170344/5652257755
 

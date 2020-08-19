@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	TouchableOpacity,
+	Button,
+	TouchableHighlight,
+} from "react-native";
 import moment, { duration } from "moment";
 import AppText from "./AppText";
 
@@ -34,6 +41,7 @@ function TimerDisplay({
 			onPressIn={onPressIn}
 			onPressOut={onPressOut}
 			style={[styles.container, style]}
+			// underlayColor="red"
 		>
 			{ready && (
 				<View>

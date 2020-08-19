@@ -110,7 +110,7 @@ function TimerSettings({ backgroundColor, onPressClose }) {
 					/>
 				</View>
 
-				<View
+				{/* <View
 					style={{
 						flexDirection: "row",
 						justifyContent: "space-evenly",
@@ -130,7 +130,7 @@ function TimerSettings({ backgroundColor, onPressClose }) {
 						onValueChange={toggleSwitch}
 						value={inspection}
 					/>
-				</View>
+				</View> */}
 			</View>
 
 			<View style={styles.buttonContainer}>
