@@ -20,6 +20,7 @@ import AlgorithmItem from "../components/AlgorithmItem";
 import AppText from "../components/AppText";
 import { theme } from "../config/themes";
 import router from "../navigation/router";
+import AdDisplay from "../components/AdDisplay";
 
 function PllAlgorithmScreen({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState("false");
@@ -111,6 +112,8 @@ function PllAlgorithmScreen({ navigation }) {
 						)}
 					/>
 				))}
+
+				<AdDisplay bannerSize="largeBanner" />
 			</ScrollView>
 		</Screen>
 	);

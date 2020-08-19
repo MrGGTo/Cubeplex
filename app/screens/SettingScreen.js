@@ -17,6 +17,7 @@ import AppText from "../components/AppText";
 import SettingsItem from "../components/SettingsItem";
 import { theme } from "../config/themes";
 import router from "../navigation/router";
+import AdDisplay, { getBannerUnitID } from "../components/AdDisplay";
 
 const settingsData = [
 	{
@@ -102,14 +103,6 @@ function SettingScreen({ navigation }) {
 	return (
 		<Screen style={styles.container}>
 			<AppText style={styles.title}>Settings</AppText>
-			<AdMobBanner
-				bannerSize="banner"
-				adUnitID="ca-app-pub-6427265675170344/5652257755" // Test ID, Replace with your-admob-unit-id
-				servePersonalizedAds={false} // true or false
-				onDidFailToReceiveAdWithError={(value) => {
-					console.log("failed " + value);
-				}}
-			/>
 			<FlatList
 				data={settingsData}
 				keyExtractor={(data) => data.id.toString()}
@@ -159,6 +152,21 @@ function SettingScreen({ navigation }) {
 					);
 				}}
 			/>
+			<AdDisplay bannerSize="banner" />
+			{/* <View style={{ alignItems: "center" }}>
+				<AdMobBanner
+					bannerSize="banner"
+					adUnitID={
+						Platform.OS === "android"
+							? "ca-app-pub-6427265675170344/8250500935"
+							: "ca-app-pub-6427265675170344/5652257755"
+					}
+					servePersonalizedAds={false} // true or false
+					onDidFailToReceiveAdWithError={(value) => {
+						console.log("failed " + value);
+					}}
+				/>
+			</View> */}
 		</Screen>
 	);
 }

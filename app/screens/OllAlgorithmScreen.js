@@ -31,6 +31,7 @@ import { theme } from "../config/themes";
 import IconButton from "../components/IconButton";
 import router from "../navigation/router";
 import AlgorithmStarAction from "../components/AlgorithmStarAction";
+import AdDisplay from "../components/AdDisplay";
 
 function OllAlgorithmScreen({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState("false");
@@ -398,6 +399,8 @@ function OllAlgorithmScreen({ navigation }) {
 						/>
 					))}
 				</View>
+
+				<AdDisplay bannerSize="largeBanner" />
 			</ScrollView>
 		</Screen>
 	);

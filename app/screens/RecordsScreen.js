@@ -11,6 +11,7 @@ import { openOrCreateDatabase } from "../database/RecordDatabase";
 import RecordStarAction from "../components/RecordStarAction";
 import { formatTime } from "../components/TimerDisplay";
 import router from "../navigation/router";
+import AdDisplay from "../components/AdDisplay";
 
 const db = SQLite.openDatabase("db.db");
 
@@ -220,6 +221,8 @@ function RecordScreen({ navigation }) {
 					onEndReachedThreshold={0}
 				/>
 			) : null}
+
+			<AdDisplay bannerSize="banner" />
 		</Screen>
 	);
 }

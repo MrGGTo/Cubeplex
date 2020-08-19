@@ -5,6 +5,7 @@ import AppText from "./AppText";
 import Slider from "@react-native-community/slider";
 import { Switch } from "react-native-gesture-handler";
 import { theme } from "../config/themes";
+import AdDisplay from "./AdDisplay";
 
 const initialValue = {
 	scrambleLength: 20,
@@ -150,6 +151,7 @@ function TimerSettings({ backgroundColor, onPressClose }) {
 					</View>
 				</TouchableOpacity>
 			</View>
+			<AdDisplay bannerSize="banner" />
 		</Screen>
 	);
 }
