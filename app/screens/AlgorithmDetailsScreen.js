@@ -16,6 +16,7 @@ import AlgorithmDetailsList from "../components/AlgorithmDetailsList";
 import AppText from "../components/AppText";
 import { theme } from "../config/themes";
 import router from "../navigation/router";
+import AdDisplay from "../components/AdDisplay";
 
 function AlgorithmDetailsScreen({ route, navigation }) {
 	const algorithmData = route.params;
@@ -95,6 +96,7 @@ function AlgorithmDetailsScreen({ route, navigation }) {
 						}}
 					/>
 				</View>
+				<AdDisplay bannerSize="banner" />
 			</View>
 		</Screen>
 	);

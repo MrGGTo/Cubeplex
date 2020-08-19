@@ -58,15 +58,16 @@ const settingsData = [
 		backgroundColor: "orange",
 		// navigate: router.THEME,
 		elseAction: "Feedback",
-	},
-	{
-		id: 6,
-		title: "Support Us",
-		iconName: "heart",
-		backgroundColor: "#FF5B83",
-		navigate: router.THEME,
 		separate: true,
 	},
+	// {
+	// 	id: 6,
+	// 	title: "Support Us",
+	// 	iconName: "heart",
+	// 	backgroundColor: "#FF5B83",
+	// 	navigate: router.THEME,
+	// 	separate: true,
+	// },
 	{
 		id: 7,
 		title: "Manage Records",

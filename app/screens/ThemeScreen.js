@@ -13,6 +13,7 @@ import { theme, themesData } from "../config/themes";
 import Screen from "../components/Screen";
 import AppText from "../components/AppText";
 import ThemeItem from "../components/ThemeItem";
+import AdDisplay from "../components/AdDisplay";
 
 // import { useSelector, useDispatch } from "react-redux";
 // import { switchTheme } from "../redux/themeActions";
@@ -24,7 +25,20 @@ function ThemeScreen(props) {
 
 	return (
 		<Screen>
-			<StatusBar barStyle={theme.statusBarStyle} />
+			<AppText>Here are some ads for you</AppText>
+			<AppText>Feel free to watch some Ads :)</AppText>
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
+			<AdDisplay bannerSize="banner" />
 			<FlatList
 				columnWrapperStyle={{
 					justifyContent: "space-evenly",

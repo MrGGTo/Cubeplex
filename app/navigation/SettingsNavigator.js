@@ -54,7 +54,7 @@ const SettingsNavigator = () => {
 					},
 				}}
 			/>
-			<Stack.Screen
+			{/* <Stack.Screen
 				name={router.THEME}
 				component={ThemeScreen}
 				options={{
@@ -67,7 +67,7 @@ const SettingsNavigator = () => {
 						// fontWeight: "bold",
 					},
 				}}
-			/>
+			/> */}
 			<Stack.Screen
 				name={router.MANAGE_RECORDS}
 				component={ManageRecordsScreen}
