@@ -215,10 +215,10 @@ function RecordScreen({ navigation }) {
 					onRefresh={() => {
 						fetchRecord();
 					}}
-					onEndReached={() => {
-						handleLoadMore();
-					}}
-					onEndReachedThreshold={0}
+					// onEndReached={() => {
+					// 	handleLoadMore();
+					// }}
+					// onEndReachedThreshold={0}
 				/>
 			) : null}
 

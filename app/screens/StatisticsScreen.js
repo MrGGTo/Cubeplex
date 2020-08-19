@@ -16,6 +16,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import router from "../navigation/router";
 import { openOrCreateDatabase } from "../database/RecordDatabase";
 import { formatTime } from "../components/TimerDisplay";
+import AdDisplay from "../components/AdDisplay";
 
 const db = SQLite.openDatabase("db.db");
 
@@ -380,6 +381,7 @@ function StatisticsScreen({ navigation }) {
 					<View style={styles.line}></View>
 				</View>
 			</ScrollView>
+			<AdDisplay bannerSize="banner" />
 		</Screen>
 	);
 }

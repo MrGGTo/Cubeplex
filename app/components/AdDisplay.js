@@ -48,7 +48,9 @@ export const getBannerUnitID =
 		: "ca-app-pub-6427265675170344/5652257755";
 
 export const getRewardedUnitID =
-	Platform.OS === "android" ? "" : "ca-app-pub-6427265675170344/5360930942";
+	Platform.OS === "android"
+		? "ca-app-pub-6427265675170344/9207185927"
+		: "ca-app-pub-6427265675170344/5360930942";
 // admob
 // iOS Banner: ca-app-pub-6427265675170344/5652257755
 

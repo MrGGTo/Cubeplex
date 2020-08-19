@@ -129,40 +129,40 @@ function TimerScreen(props) {
 				transparent={true}
 				visible={settingsVisible}
 			>
-				<View style={{ backgroundColor: "#000000aa", flex: 1 }}>
-					<Modal
-						animationType="slide"
-						transparent={true}
-						visible={settingsVisible}
+				{/* <View style={{ backgroundColor: "#000000aa", flex: 1 }}> */}
+				<Modal
+					animationType="slide"
+					transparent={true}
+					visible={settingsVisible}
+				>
+					<View
+						style={{
+							backgroundColor: theme.backgroundSecondary,
+							flex: 1,
+							marginVertical: "45%",
+							marginHorizontal: "15%",
+							borderRadius: 15,
+							overflow: "hidden",
+						}}
 					>
-						<View
-							style={{
-								backgroundColor: theme.backgroundSecondary,
-								flex: 1,
-								marginVertical: "45%",
-								marginHorizontal: "15%",
-								borderRadius: 15,
-								overflow: "hidden",
-							}}
-						>
-							<View style={{ flexDirection: "row-reverse" }}>
-								<IconButton
-									name="close"
-									size={35}
-									onPress={() => setSettingsVisible(false)}
-									style={{ padding: 15 }}
-								/>
-							</View>
-							<TimerSettings
-								backgroundColor={theme.backgroundSecondary}
-								onPressClose={() => {
-									setSettingsVisible(false);
-									retrieveSettingsData();
-								}}
+						<View style={{ flexDirection: "row-reverse" }}>
+							<IconButton
+								name="close"
+								size={35}
+								onPress={() => setSettingsVisible(false)}
+								style={{ padding: 15 }}
 							/>
 						</View>
-					</Modal>
-				</View>
+						<TimerSettings
+							backgroundColor={theme.backgroundSecondary}
+							onPressClose={() => {
+								setSettingsVisible(false);
+								retrieveSettingsData();
+							}}
+						/>
+					</View>
+				</Modal>
+				{/* </View> */}
 			</Modal>
 		</Screen>
 	);

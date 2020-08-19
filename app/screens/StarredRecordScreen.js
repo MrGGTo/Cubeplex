@@ -10,6 +10,7 @@ import RecordItem from "../components/RecordItem";
 import RecordStarAction from "../components/RecordStarAction";
 import { formatTime } from "../components/TimerDisplay";
 import RecordDeleteAction from "../components/RecordDeleteAction";
+import AdDisplay from "../components/AdDisplay";
 
 const db = SQLite.openDatabase("db.db");
 
@@ -193,7 +194,7 @@ function StarredRecordScreen(props) {
 													onPress: () => {
 														db.transaction((tx) => {
 															tx.executeSql(
-																"DELETE FROM records WHERE id = ?",
+																"DELETE FROM recordsData WHERE id = ?",
 																[item.id],
 																(
 																	txObj,
@@ -231,6 +232,7 @@ function StarredRecordScreen(props) {
 					}}
 				/>
 			) : null}
+			<AdDisplay bannerSize="banner" />
 		</Screen>
 	);
 }

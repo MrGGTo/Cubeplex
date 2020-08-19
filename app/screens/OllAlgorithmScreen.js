@@ -52,54 +52,45 @@ function OllAlgorithmScreen({ navigation }) {
 					</TouchableOpacity>
 				</View>
 				<Modal
-					animationType="fade"
+					animationType="slide"
 					transparent={true}
 					visible={infoVisible}
 				>
-					<View style={{ backgroundColor: "#000000aa", flex: 1 }}>
-						<Modal
-							animationType="slide"
-							transparent={true}
-							visible={infoVisible}
-						>
-							<View
+					<View
+						style={{
+							backgroundColor: theme.backgroundSecondary,
+							flex: 1,
+							marginVertical: 75,
+							marginHorizontal: 50,
+							borderRadius: 15,
+						}}
+					>
+						<View style={{ flexDirection: "row-reverse" }}>
+							<IconButton
+								name="close"
+								size={35}
+								onPress={() => setInfoVisible(false)}
+								style={{ padding: 15 }}
+							/>
+						</View>
+						<ScrollView style={{ margin: 15 }}>
+							<AppText
 								style={{
-									backgroundColor: theme.backgroundSecondary,
-									flex: 1,
-									marginVertical: 75,
-									marginHorizontal: 50,
-									borderRadius: 15,
+									fontSize: 32,
+									fontWeight: "bold",
+									marginBottom: 10,
 								}}
 							>
-								<View style={{ flexDirection: "row-reverse" }}>
-									<IconButton
-										name="close"
-										size={35}
-										onPress={() => setInfoVisible(false)}
-										style={{ padding: 15 }}
-									/>
-								</View>
-								<ScrollView style={{ margin: 15 }}>
-									<AppText
-										style={{
-											fontSize: 32,
-											fontWeight: "bold",
-											marginBottom: 10,
-										}}
-									>
-										What is OLL?
-									</AppText>
-									<AppText>
-										OLL stands for Orient last layer, the
-										3rd step of advanced Fridrich (CFOP)
-										method. After solving F2L, the frist two
-										layer, we need to orient the last layer
-										(OLL). OLL can be done by the provided
-										algorithms.
-									</AppText>
-								</ScrollView>
-							</View>
-						</Modal>
+								What is OLL?
+							</AppText>
+							<AppText>
+								OLL stands for Orient last layer, the 3rd step
+								of advanced Fridrich (CFOP) method. After
+								solving F2L, the frist two layer, we need to
+								orient the last layer (OLL). OLL can be done by
+								the provided algorithms.
+							</AppText>
+						</ScrollView>
 					</View>
 				</Modal>
 				<View style={styles.caseContainer}>

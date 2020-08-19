@@ -40,14 +40,14 @@ function AlgorithmDetailsScreen({ route, navigation }) {
 						justifyContent: "space-between",
 					}}
 				>
-					<TouchableOpacity style={styles.pinButton}>
+					{/* <TouchableOpacity style={styles.pinButton}>
 						<MaterialCommunityIcons
 							name="pin"
 							color="white"
 							size={30}
 						/>
 						<AppText style={styles.pinText}>Pin</AppText>
-					</TouchableOpacity>
+					</TouchableOpacity> */}
 					<TouchableOpacity
 						onPress={() => {
 							navigation.navigate(
