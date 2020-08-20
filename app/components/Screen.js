@@ -10,7 +10,7 @@ function Screen({ children, style }) {
 			style={[
 				styles.screen,
 				style,
-				{ backgroundColor: theme.backgroundPrimary },
+				// { backgroundColor: theme.backgroundPrimary },
 			]}
 		>
 			<View style={[styles.view, style]}>{children}</View>
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
 	screen: {
 		paddingTop: Constants.statusBarHeight,
 		flex: 1,
+		backgroundColor: theme.backgroundPrimary,
 	},
 	view: {
 		flex: 1,

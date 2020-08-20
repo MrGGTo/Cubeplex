@@ -2,7 +2,7 @@
 	"expo": {
 		"name": "Cubeplex",
 		"slug": "Cubeplex",
-		"version": "1.0.0",
+		"version": "2.0.0",
 		"orientation": "portrait",
 		"icon": "./assets/icon.png",
 		"splash": {
@@ -16,14 +16,15 @@
 		"assetBundlePatterns": ["**/*"],
 		"ios": {
 			"supportsTablet": true,
+			"bundleIdentifier": "com.mrggto.cubeplex",
+			"buildNumber": "2.0.0",
 			"config": {
 				"googleMobileAdsAppId": "ca-app-pub-6427265675170344~9064248524"
 			}
 		},
 		"android": {
-			"config": {
-				"googleMobileAdsAppId": "ca-app-pub-6427265675170344~4502827614"
-			}
+			"package": "com.mrggto.cubeplex",
+			"versionCode": 2
 		},
 		"web": {
 			"favicon": "./assets/favicon.png"

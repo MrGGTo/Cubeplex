@@ -12,6 +12,8 @@ import thunk from "redux-thunk";
 import themeReducer from "./app/redux/themeReducer";
 import { themesData, loadTheme } from "./app/config/themes";
 
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
 const store = createStore(
 	combineReducers({ themeReducer }),
 	applyMiddleware(thunk)
@@ -19,11 +21,13 @@ const store = createStore(
 
 export default function App() {
 	return (
-		<Provider store={store}>
-			<NavigationContainer theme={navigationTheme}>
-				<AppNavigator />
-			</NavigationContainer>
-		</Provider>
+		<SafeAreaProvider>
+			<Provider store={store}>
+				<NavigationContainer theme={navigationTheme}>
+					<AppNavigator />
+				</NavigationContainer>
+			</Provider>
+		</SafeAreaProvider>
 	);
 }
 

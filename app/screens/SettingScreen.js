@@ -83,7 +83,7 @@ function SettingScreen({ navigation }) {
 		try {
 			await Share.share({
 				message:
-					"Cubeplex - Professional Speed Cube Timer. https://www.google.com",
+					"Cubeplex - Professional Speed Cube Timer. Check it out on Google Play and App Store",
 			});
 		} catch (error) {
 			alert(error.message);

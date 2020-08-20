@@ -37,6 +37,17 @@ export const theme = {
 	statusBarStyle: "light-content",
 };
 
+// export const theme = {
+//     id: 1,
+//     name: "Dodger Blue",
+//     color: "#53A2FF",
+//     backgroundPrimary: "#ffffff",
+//     backgroundSecondary: "#f0f0f0",
+//     fontPrimary: "#0f0f0f",
+//     fontSecondary: "#585858",
+//     statusBarStyle: "dark-content",
+// },
+
 // export const getSelectedTheme = () => {
 // 	const theme = useSelector((state) => state.themeReducer.theme);
 // 	return theme;
