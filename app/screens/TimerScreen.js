@@ -85,8 +85,9 @@ function TimerScreen(props) {
 				setScramble(createScramble);
 				// setInspection(valueObj.inspection);
 			} else {
-				storeSettingsData();
 				setScrambleLength(20);
+				setScramble(createScramble);
+				storeSettingsData();
 			}
 		} catch (error) {
 			// Error retrieving data

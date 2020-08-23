@@ -1,5 +1,13 @@
 import React from "react";
-import { View, StyleSheet, Text, FlatList, Button, Share } from "react-native";
+import {
+	View,
+	StyleSheet,
+	Text,
+	FlatList,
+	Button,
+	Share,
+	Platform,
+} from "react-native";
 import email from "react-native-email";
 
 import {
@@ -79,11 +87,15 @@ const settingsData = [
 ];
 
 function SettingScreen({ navigation }) {
+	// TODO Add App Store Link
 	const onShare = async () => {
 		try {
 			await Share.share({
 				message:
-					"Cubeplex - Professional Speed Cube Timer. Check it out on Google Play and App Store",
+					"Cubeplex - Professional Speed Cube Timer. Check it out on Google Play and App Store. " +
+					(Platform.OS === "android"
+						? "https://play.google.com/store/apps/details?id=com.mrggto.cubeplex"
+						: "https://play.google.com/store/apps/details?id=com.mrggto.cubeplex"),
 			});
 		} catch (error) {
 			alert(error.message);
@@ -150,20 +162,18 @@ function SettingScreen({ navigation }) {
 				}}
 			/>
 			<AdDisplay bannerSize="banner" />
-			{/* <View style={{ alignItems: "center" }}>
-				<AdMobBanner
-					bannerSize="banner"
-					adUnitID={
-						Platform.OS === "android"
-							? "ca-app-pub-6427265675170344/8250500935"
-							: "ca-app-pub-6427265675170344/5652257755"
-					}
-					servePersonalizedAds={false} // true or false
-					onDidFailToReceiveAdWithError={(value) => {
-						console.log("failed " + value);
-					}}
-				/>
-			</View> */}
+			{/* <AdMobBanner
+				bannerSize="LargeBanner"
+				adUnitID={
+					Platform.OS === "android"
+						? "ca-app-pub-6427265675170344/8250500935"
+						: "ca-app-pub-6427265675170344/5652257755"
+				}
+				servePersonalizedAds={false} // true or false
+				onDidFailToReceiveAdWithError={(value) => {
+					console.log("failed " + value);
+				}}
+			/> */}
 		</Screen>
 	);
 }

@@ -7,6 +7,7 @@ function AdDisplay({ bannerSize = "banner" }) {
 		<View style={styles.container}>
 			<AdMobBanner
 				bannerSize={bannerSize}
+				// bannerSize="320x50"
 				adUnitID={
 					Platform.OS === "android"
 						? "ca-app-pub-6427265675170344/8250500935"
