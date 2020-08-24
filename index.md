@@ -1,37 +1,29 @@
-## Welcome to GitHub Pages
+# Welcome to Cubeplex
 
-You can use the [editor on GitHub](https://github.com/MrGGTo/Cubeplex/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This is the supporting page for the mobile application **Cubeplex**.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### What is Cubeplex?
+Cubeplex is a Professional Speed Cube Timer, available on both Android and iOS platforms.
+Check it out now on:
+[Google Play](https://play.google.com/store/apps/details?id=com.mrggto.cubeplex)
+App Store (_coming soon_)
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### What features does Cubeplex have?
+**Easy to use with a clean, intuitive design**
+• Save, View and share your solves
+• Random-state scrambles
+• Improve your 3x3 times with the built-in Algorithm Trainer.
 
-```markdown
-Syntax highlighted code block
+**VIEW YOUR PROGRESS**
+Every solves with be saved and can be viewed, starred, share, or delete. You can view all your progress with the app's statistics.
 
-# Header 1
-## Header 2
-### Header 3
+**LEARN NEW ALGORITHMS**
+A full OLL and PLL algorithm reference, with multiple solutions to each case. Train your algorithms with the Algorithm Trainer to improve your 3x3 times.
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/MrGGTo/Cubeplex/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+**SIMPLE TIMER**
+The app is clean and super easy to use, install the app now to discover more.
 
 ### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Having trouble with Cubeplex? Email me at cubeplexfeedback@gmail.com for help and support.
