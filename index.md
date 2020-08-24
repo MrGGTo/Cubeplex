@@ -4,8 +4,11 @@ This is the supporting page for the mobile application **Cubeplex**.
 
 ### What is Cubeplex?
 Cubeplex is a Professional Speed Cube Timer, available on both Android and iOS platforms.
+
 Check it out now on:
+
 [Google Play](https://play.google.com/store/apps/details?id=com.mrggto.cubeplex)
+
 App Store (_coming soon_)
 
 
