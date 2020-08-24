@@ -3,13 +3,13 @@
 This is the supporting page for the mobile application **Cubeplex**.
 
 ### What is Cubeplex?
-Cubeplex is a Professional Speed Cube Timer, available on both Android and iOS platforms.
+Cubeplex is a Professional Speed Cube Timer, available on both Android and iOS platforms.   
 
-Check it out now on:
+Check it out now on:   
 
-[Google Play](https://play.google.com/store/apps/details?id=com.mrggto.cubeplex)
+[Google Play](https://play.google.com/store/apps/details?id=com.mrggto.cubeplex)    
 
-App Store (_coming soon_)
+App Store (_coming soon_).   
 
 
 ### What features does Cubeplex have?
@@ -30,3 +30,6 @@ The app is clean and super easy to use, install the app now to discover more.
 ### Support or Contact
 
 Having trouble with Cubeplex? Email me at cubeplexfeedback@gmail.com for help and support.
+
+### Privacy Policy 
+To learn the privacy policy of Cubeplex, [Click Here](https://cubeplex.flycricket.io/privacy.html).
