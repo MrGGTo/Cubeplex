@@ -1,5 +1,3 @@
-![Icon](Cubeplex-icon.png)
-
 # Welcome to Cubeplex
 
 This is the supporting page for the mobile application **Cubeplex**.
