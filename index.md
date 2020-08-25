@@ -1,4 +1,4 @@
-[Icon](Cubeplex-icon.png)
+![Icon](Cubeplex-icon.png)
 
 # Welcome to Cubeplex
 
