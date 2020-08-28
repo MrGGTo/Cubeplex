@@ -34,7 +34,8 @@
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "expo-ads-admob": "~8.2.1"
+    "expo-ads-admob": "~8.2.1",
+    "expo-store-review": "~2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

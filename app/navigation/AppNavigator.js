@@ -23,6 +23,9 @@ const AppNavigator = () => {
 				activeTintColor: theme.color,
 				activeBackgroundColor: theme.backgroundSecondary,
 				inactiveBackgroundColor: theme.backgroundPrimary,
+				labelStyle: {
+					fontWeight: "600",
+				},
 			}}
 		>
 			<Tab.Screen

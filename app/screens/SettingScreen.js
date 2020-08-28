@@ -9,18 +9,9 @@ import {
 	Platform,
 } from "react-native";
 import email from "react-native-email";
-
-import {
-	AdMobBanner,
-	AdMobInterstitial,
-	PublisherBanner,
-	AdMobRewarded,
-	setTestDeviceIDAsync,
-} from "expo-ads-admob";
+import * as StoreReview from "expo-store-review";
 
 import Screen from "../components/Screen";
-import SettingsItemList from "../components/SettingsItemList";
-import { ScrollView } from "react-native-gesture-handler";
 import AppText from "../components/AppText";
 import SettingsItem from "../components/SettingsItem";
 import { theme } from "../config/themes";
@@ -66,16 +57,17 @@ const settingsData = [
 		backgroundColor: "orange",
 		// navigate: router.THEME,
 		elseAction: "Feedback",
+		// separate: true,
+	},
+	{
+		id: 6,
+		title: "Rate Us",
+		iconName: "heart",
+		backgroundColor: "#FF5B83",
+		// navigate: router.THEME,
+		elseAction: "Rate",
 		separate: true,
 	},
-	// {
-	// 	id: 6,
-	// 	title: "Support Us",
-	// 	iconName: "heart",
-	// 	backgroundColor: "#FF5B83",
-	// 	navigate: router.THEME,
-	// 	separate: true,
-	// },
 	{
 		id: 7,
 		title: "Manage Records",
@@ -95,7 +87,7 @@ function SettingScreen({ navigation }) {
 					"Cubeplex - Professional Speed Cube Timer. Check it out on Google Play and App Store. " +
 					(Platform.OS === "android"
 						? "https://play.google.com/store/apps/details?id=com.mrggto.cubeplex"
-						: "https://play.google.com/store/apps/details?id=com.mrggto.cubeplex"),
+						: "https://apps.apple.com/us/app/id1528934901"),
 			});
 		} catch (error) {
 			alert(error.message);
@@ -140,6 +132,11 @@ function SettingScreen({ navigation }) {
 										alert("all");
 										break;
 
+									case "Rate":
+										// alert("all");
+										StoreReview.requestReview();
+										break;
+
 									default:
 										break;
 								}
@@ -162,18 +159,6 @@ function SettingScreen({ navigation }) {
 				}}
 			/>
 			<AdDisplay bannerSize="banner" />
-			{/* <AdMobBanner
-				bannerSize="LargeBanner"
-				adUnitID={
-					Platform.OS === "android"
-						? "ca-app-pub-6427265675170344/8250500935"
-						: "ca-app-pub-6427265675170344/5652257755"
-				}
-				servePersonalizedAds={false} // true or false
-				onDidFailToReceiveAdWithError={(value) => {
-					console.log("failed " + value);
-				}}
-			/> */}
 		</Screen>
 	);
 }

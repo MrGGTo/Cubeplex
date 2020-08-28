@@ -10,6 +10,7 @@ import {
 	openOrCreateDatabase,
 	deleteRecords,
 } from "../database/RecordDatabase";
+import AdDisplay from "../components/AdDisplay";
 
 const settingsData = [
 	{
@@ -22,27 +23,6 @@ const settingsData = [
 		navigate: null,
 		delete: "timer",
 	},
-	// {
-	// 	id: 2,
-	// 	title: "Delete Algorithm Training Records",
-	// 	backgroundColor: "red",
-	// 	iconName: "timer-sand",
-	// 	noChevron: true,
-	// 	titleColor: "red",
-	// 	navigate: null,
-	// 	delete: "training",
-	// 	separate: true,
-	// },
-	// {
-	// 	id: 3,
-	// 	title: "Delete All Records",
-	// 	backgroundColor: "red",
-	// 	iconName: "trash-can",
-	// 	noChevron: true,
-	// 	titleColor: "red",
-	// 	navigate: null,
-	// 	delete: "all",
-	// },
 ];
 
 const db = SQLite.openDatabase("db.db");
@@ -52,24 +32,6 @@ function ManageRecordsScreen(props) {
 	useEffect(() => {
 		openOrCreateDatabase();
 	}, []);
-
-	// deleteTimerRecord = () => {
-	// 	db.transaction((tx) => {
-	// 		tx.executeSql(
-	// 			"DELETE FROM records WHERE id != -1",
-	// 			null,
-	// 			// success
-	// 			(txObj, { rows: { _array } }) => {
-	// 				alert("Deleted Timer Records");
-	// 				console.log("Deleted Timer Records");
-	// 			},
-	// 			// failed
-	// 			(txObj, error) => {
-	// 				console.log("Delete Timer failed");
-	// 			}
-	// 		);
-	// 	});
-	// };
 
 	return (
 		<Screen style={styles.container}>
@@ -122,6 +84,7 @@ function ManageRecordsScreen(props) {
 					);
 				}}
 			/>
+			<AdDisplay bannerSize="banner" />
 		</Screen>
 	);
 }

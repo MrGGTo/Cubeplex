@@ -41,6 +41,23 @@ const getRewardedAd = async () => {
 				);
 			});
 		});
+		AdMobRewarded.addEventListener("rewardedVideoDidFailToLoad", () => {
+			db.transaction((tx) => {
+				tx.executeSql(
+					"DELETE FROM recordsData WHERE id != -1",
+					null,
+					// success
+					(txObj, { rows: { _array } }) => {
+						alert("Deleted Timer Records");
+						console.log("Deleted Timer Records");
+					},
+					// failed
+					(txObj, error) => {
+						console.log("Delete Timer failed");
+					}
+				);
+			});
+		});
 	} catch (error) {
 		console.log(error);
 	}

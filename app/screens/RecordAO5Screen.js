@@ -25,7 +25,14 @@ function RecordAO5Screen({ route, navigation }) {
 	const onShare = async () => {
 		try {
 			await Share.share({
-				message: "I got an Ao5 of " + record.ao5 + " on Cubeplex.",
+				message:
+					"I got an Ao5 of " +
+					record.ao5 +
+					" on Cubeplex. " +
+					"\nCubeplex - Professional Speed Cube Timer. Check it out on Google Play and App Store. " +
+					(Platform.OS === "android"
+						? "https://play.google.com/store/apps/details?id=com.mrggto.cubeplex"
+						: "https://apps.apple.com/us/app/id1528934901"),
 			});
 		} catch (error) {
 			alert(error.message);
