@@ -6,9 +6,12 @@ import {
 	TouchableOpacity,
 	Button,
 	TouchableHighlight,
+	Dimensions,
 } from "react-native";
 import moment, { duration } from "moment";
 import AppText from "./AppText";
+
+const { width, height } = Dimensions.get("window");
 
 function TimerDisplay({
 	interval,
@@ -43,40 +46,46 @@ function TimerDisplay({
 			style={[styles.container, style]}
 			// underlayColor="red"
 		>
-			{ready && (
-				<View>
-					<AppText style={styles.ready}>Ready</AppText>
-				</View>
-			)}
-			{!ready && (
-				<View style={styles.timerContainer}>
-					{duration.minutes() > 0 && (
+			<View>
+				{ready && (
+					<View>
+						<AppText style={styles.ready}>Ready</AppText>
+					</View>
+				)}
+				{!ready && (
+					<View style={styles.timerContainer}>
+						{duration.minutes() > 0 && (
+							<View style={styles.textContainer}>
+								<AppText style={styles.text2}>
+									{duration.minutes()}
+								</AppText>
+								<AppText style={styles.dots}>:</AppText>
+							</View>
+						)}
 						<View style={styles.textContainer}>
 							<AppText style={styles.text2}>
-								{duration.minutes()}
+								{pad2(duration.seconds())}
 							</AppText>
-							<AppText style={styles.dots}>:</AppText>
 						</View>
-					)}
-					<View style={styles.textContainer}>
-						<AppText style={styles.text2}>
-							{pad2(duration.seconds())}
+						<AppText style={styles.dots}>.</AppText>
+						<AppText style={styles.text3}>
+							{pad3(duration.milliseconds())}
 						</AppText>
 					</View>
-					<AppText style={styles.dots}>.</AppText>
-					<AppText style={styles.text3}>
-						{pad3(duration.milliseconds())}
-					</AppText>
-				</View>
-			)}
+				)}
+			</View>
 		</TouchableOpacity>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 125,
+		// padding: 125,
 		// backgroundColor: "dodgerblue",
+		width: width,
+		height: height,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	timerContainer: {
 		flexDirection: "row",

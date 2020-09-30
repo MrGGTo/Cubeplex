@@ -34,65 +34,13 @@ import AlgorithmStarAction from "../components/AlgorithmStarAction";
 import AdDisplay from "../components/AdDisplay";
 
 function OllAlgorithmScreen({ navigation }) {
-	const [infoVisible, setInfoVisible] = useState("false");
 	return (
 		<Screen>
 			<ScrollView>
 				<View style={styles.header}>
 					<AppText style={styles.title}>OLL Algorithms</AppText>
-					<TouchableOpacity onPress={() => setInfoVisible(true)}>
-						<AppText
-							style={{
-								color: theme.color,
-								fontSize: 18,
-							}}
-						>
-							Info
-						</AppText>
-					</TouchableOpacity>
 				</View>
-				<Modal
-					animationType="slide"
-					transparent={true}
-					visible={infoVisible}
-				>
-					<View
-						style={{
-							backgroundColor: theme.backgroundSecondary,
-							flex: 1,
-							marginVertical: 75,
-							marginHorizontal: 50,
-							borderRadius: 15,
-						}}
-					>
-						<View style={{ flexDirection: "row-reverse" }}>
-							<IconButton
-								name="close"
-								size={35}
-								onPress={() => setInfoVisible(false)}
-								style={{ padding: 15 }}
-							/>
-						</View>
-						<ScrollView style={{ margin: 15 }}>
-							<AppText
-								style={{
-									fontSize: 32,
-									fontWeight: "bold",
-									marginBottom: 10,
-								}}
-							>
-								What is OLL?
-							</AppText>
-							<AppText>
-								OLL stands for Orient last layer, the 3rd step
-								of advanced Fridrich (CFOP) method. After
-								solving F2L, the frist two layer, we need to
-								orient the last layer (OLL). OLL can be done by
-								the provided algorithms.
-							</AppText>
-						</ScrollView>
-					</View>
-				</Modal>
+
 				<View style={styles.caseContainer}>
 					<AppText style={styles.caseText}>Dot Case</AppText>
 					{DotCase.map((item) => (

@@ -7,5 +7,7 @@ export default {
 		...DefaultTheme.colors,
 		primary: theme.color,
 		background: theme.backgroundPrimary,
+		card: theme.backgroundPrimary,
+		border: "#000",
 	},
 };

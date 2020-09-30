@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-	View,
-	StyleSheet,
-	Modal,
-	Switch,
-	Image,
-	Button,
-	AsyncStorage,
-	StatusBar,
-} from "react-native";
+import { View, StyleSheet, Modal, AsyncStorage, StatusBar } from "react-native";
 
 import scrambleRotations from "../data/scrambleRotations";
 import Screen from "../components/Screen";
-import Scramble from "../components/Scramble";
 import IconButton from "../components/IconButton";
 import Timer from "../components/Timer";
 import AppText from "../components/AppText";
 import { theme } from "../config/themes";
 import { useDispatch } from "react-redux";
-import { switchTheme } from "../redux/themeActions";
 import TimerSettings from "../components/TimerSettings";
-import { useFocusEffect } from "@react-navigation/native";
 
 function TimerScreen(props) {
 	const [settingsVisible, setSettingsVisible] = useState(false);
@@ -125,46 +113,37 @@ function TimerScreen(props) {
 			<View style={styles.timerContainer}>
 				<Timer onPressStop={onPressStop} scramble={scramble} />
 			</View>
-
 			<Modal
-				animationType="fade"
+				animationType="slide"
 				transparent={true}
 				visible={settingsVisible}
 			>
-				{/* <View style={{ backgroundColor: "#000000aa", flex: 1 }}> */}
-				<Modal
-					animationType="slide"
-					transparent={true}
-					visible={settingsVisible}
+				<View
+					style={{
+						backgroundColor: theme.backgroundSecondary,
+						flex: 1,
+						marginVertical: "45%",
+						marginHorizontal: "15%",
+						borderRadius: 15,
+						overflow: "hidden",
+					}}
 				>
-					<View
-						style={{
-							backgroundColor: theme.backgroundSecondary,
-							flex: 1,
-							marginVertical: "45%",
-							marginHorizontal: "15%",
-							borderRadius: 15,
-							overflow: "hidden",
-						}}
-					>
-						<View style={{ flexDirection: "row-reverse" }}>
-							<IconButton
-								name="close"
-								size={35}
-								onPress={() => setSettingsVisible(false)}
-								style={{ padding: 15 }}
-							/>
-						</View>
-						<TimerSettings
-							backgroundColor={theme.backgroundSecondary}
-							onPressClose={() => {
-								setSettingsVisible(false);
-								retrieveSettingsData();
-							}}
+					<View style={{ flexDirection: "row-reverse" }}>
+						<IconButton
+							name="close"
+							size={35}
+							onPress={() => setSettingsVisible(false)}
+							style={{ padding: 15 }}
 						/>
 					</View>
-				</Modal>
-				{/* </View> */}
+					<TimerSettings
+						backgroundColor={theme.backgroundSecondary}
+						onPressClose={() => {
+							setSettingsVisible(false);
+							retrieveSettingsData();
+						}}
+					/>
+				</View>
 			</Modal>
 		</Screen>
 	);
@@ -185,6 +164,7 @@ const styles = StyleSheet.create({
 		fontSize: 100,
 		padding: 75,
 		paddingVertical: 125,
+		// backgroundColor: "red",
 	},
 	scramble: {
 		position: "absolute",

@@ -17,6 +17,7 @@ import router from "../navigation/router";
 import { openOrCreateDatabase } from "../database/RecordDatabase";
 import { formatTime } from "../components/TimerDisplay";
 import AdDisplay from "../components/AdDisplay";
+import DountChart from "../components/DountChart";
 
 const db = SQLite.openDatabase("db.db");
 
@@ -378,8 +379,10 @@ function StatisticsScreen({ navigation }) {
 							color={theme.fontSecondary}
 						/>
 					</TouchableOpacity>
-					<View style={styles.line}></View>
 				</View>
+				{/* <View>
+					<DountChart percentage="50" max="100" extraText="%" />
+				</View> */}
 			</ScrollView>
 			<AdDisplay bannerSize="banner" />
 		</Screen>

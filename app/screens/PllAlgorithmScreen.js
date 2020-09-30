@@ -23,66 +23,12 @@ import router from "../navigation/router";
 import AdDisplay from "../components/AdDisplay";
 
 function PllAlgorithmScreen({ navigation }) {
-	const [infoVisible, setInfoVisible] = useState("false");
 	return (
 		<Screen>
 			<ScrollView>
 				<View style={styles.header}>
 					<AppText style={styles.title}>PLL Algorithms</AppText>
-					<TouchableOpacity onPress={() => setInfoVisible(true)}>
-						<AppText
-							style={{
-								color: theme.color,
-								fontSize: 18,
-							}}
-						>
-							Info
-						</AppText>
-					</TouchableOpacity>
 				</View>
-				<Modal
-					animationType="slide"
-					transparent={true}
-					visible={infoVisible}
-				>
-					<View
-						style={{
-							backgroundColor: theme.backgroundSecondary,
-							flex: 1,
-							marginVertical: 75,
-							marginHorizontal: 50,
-							borderRadius: 15,
-						}}
-					>
-						<View style={{ flexDirection: "row-reverse" }}>
-							<IconButton
-								name="close"
-								size={35}
-								onPress={() => setInfoVisible(false)}
-								style={{ padding: 15 }}
-							/>
-						</View>
-						<ScrollView style={{ margin: 15 }}>
-							<AppText
-								style={{
-									fontSize: 32,
-									fontWeight: "bold",
-									marginBottom: 10,
-								}}
-							>
-								What is PLL?
-							</AppText>
-							<AppText>
-								PLL stands for permutate the last layer, the 4th
-								step of advanced Fridrich (CFOP) method. After
-								solving OLL, we need to permutate the last layer
-								(PLL). PLL can be done by the provided
-								algorithms.
-							</AppText>
-						</ScrollView>
-					</View>
-				</Modal>
-
 				{plls.map((item) => (
 					<AlgorithmItem
 						key={item.id}

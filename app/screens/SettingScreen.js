@@ -26,16 +26,8 @@ const settingsData = [
 		backgroundColor: "#FFE60A",
 		navigate: router.STARRED_RECORDS,
 	},
-	// {
-	// 	id: 2,
-	// 	title: "Pinned Algorithms",
-	// 	iconName: "pin",
-	// 	backgroundColor: "#299B50",
-	// 	navigate: router.THEME,
-	// 	separate: true,
-	// },
 	{
-		id: 3,
+		id: 2,
 		title: "Timer Settings",
 		iconName: "settings",
 		backgroundColor: "#6f6f6f",
@@ -43,7 +35,7 @@ const settingsData = [
 		separate: true,
 	},
 	{
-		id: 4,
+		id: 3,
 		title: "Tell Friends About Cubeplex",
 		iconName: "thumb-up",
 		backgroundColor: "dodgerblue",
@@ -51,7 +43,7 @@ const settingsData = [
 		elseAction: "Share",
 	},
 	{
-		id: 5,
+		id: 4,
 		title: "Send Feedback",
 		iconName: "message-text",
 		backgroundColor: "orange",
@@ -60,7 +52,7 @@ const settingsData = [
 		// separate: true,
 	},
 	{
-		id: 6,
+		id: 5,
 		title: "Rate Us",
 		iconName: "heart",
 		backgroundColor: "#FF5B83",
@@ -69,7 +61,7 @@ const settingsData = [
 		separate: true,
 	},
 	{
-		id: 7,
+		id: 6,
 		title: "Manage Records",
 		backgroundColor: "teal",
 		iconName: "pencil",

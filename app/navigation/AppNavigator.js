@@ -22,6 +22,7 @@ const AppNavigator = () => {
 			tabBarOptions={{
 				activeTintColor: theme.color,
 				activeBackgroundColor: theme.backgroundSecondary,
+				inactiveTintColor: theme.fontSecondary,
 				inactiveBackgroundColor: theme.backgroundPrimary,
 				labelStyle: {
 					fontWeight: "600",

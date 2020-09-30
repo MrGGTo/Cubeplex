@@ -156,12 +156,12 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		// paddingTop: 130,
 		// paddingHorizontal: 20,
+		// backgroundColor: "dodgerblue",
 	},
 	timer: {
 		fontSize: 65,
 		fontWeight: "200",
 		width: 100,
-		backgroundColor: "dodgerblue",
 	},
 	button: {
 		width: 80,
