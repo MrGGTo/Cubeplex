@@ -63,6 +63,40 @@ const getRewardedAd = async () => {
 	}
 };
 
+export const deleteLastRecord = () => {
+	Alert.alert(
+		"Delete last solve",
+		"Tap delete to confirm",
+		[
+			{
+				text: "Cancel",
+				style: "cancel",
+			},
+			{
+				text: "Delete",
+				onPress: () => {
+					db.transaction((tx) => {
+						tx.executeSql(
+							"DELETE FROM recordsData WHERE id = (SELECT MAX(id)  FROM recordsData)",
+							null,
+							// success
+							(txObj, { rows: { _array } }) => {
+								alert("Deleted");
+								console.log("Deleted Last Timer Records");
+							},
+							// failed
+							(txObj, error) => {
+								console.log("Delete Last Timer failed");
+							}
+						);
+					});
+				},
+			},
+		],
+		{ cancelable: false }
+	);
+};
+
 export const deleteRecords = () => {
 	Alert.alert(
 		"Delete Timer Records",

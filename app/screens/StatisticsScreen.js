@@ -18,6 +18,7 @@ import { openOrCreateDatabase } from "../database/RecordDatabase";
 import { formatTime } from "../components/TimerDisplay";
 import AdDisplay from "../components/AdDisplay";
 import DountChart from "../components/DountChart";
+import { fontSize } from "../config/sizes";
 
 const db = SQLite.openDatabase("db.db");
 
@@ -397,7 +398,7 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 	title: {
-		fontSize: 35,
+		fontSize: fontSize.header,
 		margin: 20,
 		fontWeight: "700",
 		flex: 1,
