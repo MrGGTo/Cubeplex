@@ -10,6 +10,10 @@ const db = SQLite.openDatabase("db.db");
 import { openOrCreateDatabase } from "../database/RecordDatabase";
 
 export default class Timer extends Component {
+	state = {
+		isPress: false,
+	};
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -105,6 +109,19 @@ export default class Timer extends Component {
 		});
 	};
 
+	onStartPressIn = () => {
+		alert("in");
+	};
+
+	touchProps = {
+		// activeOpacity: 1,
+		// underlayColor: "blue", // <-- "backgroundColor" will be always overwritten by "underlayColor"
+		style: this.state.isPress ? styles.green : styles.btnNormal, // <-- but you can still apply other style changes
+		onHideUnderlay: () => this.setState({ isPress: false }),
+		onShowUnderlay: () => this.setState({ isPress: true }),
+		// onPress: () => console.log("HELLO"), // <-- "onPress" is apparently required
+	};
+
 	render() {
 		const { now, start, laps } = this.state;
 		const timer = now - start;
@@ -116,6 +133,7 @@ export default class Timer extends Component {
 							laps.reduce((total, curr) => total + curr, 0) +
 							timer
 						}
+						// onPressIn={this.onStartPressIn}
 						onPressOut={this.start}
 						ready
 					/>
@@ -130,7 +148,7 @@ export default class Timer extends Component {
 							this.stop();
 							this.props.onPressStop();
 						}}
-						style={{ padding: 250 }}
+						// style={{ padding: 250 }}
 					/>
 				)}
 				{laps.length > 0 && start === 0 && (
@@ -143,6 +161,7 @@ export default class Timer extends Component {
 							this.start();
 							// this.props.onPressStop();
 						}}
+						// onPressIn={this.onStartPressIn}
 					/>
 				)}
 			</View>
