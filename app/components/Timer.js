@@ -171,28 +171,7 @@ export default class Timer extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		// flex: 1,
 		alignItems: "center",
-		// paddingTop: 130,
-		// paddingHorizontal: 20,
 		// backgroundColor: "dodgerblue",
-	},
-	timer: {
-		fontSize: 65,
-		fontWeight: "200",
-		width: 100,
-	},
-	button: {
-		width: 80,
-		height: 80,
-		borderRadius: 40,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	buttonTitle: {
-		fontSize: 18,
-	},
-	timerContainer: {
-		flexDirection: "row",
 	},
 });

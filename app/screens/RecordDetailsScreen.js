@@ -6,6 +6,7 @@ import { MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
 import Screen from "../components/Screen";
 import AppText from "../components/AppText";
 import { formatTime } from "../components/TimerDisplay";
+import { fontSize, spacing } from "../config/sizes";
 import { theme } from "../config/themes";
 
 function RecordDetailsScreen({
@@ -64,22 +65,22 @@ function RecordDetailsScreen({
 
 const styles = StyleSheet.create({
 	detailsContainer: {
-		marginVertical: 25,
-		padding: 20,
+		marginVertical: spacing.l,
+		padding: spacing.m,
 		backgroundColor: theme.backgroundSecondary,
 	},
 	text: {
-		marginVertical: 10,
+		marginVertical: spacing.s,
 	},
 	time: {
-		fontSize: 46,
-		fontWeight: "500",
+		fontSize: fontSize.xxl,
+		fontWeight: "600",
 	},
 	scramble: {
-		fontSize: 16,
+		fontSize: fontSize.m,
 	},
 	dateTime: {
-		fontSize: 16,
+		fontSize: fontSize.m,
 	},
 	button: {
 		backgroundColor: "dodgerblue",
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
 		// bottom: 0,
 	},
 	buttonText: {
-		fontSize: 20,
+		fontSize: fontSize.l,
 	},
 });
 

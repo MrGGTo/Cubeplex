@@ -32,6 +32,7 @@ import IconButton from "../components/IconButton";
 import router from "../navigation/router";
 import AlgorithmStarAction from "../components/AlgorithmStarAction";
 import AdDisplay from "../components/AdDisplay";
+import { fontSize, spacing } from "../config/sizes";
 
 function OllAlgorithmScreen({ navigation }) {
 	return (
@@ -346,47 +347,23 @@ function OllAlgorithmScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		alignItems: "center",
-		flexDirection: "row",
-		padding: 15,
-		backgroundColor: "white",
-		borderWidth: 1,
-		margin: 10,
-		borderRadius: 15,
-	},
 	title: {
-		fontSize: 35,
+		fontSize: fontSize.header,
 		fontWeight: "700",
 		flex: 1,
 	},
 	header: {
 		flexDirection: "row",
-		marginTop: 15,
-		marginHorizontal: 15,
+		marginTop: spacing.m,
+		marginHorizontal: spacing.m,
 		alignItems: "center",
 	},
-	info: {
-		// color: selectedTheme.color,
-		fontSize: 18,
-	},
-	detailContainer: {
-		flexDirection: "column",
-		marginLeft: 15,
-		justifyContent: "center",
-		flex: 1,
-	},
-	image: {
-		width: 75,
-		height: 75,
-		// borderRadius: 35,
-	},
 	caseContainer: {
-		marginVertical: 25,
+		marginVertical: spacing.l,
 	},
 	caseText: {
-		fontSize: 35,
-		marginLeft: 15,
+		fontSize: fontSize.xl,
+		marginLeft: spacing.m,
 	},
 });
 

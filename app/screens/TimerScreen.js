@@ -10,6 +10,7 @@ import {
 import GestureRecognizer, {
 	swipeDirections,
 } from "react-native-swipe-gestures";
+import { useKeepAwake } from "expo-keep-awake";
 
 import scrambleRotations from "../data/scrambleRotations";
 import { deleteLastRecord } from "../database/RecordDatabase";
@@ -18,10 +19,13 @@ import IconButton from "../components/IconButton";
 import Timer from "../components/Timer";
 import AppText from "../components/AppText";
 import { theme } from "../config/themes";
+import { fontSize, spacing } from "../config/sizes";
 import { useDispatch } from "react-redux";
 import TimerSettings from "../components/TimerSettings";
+import GestureHelpScreen from "./GestureHelpScreen";
 
 function TimerScreen(props) {
+	const [gestureVisible, setGestureVisible] = useState(false);
 	const [settingsVisible, setSettingsVisible] = useState(false);
 	const [scrambleLength, setScrambleLength] = useState(20);
 	const [scramble, setScramble] = useState(createScramble);
@@ -58,6 +62,7 @@ function TimerScreen(props) {
 	useEffect(() => {
 		retrieveSettingsData();
 	}, []);
+	useKeepAwake();
 
 	const storeSettingsData = async () => {
 		try {
@@ -137,29 +142,69 @@ function TimerScreen(props) {
 		>
 			<Screen style={styles.container}>
 				<StatusBar barStyle={theme.statusBarStyle} />
-
-				<AppText style={styles.appName}>Cubeplex</AppText>
-				<IconButton
-					style={styles.settingsContainer}
-					onPress={() => setSettingsVisible(true)}
-					name="settings"
-					size={27}
-					color="black"
-				/>
+				<View style={styles.topBar}>
+					<IconButton
+						// style={styles.settingsContainer}
+						onPress={() => setGestureVisible(true)}
+						name="gesture"
+						size={27}
+						color="black"
+					/>
+					<AppText style={styles.appName}>Cubeplex</AppText>
+					<IconButton
+						// style={styles.settingsContainer}
+						onPress={() => setSettingsVisible(true)}
+						name="settings"
+						size={27}
+						color="black"
+					/>
+				</View>
 				<View style={styles.scramble}>
 					<AppText style={{ fontSize: 20 }}>{scramble}</AppText>
-					<IconButton
-						name="reload"
-						size={24}
-						style={{ paddingHorizontal: 5 }}
-						onPress={() => {
-							retrieveSettingsData();
-						}}
-					/>
 				</View>
 				<View style={styles.timerContainer}>
 					<Timer onPressStop={onPressStop} scramble={scramble} />
 				</View>
+				<Modal
+					animationType="slide"
+					transparent={true}
+					visible={gestureVisible}
+				>
+					<View
+						style={{
+							backgroundColor: theme.backgroundSecondary,
+							flex: 1,
+							marginVertical: "45%",
+							marginHorizontal: "15%",
+							borderRadius: 15,
+							overflow: "hidden",
+						}}
+					>
+						<View
+							style={{
+								flexDirection: "row-reverse",
+								alignItems: "center",
+								// justifyContent: "center",
+							}}
+						>
+							<IconButton
+								name="close"
+								size={35}
+								onPress={() => setGestureVisible(false)}
+								style={{ padding: spacing.s }}
+							/>
+							<AppText
+								style={{
+									fontWeight: "700",
+									fontSize: fontSize.m,
+								}}
+							>
+								Gestures Help
+							</AppText>
+						</View>
+						<GestureHelpScreen />
+					</View>
+				</Modal>
 				<Modal
 					animationType="slide"
 					transparent={true}
@@ -175,13 +220,27 @@ function TimerScreen(props) {
 							overflow: "hidden",
 						}}
 					>
-						<View style={{ flexDirection: "row-reverse" }}>
+						<View
+							style={{
+								flexDirection: "row-reverse",
+								alignItems: "center",
+								// justifyContent: "center",
+							}}
+						>
 							<IconButton
 								name="close"
 								size={35}
 								onPress={() => setSettingsVisible(false)}
-								style={{ padding: 15 }}
+								style={{ padding: spacing.s }}
 							/>
+							<AppText
+								style={{
+									fontWeight: "700",
+									fontSize: fontSize.m,
+								}}
+							>
+								Settings
+							</AppText>
 						</View>
 						<TimerSettings
 							backgroundColor={theme.backgroundSecondary}
@@ -198,42 +257,29 @@ function TimerScreen(props) {
 }
 
 const styles = StyleSheet.create({
+	topBar: {
+		marginVertical: spacing.l,
+		marginHorizontal: spacing.l,
+		flexDirection: "row",
+		justifyContent: "space-around",
+		width: "100%",
+	},
 	appName: {
-		position: "absolute",
-		top: 25,
-		fontSize: 25,
+		fontSize: fontSize.xl,
 	},
 	container: {
 		alignItems: "center",
-		justifyContent: "center",
 		width: "100%",
 	},
-	timer: {
-		fontSize: 100,
-		padding: 75,
-		paddingVertical: 125,
-		// backgroundColor: "red",
-	},
 	scramble: {
-		position: "absolute",
 		flexDirection: "row",
-		top: 75,
-		padding: 50,
+		marginHorizontal: spacing.l,
+		marginVertical: spacing.l,
 	},
-	settingsContainer: {
-		position: "absolute",
-		top: 15,
-		right: 15,
-		flexDirection: "row-reverse",
-	},
-	startLButton: {
-		borderRadius: 125 / 2,
-		width: 125,
-		height: 125,
-		backgroundColor: "dodgerblue",
-		position: "absolute",
-		left: 25,
-		bottom: 125,
+	timerContainer: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 });
 

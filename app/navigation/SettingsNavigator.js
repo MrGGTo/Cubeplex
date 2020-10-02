@@ -9,6 +9,7 @@ import router from "./router";
 import ManageRecordsScreen from "../screens/ManageRecordsScreen";
 import StarredRecordScreen from "../screens/StarredRecordScreen";
 import TimerSettings from "../components/TimerSettings";
+import GestureHelpScreen from "../screens/GestureHelpScreen";
 
 const Stack = createStackNavigator();
 
@@ -54,9 +55,9 @@ const SettingsNavigator = () => {
 					},
 				}}
 			/>
-			{/* <Stack.Screen
-				name={router.THEME}
-				component={ThemeScreen}
+			<Stack.Screen
+				name={router.GESTURE_HELP}
+				component={GestureHelpScreen}
 				options={{
 					headerStyle: {
 						backgroundColor: theme.backgroundSecondary,
@@ -67,7 +68,7 @@ const SettingsNavigator = () => {
 						// fontWeight: "bold",
 					},
 				}}
-			/> */}
+			/>
 			<Stack.Screen
 				name={router.MANAGE_RECORDS}
 				component={ManageRecordsScreen}

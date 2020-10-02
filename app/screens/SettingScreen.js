@@ -17,6 +17,7 @@ import SettingsItem from "../components/SettingsItem";
 import { theme } from "../config/themes";
 import router from "../navigation/router";
 import AdDisplay, { getBannerUnitID } from "../components/AdDisplay";
+import { spacing, fontSize } from "../config/sizes";
 
 const settingsData = [
 	{
@@ -32,10 +33,17 @@ const settingsData = [
 		iconName: "settings",
 		backgroundColor: "#6f6f6f",
 		navigate: router.TIMER_SETTINGS,
-		separate: true,
 	},
 	{
 		id: 3,
+		title: "Gesture Help",
+		iconName: "gesture",
+		backgroundColor: "tomato",
+		navigate: router.GESTURE_HELP,
+		separate: true,
+	},
+	{
+		id: 4,
 		title: "Tell Friends About Cubeplex",
 		iconName: "thumb-up",
 		backgroundColor: "dodgerblue",
@@ -43,7 +51,7 @@ const settingsData = [
 		elseAction: "Share",
 	},
 	{
-		id: 4,
+		id: 5,
 		title: "Send Feedback",
 		iconName: "message-text",
 		backgroundColor: "orange",
@@ -52,7 +60,7 @@ const settingsData = [
 		// separate: true,
 	},
 	{
-		id: 5,
+		id: 6,
 		title: "Rate Us",
 		iconName: "heart",
 		backgroundColor: "#FF5B83",
@@ -61,7 +69,7 @@ const settingsData = [
 		separate: true,
 	},
 	{
-		id: 6,
+		id: 7,
 		title: "Manage Records",
 		backgroundColor: "teal",
 		iconName: "pencil",
@@ -71,7 +79,6 @@ const settingsData = [
 ];
 
 function SettingScreen({ navigation }) {
-	// TODO Add App Store Link
 	const onShare = async () => {
 		try {
 			await Share.share({
@@ -157,13 +164,12 @@ function SettingScreen({ navigation }) {
 
 const styles = StyleSheet.create({
 	title: {
-		fontSize: 35,
-		margin: 20,
+		fontSize: fontSize.header,
+		margin: spacing.l,
 		fontWeight: "700",
 	},
 	container: {},
 	settingsContainer: {
-		// marginVertical: 25,
 		marginBottom: 30,
 		backgroundColor: "#f9f9f9",
 	},

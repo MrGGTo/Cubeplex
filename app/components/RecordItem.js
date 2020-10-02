@@ -10,6 +10,7 @@ import AlgorithmStarAction from "./AlgorithmStarAction";
 import RecordStarAction from "./RecordStarAction";
 import { formatTime } from "../components/TimerDisplay";
 import RecordDeleteAction from "./RecordDeleteAction";
+import { fontSize, spacing } from "../config/sizes";
 
 function RecordItem({
 	id,
@@ -63,31 +64,30 @@ const styles = StyleSheet.create({
 		borderColor: "#aaa",
 		borderWidth: 1,
 		borderRadius: 5,
-		padding: 15,
-		margin: 5,
+		padding: spacing.s,
+		margin: spacing.xs,
 		backgroundColor: theme.backgroundSecondary,
 	},
 	recordItemTime: {
-		borderBottomWidth: 1,
 		borderBottomColor: theme.fontPrimary,
 	},
 	line: {
 		height: 1,
 		width: "100%",
 		backgroundColor: theme.fontPrimary,
-		marginVertical: 5,
+		marginVertical: spacing.xs,
 	},
 	timeContainer: {
 		flexDirection: "row",
 		alignItems: "center",
-		marginHorizontal: 5,
-		marginVertical: 10,
+		marginHorizontal: spacing.xs,
+		marginVertical: spacing.s,
 		flex: 1,
 	},
 	time: {
-		fontSize: 20,
+		fontSize: fontSize.l,
 		fontWeight: "500",
-		marginHorizontal: 10,
+		marginHorizontal: spacing.s,
 		flex: 1,
 	},
 });

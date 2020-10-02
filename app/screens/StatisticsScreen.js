@@ -18,7 +18,7 @@ import { openOrCreateDatabase } from "../database/RecordDatabase";
 import { formatTime } from "../components/TimerDisplay";
 import AdDisplay from "../components/AdDisplay";
 import DountChart from "../components/DountChart";
-import { fontSize } from "../config/sizes";
+import { fontSize, spacing } from "../config/sizes";
 
 const db = SQLite.openDatabase("db.db");
 
@@ -146,19 +146,10 @@ function StatisticsScreen({ navigation }) {
 						navigation.navigate(router.RECORDS);
 					}}
 				>
-					<View
-						style={{
-							flexDirection: "row",
-							alignItems: "center",
-							justifyContent: "center",
-							backgroundColor: theme.backgroundSecondary,
-							paddingVertical: 10,
-							paddingHorizontal: 20,
-							borderRadius: 25,
-							marginRight: 15,
-						}}
-					>
-						<AppText>View Records</AppText>
+					<View style={styles.viewRecordsButton}>
+						<AppText style={{ fontSize: fontSize.s }}>
+							View Records
+						</AppText>
 						<MaterialCommunityIcons
 							name="chevron-right"
 							size={24}
@@ -391,32 +382,41 @@ function StatisticsScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	container: {},
 	statsContainer: {
 		alignItems: "center",
 		backgroundColor: theme.backgroundSecondary,
-		marginTop: 20,
+		marginTop: spacing.m,
 	},
 	title: {
 		fontSize: fontSize.header,
-		margin: 20,
+		margin: spacing.m,
 		fontWeight: "700",
 		flex: 1,
+	},
+	viewRecordsButton: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+		backgroundColor: theme.backgroundSecondary,
+		paddingVertical: spacing.s,
+		paddingHorizontal: spacing.m,
+		marginRight: spacing.m,
+		borderRadius: 25,
 	},
 	statisticsItem: {
 		backgroundColor: theme.backgroundSecondary,
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
-		paddingVertical: 15,
-		paddingHorizontal: 15,
+		paddingVertical: spacing.m,
+		paddingHorizontal: spacing.m,
 	},
 	name: {
 		flex: 1,
-		fontSize: 20,
+		fontSize: fontSize.m,
 	},
 	result: {
-		fontSize: 20,
+		fontSize: fontSize.m,
 	},
 	line: {
 		height: 1,

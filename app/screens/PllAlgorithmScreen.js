@@ -20,6 +20,7 @@ import AlgorithmItem from "../components/AlgorithmItem";
 import AppText from "../components/AppText";
 import { theme } from "../config/themes";
 import router from "../navigation/router";
+import { fontSize, spacing } from "../config/sizes";
 import AdDisplay from "../components/AdDisplay";
 
 function PllAlgorithmScreen({ navigation }) {
@@ -58,39 +59,23 @@ function PllAlgorithmScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		alignItems: "center",
-		flexDirection: "row",
-		padding: 15,
-		backgroundColor: "white",
-		borderWidth: 1,
-		margin: 10,
-		borderRadius: 15,
-	},
-	detailContainer: {
-		flexDirection: "column",
-		marginLeft: 15,
-		justifyContent: "center",
-		flex: 1,
-	},
-	image: {
-		width: 75,
-		height: 75,
-		// borderRadius: 35,
-	},
 	title: {
-		fontSize: 35,
+		fontSize: fontSize.header,
 		fontWeight: "700",
 		flex: 1,
 	},
 	header: {
 		flexDirection: "row",
-		margin: 15,
+		marginTop: spacing.m,
+		marginHorizontal: spacing.m,
 		alignItems: "center",
 	},
-	info: {
-		// color: selectedTheme.color,
-		fontSize: 18,
+	caseContainer: {
+		marginVertical: spacing.l,
+	},
+	caseText: {
+		fontSize: fontSize.xl,
+		marginLeft: spacing.m,
 	},
 });
 

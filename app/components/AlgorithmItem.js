@@ -11,6 +11,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppText from "./AppText";
 
 import { theme } from "../config/themes";
+import { fontSize, spacing } from "../config/sizes";
 
 function AlgorithmItem({ name, algorithm, image, onPress, renderLeftActions }) {
 	return (
@@ -26,11 +27,7 @@ function AlgorithmItem({ name, algorithm, image, onPress, renderLeftActions }) {
 							},
 						]}
 					>
-						<Image
-							// resizeMethod="resize"
-							style={styles.image}
-							source={image}
-						/>
+						<Image style={styles.image} source={image} />
 						<View style={styles.detailContainer}>
 							<AppText style={styles.name}>{name}</AppText>
 							<AppText style={styles.algorithm} secondary>
@@ -53,30 +50,28 @@ const styles = StyleSheet.create({
 	container: {
 		alignItems: "center",
 		flexDirection: "row",
-		padding: 10,
+		padding: spacing.s,
 		borderWidth: 1,
-		margin: 10,
+		margin: spacing.s,
 		borderRadius: 15,
 	},
 	detailContainer: {
 		flexDirection: "column",
-		marginLeft: 15,
+		marginLeft: spacing.m,
 		justifyContent: "center",
 		flex: 1,
 	},
 	image: {
-		width: 75,
-		height: 75,
+		width: spacing.xl,
+		height: spacing.xl,
 		resizeMode: "contain",
-		// borderRadius: 35,
 	},
 	name: {
-		fontSize: 22,
+		fontSize: fontSize.l,
 		fontWeight: "500",
-		// color: "black",
 	},
 	algorithm: {
-		// color: "grey",
+		fontSize: fontSize.s,
 	},
 });
 

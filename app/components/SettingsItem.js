@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { theme } from "../config/themes";
+import { fontSize, spacing } from "../config/sizes";
 import AppText from "./AppText";
 
 function SettingsItem({
@@ -19,7 +20,7 @@ function SettingsItem({
 	return (
 		<TouchableOpacity
 			onPress={onPress}
-			style={{ marginBottom: separate ? 30 : 0 }}
+			style={{ marginBottom: separate ? spacing.l : 0 }}
 		>
 			<View
 				style={[
@@ -61,17 +62,17 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		// marginHorizontal: 15,
-		paddingHorizontal: 15,
-		paddingVertical: 10,
+		paddingHorizontal: spacing.m,
+		paddingVertical: spacing.s,
 	},
 	iconContainer: {
 		backgroundColor: "orange",
 		padding: 5,
 		borderRadius: 10,
-		marginRight: 15,
+		marginRight: spacing.m,
 	},
 	text: {
-		fontSize: 17,
+		fontSize: fontSize.m,
 		flex: 1,
 	},
 });

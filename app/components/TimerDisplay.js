@@ -1,17 +1,12 @@
-import React, { Component, useState } from "react";
-import {
-	StyleSheet,
-	Text,
-	View,
-	TouchableOpacity,
-	Button,
-	TouchableHighlight,
-	Dimensions,
-} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, TouchableOpacity, Dimensions } from "react-native";
 import moment, { duration } from "moment";
 import AppText from "./AppText";
+import { fontSize, spacing } from "../config/sizes";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
+const fontWithoutMinutes = width / 5;
+const fontWithMinutes = width / 7;
 
 function TimerDisplay({
 	interval,
@@ -25,7 +20,6 @@ function TimerDisplay({
 	const duration = moment.duration(interval);
 
 	const pad2 = (n) => {
-		// (n < 10 ? "0" + n : n)
 		if (n < 10 && duration.minutes() > 0) {
 			return "0" + n;
 		} else {
@@ -63,40 +57,131 @@ function TimerDisplay({
 					</View>
 				)}
 				{!ready && (
-					<View style={styles.timerContainer}>
+					<View
+						style={[
+							styles.timerContainer,
+							{
+								width: duration.minutes() > 0 ? "75%" : "65%",
+							},
+						]}
+					>
 						{duration.minutes() > 0 && (
-							<View style={styles.textContainer}>
+							<View style={styles.minuteContainer}>
 								<AppText
 									style={
 										isLongPressed
-											? styles.greenText2
-											: styles.text2
+											? {
+													fontSize: fontWithMinutes,
+													fontWeight: "200",
+													color: "lime",
+											  }
+											: {
+													fontSize: fontWithMinutes,
+													fontWeight: "200",
+											  }
 									}
 								>
 									{duration.minutes()}
 								</AppText>
-								<AppText style={[styles.dots]}>:</AppText>
 							</View>
 						)}
-						<View style={styles.textContainer}>
+
+						{duration.minutes() > 0 && (
 							<AppText
 								style={
 									isLongPressed
-										? styles.greenText2
-										: styles.text2
+										? {
+												fontSize:
+													duration.minutes() > 0
+														? fontWithMinutes
+														: fontWithoutMinutes,
+												fontWeight: "200",
+												color: "lime",
+										  }
+										: {
+												fontSize:
+													duration.minutes() > 0
+														? fontWithMinutes
+														: fontWithoutMinutes,
+												fontWeight: "200",
+										  }
 								}
+							>
+								:
+							</AppText>
+						)}
+						<View style={styles.secondContainer}>
+							<AppText
+								style={
+									isLongPressed
+										? {
+												fontSize:
+													duration.minutes() > 0
+														? fontWithMinutes
+														: fontWithoutMinutes,
+												fontWeight: "200",
+												color: "lime",
+										  }
+										: {
+												fontSize:
+													duration.minutes() > 0
+														? fontWithMinutes
+														: fontWithoutMinutes,
+												fontWeight: "200",
+										  }
+								}
+								numberOfLines={1}
 							>
 								{pad2(duration.seconds())}
 							</AppText>
 						</View>
-						<AppText style={[styles.dots]}>.</AppText>
 						<AppText
 							style={
-								isLongPressed ? styles.greenText3 : styles.text3
+								isLongPressed
+									? {
+											fontSize:
+												duration.minutes() > 0
+													? fontWithMinutes
+													: fontWithoutMinutes,
+											fontWeight: "200",
+											color: "lime",
+									  }
+									: {
+											fontSize:
+												duration.minutes() > 0
+													? fontWithMinutes
+													: fontWithoutMinutes,
+											fontWeight: "200",
+									  }
 							}
 						>
-							{pad3(duration.milliseconds())}
+							.
 						</AppText>
+						<View style={styles.millContainer}>
+							<AppText
+								style={
+									isLongPressed
+										? {
+												fontSize:
+													duration.minutes() > 0
+														? fontWithMinutes
+														: fontWithoutMinutes,
+												fontWeight: "200",
+												color: "lime",
+										  }
+										: {
+												fontSize:
+													duration.minutes() > 0
+														? fontWithMinutes
+														: fontWithoutMinutes,
+												fontWeight: "200",
+										  }
+								}
+								numberOfLines={1}
+							>
+								{pad3(duration.milliseconds())}
+							</AppText>
+						</View>
 					</View>
 				)}
 			</View>
@@ -107,63 +192,37 @@ function TimerDisplay({
 const styles = StyleSheet.create({
 	container: {
 		width: width,
-		height: height,
+		height: "100%",
 		alignItems: "center",
+		justifyContent: "center",
+	},
+	ready: {
+		fontSize: fontSize.xxxl,
+		alignContent: "center",
+		justifyContent: "center",
+	},
+	greenReady: {
+		color: "lime",
+		fontSize: fontSize.xxxl,
+		alignContent: "center",
 		justifyContent: "center",
 	},
 	timerContainer: {
 		flexDirection: "row",
+		alignItems: "center",
 		justifyContent: "center",
+	},
+	minuteContainer: {
+		flex: 1,
+		alignItems: "flex-end",
+	},
+	secondContainer: {
+		flex: 1,
 		alignItems: "center",
 	},
-	ready: {
-		fontSize: 50,
-		alignContent: "center",
-		justifyContent: "center",
-	},
-	textContainer: {
-		width: 90,
-		alignContent: "center",
-		justifyContent: "center",
-		alignSelf: "center",
-		flexDirection: "row",
-	},
-	text2: {
-		fontSize: 75,
-		fontWeight: "200",
-	},
-	text3: {
-		fontSize: 75,
-		fontWeight: "200",
-		width: 130,
-		alignContent: "center",
-		justifyContent: "center",
-		alignSelf: "center",
-	},
-	dots: {
-		fontSize: 65,
-		fontWeight: "200",
-		width: 10,
-	},
-	greenReady: {
-		color: "lime",
-		fontSize: 50,
-		alignContent: "center",
-		justifyContent: "center",
-	},
-	greenText2: {
-		color: "lime",
-		fontSize: 75,
-		fontWeight: "200",
-	},
-	greenText3: {
-		color: "lime",
-		fontSize: 75,
-		fontWeight: "200",
-		width: 130,
-		alignContent: "center",
-		justifyContent: "center",
-		alignSelf: "center",
+	millContainer: {
+		flex: 1.5,
+		alignItems: "flex-start",
 	},
 });
 

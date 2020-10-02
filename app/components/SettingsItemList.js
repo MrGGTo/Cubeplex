@@ -8,7 +8,7 @@ function SettingsItemList({ dataRow, onPress }) {
 	return (
 		<View
 			style={{
-				marginBottom: 30,
+				// marginBottom: spacing.m,
 				backgroundColor: theme.backgroundSecondary,
 			}}
 		>

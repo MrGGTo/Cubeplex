@@ -12,6 +12,7 @@ export default {
 	OLL_ALGORITHMS: "OLL Algorithms",
 	ALGORITHM_DETAILS: "Algorithm Details",
 	SETTINGS: "Settings",
+	GESTURE_HELP: "Gesture Help",
 	MANAGE_RECORDS: "Manage Records",
 	THEME: "Theme",
 	DARK_THEME: "Dark Theme",
